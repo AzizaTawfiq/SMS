@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Hash;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -38,6 +38,8 @@ class AuthController extends Controller
                 return redirect('student/dashboard');
             }elseif(Auth::user()->role == 4){
                 return redirect('parent/dashboard');
+            }else{
+                abort(404);
             }
         }else{
             return redirect()->back()->with('error', 'Invalid email or password');

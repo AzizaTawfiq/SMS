@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SchoolClassController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/admin/list', [AdminController::class, 'list']);
     Route::get('admin/admin/add', [AdminController::class, 'add']);
     Route::post('admin/admin/add', [AdminController::class, 'insert']);
+
+    Route::get('admin/school_classes/list', [SchoolClassController::class, 'list'])->name('school_classes.list');
+    Route::get('admin/school_classes/add', [SchoolClassController::class, 'add'])->name('school_classes.add');
+    Route::post('admin/school_classes/add', [SchoolClassController::class, 'store'])->name('school_classes.store');
+
 });
 
 Route::group(['middleware' => 'teacher'], function () {

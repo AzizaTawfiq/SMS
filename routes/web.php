@@ -20,6 +20,8 @@ use App\Http\Controllers\SchoolClassController;
 Route::get('/', [AuthController::class, 'login']);
 Route::post('login', [AuthController::class, 'AuthLogin']);
 Route::get('logout', [AuthController::class, 'logout']);
+Route::get('forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('forgot-password', [AuthController::class, 'submitForgotPassword']);
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
@@ -31,6 +33,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/school_classes/add', [SchoolClassController::class, 'add'])->name('school_classes.add');
     Route::post('admin/school_classes/add', [SchoolClassController::class, 'store'])->name('school_classes.store');
 
+    Route::get('admin/admin/edit/{id}', [AdminController::class, 'edit']);
+    Route::post('admin/admin/edit/{id}', [AdminController::class, 'update']);
+    Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete']);
 });
 
 Route::group(['middleware' => 'teacher'], function () {

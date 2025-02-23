@@ -1,5 +1,5 @@
 <nav class="app-header navbar navbar-expand bg-body">
-
+Dashboard
         <!--begin::Container-->
         <div class="container-fluid">
           <!--begin::Start Navbar Links-->
@@ -226,9 +226,15 @@
                 </a>
                 </li>
                 <li class="nav-item">
-                <a href="{{url('admin/admin/list')}}" class="nav-link">
+                <a href="{{url('admin/admin/list')}}" class="nav-link {{request()->is('admin/admin/*') ? 'active':''}}">
                   <i class="nav-icon fa fa-user"></i>
                   <p>Admin</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('admin/school_classes/list')}}" class="nav-link {{request()->is('admin/school_classes/*') ? 'active':''}}">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>School Classes</p>
                 </a>
               </li>
                   @elseif(Auth::user()->role == 2)

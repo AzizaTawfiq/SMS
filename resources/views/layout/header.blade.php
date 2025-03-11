@@ -231,6 +231,12 @@ Dashboard
                   <p>Admin</p>
                 </a>
               </li>
+                <li class="nav-item">
+                <a href="{{url('admin/student/list')}}" class="nav-link {{request()->is('admin/student/*') ? 'active':''}}">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>Student</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="{{url('admin/school_classes/list')}}" class="nav-link {{request()->is('admin/school_classes/*') ? 'active':''}}">
                   <i class="nav-icon fa fa-user"></i>

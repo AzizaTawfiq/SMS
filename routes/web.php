@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ParentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,20 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/student/edit/{id}', [StudentController::class, 'edit']);
     Route::post('admin/student/edit/{id}', [StudentController::class, 'update']);
     Route::get('admin/student/delete/{id}', [StudentController::class, 'delete']);
+
+
+    // parent
+    Route::get('admin/parent/list', [ParentController::class, 'list']);
+    Route::get('admin/parent/add', [ParentController::class, 'add']);
+    Route::post('admin/parent/add', [ParentController::class, 'insert']);
+    Route::post('admin/parent/add', [ParentController::class, 'insert']);
+    Route::get('admin/parent/edit/{id}', [ParentController::class, 'edit']);
+    Route::post('admin/parent/edit/{id}', [ParentController::class, 'update']);
+    Route::get('admin/parent/edit/{id}', [ParentController::class, 'delete']);
+
+   
+
+  
 });
 
 

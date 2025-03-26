@@ -237,6 +237,14 @@ Dashboard
                   <p>Student</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{url('admin/parent/list')}}" class="nav-link {{request()->is('admin/parent/*') ? 'active':''}}">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>Parent</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{url('admin/school_classes/list')}}" class="nav-link {{request()->is('admin/school_classes/*') ? 'active':''}}">
                   <i class="nav-icon fa fa-user"></i>

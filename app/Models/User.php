@@ -70,7 +70,7 @@ class User extends Authenticatable
     static public function getEmailSingle($email){
         return User::where('email', $email)->first();
     }
-
+    
 
     static public function getStudent(){
 
@@ -132,6 +132,16 @@ class User extends Authenticatable
 
         $return= $return->orderBy('users.id', 'desc')
         ->paginate(10);
+
+        return $return;
+    }
+
+    static public function getParent(){
+
+        $return= self::select('users.*')->where('role', '=','4')
+        ->where('is_deleted', '=','0');
+        $return= $return->orderBy('id', 'desc')
+        ->paginate(20);
 
         return $return;
     }

@@ -103,7 +103,7 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
-                    <table class="table table-striped">
+                    <table class="table table-striped ">
                       <thead>
                         <tr>
                           <th >#</th>
@@ -138,11 +138,12 @@
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                             <td><a href="{{url('admin/parent/edit/' .$value->id)}}" class="btn btn-outline-primary">Edit</a></td>
                             <td><a href="{{url('admin/parent/delete/' .$value->id)}}" class="btn btn-outline-danger">Delete</a></td>
+                            <td><a href="{{url('admin/parent/my.student/' .$value->id)}}" class="btn btn-outline-primary">My student</a></td>
                         </tr>
                         @endforeach
                       </tbody>
                     </table>
-                    <div class="d-flex justify-content-center mt-4">
+                    <div class=" padding:10px; justify-content-center mt-4">
 
                         {!! $getRecord-> appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                     </div>

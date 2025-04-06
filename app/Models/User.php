@@ -135,6 +135,48 @@ class User extends Authenticatable
 
         return $return;
     }
+    static public function getTeacher(){
+
+        $return= self::select('users.*')->where('users.role', '=','2')
+        ->where('users.is_deleted', '=','0');
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+        }
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
+        }
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+        }
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('users.gender', '=', Request::get('gender'));
+        }
+        if (!empty(Request::get('mobile'))) {
+            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile') . '%');
+        }
+        if (!empty(Request::get('marital_status'))) {
+            $return = $return->where('users.marital_status', 'like', '%' . Request::get('marital_status') . '%');
+        }
+        if (!empty(Request::get('address'))) {
+            $return = $return->where('users.address', 'like', '%' . Request::get('address') . '%');
+        }
+        if (!empty(Request::get('admission_date'))) {
+            $return = $return->whereDate('users.admission_date', '=', Request::get('admission_date'));
+        }
+        if (!empty(Request::get('status'))) {
+            $status= (Request::get('status')) == 100 ? 0 : 1;
+            $return = $return->where('users.status', '=', $status);
+        }
+        if (!empty(Request::get('created_at'))) {
+            $return = $return->whereDate('users.created_at', '=', Request::get('created_at'));
+        }
+
+
+        $return= $return->orderBy('users.id', 'desc')
+        ->paginate(10);
+
+        return $return;
+    }
 
     public function getProfile(){
         if(!empty($this->profile_pic && file_exists('upload/profile/'.$this->profile_pic))){

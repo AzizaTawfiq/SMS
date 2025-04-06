@@ -124,6 +124,18 @@ class ParentController extends Controller
         }
     }
 
+    public function MyStudent($id) {
+
+        $data['parent_id'] = $id;
+        $data['getSearchstudent'] = User::getSearchstudent();
+        $data['getRecored'] = User::getMystudent($id);
+        $data['header_title'] = 'parent student List';
+        return view('admin.parent./my_student', $data);
+
+    }
+
+   
+
 
 
   

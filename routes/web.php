@@ -30,6 +30,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/school_classes/list', [SchoolClassController::class, 'list'])->name('school_classes.list');
     Route::get('admin/school_classes/add', [SchoolClassController::class, 'add'])->name('school_classes.add');
     Route::post('admin/school_classes/add', [SchoolClassController::class, 'store'])->name('school_classes.store');
+    Route::get('admin/school_classes/{id}/edit', [SchoolClassController::class, 'edit'])->name('school_classes.edit');
+    Route::put('admin/school_classes/{id}/update', [SchoolClassController::class, 'update'])->name('school_classes.update');
+    Route::delete('admin/school_classes/{id}/destroy', [SchoolClassController::class, 'destroy'])->name('school_classes.destroy');
+    Route::get('admin/school_classes/search', [SchoolClassController::class, 'search'])->name('school_classes.search');
 
 });
 

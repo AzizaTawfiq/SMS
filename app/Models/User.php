@@ -47,4 +47,8 @@ class User extends Authenticatable
     static public function getAdmin(){
         return self::select('users.*')->where('role', '=','1')->orderBy('id', 'desc')->get();
     }
+
+    public function school_class(){
+        return $this->hasMany(School_Class::class); 
+    }
 }

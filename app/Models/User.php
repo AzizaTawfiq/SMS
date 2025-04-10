@@ -70,7 +70,11 @@ class User extends Authenticatable
     static public function getEmailSingle($email){
         return User::where('email', $email)->first();
     }
-    
+
+    public function school_class(){
+        return $this->hasMany(School_Class::class);
+    }
+
 
     static public function getStudent(){
 
@@ -157,7 +161,7 @@ class User extends Authenticatable
 
 static public function getSearchstudent() {
     if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
-        
+
         $return = self::select('users.*', 'class-num as class_name')
             ->leftJoin('class', 'class.id', '=', 'users.class_id' ,'left')
             ->where('users.user_type', '=',3)
@@ -189,7 +193,7 @@ static public function getSearchstudent() {
 
 static public function getMyStudent($parent_id) {
     $return = self::select(
-            'users.*', 
+            'users.*',
             'class.class-num as class_name',
             'parent.name as parent_name'
         )

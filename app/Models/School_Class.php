@@ -9,10 +9,5 @@ class School_Class extends Model
 {
     use HasFactory;
     protected $table = 'school_classes';
-    protected $fillable = ['name', 'status', 'user_id'];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = ['name','status','created_by'];
 }

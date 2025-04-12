@@ -11,10 +11,8 @@ class SchoolClassController extends Controller
 {
     public function list()
     {
-        $school_classes = School_Class::with('user')->paginate(10);
-        // $school_classes = School_Class::with('user')->get();
-
-        return view('admin.school_classes.list', compact('school_classes'));
+        $school_classes = School_Class::all();
+        return view('admin.school_classes.list',compact('school_classes'));
     }
 
     public function add()
@@ -35,47 +33,8 @@ class SchoolClassController extends Controller
         $school_class = new School_Class();
         $school_class->name = $request->name;
         $school_class->status = $request->status;
-        $school_class->user_id = Auth::user()->id;
+        $school_class->created_by = Auth::user()->id;
         $school_class->save();
-        return redirect()->route('school_classes.list')->with('success', 'class inserted successfuly');
-    }
-
-    public function edit(Request $request)
-    {
-        $school_class = School_Class::findOrFail($request->id);
-        
-    }
-
-    public function update(Request $request,$id)
-    {
-        $school_class = School_Class::findOrFail($id);
-        $school_class->update($request->all());
-        return redirect()->route('school_classes.list')->with('success', 'class updated successfuly');
-
-    }
-
-    public function destroy(Request $request)
-    {
-        $school_class = School_Class::findOrFail($request->id);
-        $school_class->delete();
-        return redirect()->route('school_classes.list')->with('success', 'class deleted successfuly');
-
-    }
-
-    public function search(Request $request)
-    {
-        $search = $request->input('search');
-
-        $school_classes = School_Class::when($search, function ($query, $search) {
-        if($search=='Active'){$search=0;}
-        if($search=='InActive'){$search=1;}
-        
-            return $query->where('name', 'like', "%{$search}%")
-                         ->orWhere('status', 'like', $search);
-        })->paginate(10);
-
-        // return view('users.index', compact('users', 'search'));
-        return view('admin.school_classes.list', compact('school_classes','search'));
-
+        return redirect()->route('school_classes.list')->with('success','class inserted successfuly');
     }
 }

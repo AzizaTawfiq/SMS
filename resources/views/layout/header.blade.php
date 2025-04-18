@@ -251,6 +251,14 @@ Dashboard
                   <p>School Classes</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{url('admin/subjects/list')}}" class="nav-link {{request()->is('admin/subjects/*') ? 'active':''}}">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>School Subjects</p>
+                </a>
+              </li>
+
                   @elseif(Auth::user()->role == 2)
                   <li class="nav-item">
                   <a href="{{url('teacher/dashboard')}}" class="nav-link">

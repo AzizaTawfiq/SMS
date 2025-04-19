@@ -12,8 +12,6 @@ class SchoolClassController extends Controller
     public function list()
     {
         $school_classes = School_Class::with('user')->paginate(10);
-        // $school_classes = School_Class::with('user')->get();
-
         return view('admin.school_classes.list', compact('school_classes'));
     }
 
@@ -65,17 +63,23 @@ class SchoolClassController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
+        if(empty($search)){
+            $search = $request->input('search_date');   
+        }
+       
 
         $school_classes = School_Class::when($search, function ($query, $search) {
         if($search=='Active'){$search=0;}
         if($search=='InActive'){$search=1;}
         
             return $query->where('name', 'like', "%{$search}%")
-                         ->orWhere('status', 'like', $search);
+                         ->orWhere('status', 'like', $search)
+                         ->orWhereDate('created_at', $search);
         })->paginate(10);
 
-        // return view('users.index', compact('users', 'search'));
         return view('admin.school_classes.list', compact('school_classes','search'));
 
     }
+
+
 }

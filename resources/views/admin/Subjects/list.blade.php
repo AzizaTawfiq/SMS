@@ -7,17 +7,20 @@
                 <!--begin::Row-->
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Classes</h3>
+                        <h3 class="mb-0">Subjects list</h3>
                     </div>
                     <div class="col-sm-6 text-end">
-                        <a href="{{ url('admin/school_classes/add') }}" class="btn btn-primary">Add Class</a>
+                        <a href="{{ url('admin/subjects/add') }}" class="btn btn-primary">Add Subject</a>
                     </div>
                 </div>
+                <!--end::Row-->
+
+                     <!--begin::Row-->
                      <div class="row">
                       <div class="col-sm-6">
-                          <p class="mb-0">Search:  By (Class Name & status & Date)</p>
+                          <p class="mb-0">Search:  By (title & type & status & Date)</p>
                       </div>
-                      <form action="{{ route('school_classes.search') }}" method="GET">
+                      <form action="{{ route('subjects.search') }}" method="GET">
                         <div class="row">
                             <div class="col-4">
                                 <input type="text" class="form-control" name="search" value="{{ request('search') }}" placeholder="Search ...">
@@ -27,13 +30,10 @@
                             </div>
                             <div class="col-4">
                                 <button type="submit" class="btn btn-secondary"><i class="las la-search"></i> Search</button>
-                                <a href="{{route('school_classes.list')}}" class="btn btn-secondary"><i class="las la-ban"></i> Reset</a>
+                                <a href="{{route('subjects.list')}}" class="btn btn-secondary"><i class="las la-ban"></i> Reset</a>
                             </div>
                         </div>
                     </form>
-
-                        
-
                   </div>
                   <!--end::Row-->
             </div>
@@ -47,7 +47,7 @@
                         @include('_message')
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h3 class="card-title">classes list</h3>
+                                <h3 class="card-title">Subjects list</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0">
@@ -55,7 +55,8 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Name</th>
+                                            <th>Title</th>
+                                            <th>Type</th>
                                             <th>Status</th>
                                             <th>Created By</th>
                                             <th>Created At</th>
@@ -63,10 +64,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($school_classes as $item)
+                                        @foreach ($subjects as $item)
                                             <tr>
                                                 <td>#</td>
                                                 <td>{{ $item->name }}</td>
+                                                <td>
+                                                    @if ($item->type == 0)
+                                                        <span class="badge bg-success">Theory</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Practical</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($item->status == 0)
                                                         <span class="badge bg-success">Active</span>
@@ -78,10 +86,10 @@
                                                 <td>{{ $item->created_at }}</td>
 
                                                 <td>
-                                                    <form action="{{ route('school_classes.update', $item->id) }}" method="POST" style="display: inline !important;">
+                                                    <form action="{{ route('subjects.update', $item->id) }}" method="POST" style="display: inline !important;">
                                                         @csrf
                                                         @method('PUT')
-                                                        <a href="{{ route('school_classes.edit', $item->id) }}"
+                                                        <a href="{{ route('subjects.edit', $item->id) }}"
                                                             class="btn btn-success btn-sm" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal{{ $item->id }}"
                                                             style="width:75px !important;">Edit</a>
@@ -92,7 +100,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                            Edit Class</h1>
+                                                                            Edit Subject</h1>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
@@ -100,12 +108,20 @@
                                                                     <div class="modal-body">
                                                                         <div class="form-group mb-3">
                                                                             <label for="name"
-                                                                                class="form-label text-bold">Class
-                                                                                Name</label>
+                                                                                class="form-label text-bold">Subject
+                                                                                Title</label>
                                                                             <input type="text" class="form-control"
-                                                                                id="name" placeholder="class name"
+                                                                                id="name" placeholder="subject title"
                                                                                 name="name"
                                                                                 value="{{ $item->name }}" />
+                                                                        </div>
+                                                                        <div class="form-group mb-3">
+                                                                            <label class="form-label">Types</label>
+                                                                            <select name="type" class="form-control">
+                                                                                <option>Select Type</option>
+                                                                                <option @if($item->type==0) selected @endif value="0">Theory</option>
+                                                                                <option @if($item->type==1) selected @endif value="1">Practical</option>
+                                                                            </select>
                                                                         </div>
                                                                         <div class="form-group mb-3">
                                                                           <label class="form-label">Status</label>
@@ -125,7 +141,7 @@
                                                             </div>
                                                         </div>
                                                     </form>
-                                                    <form action="{{ route('school_classes.destroy', $item->id) }}"
+                                                    <form action="{{ route('subjects.destroy', $item->id) }}"
                                                       method="POST" style="display: inline !important;">
                                                       @csrf
                                                       @method('DELETE')
@@ -139,7 +155,7 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                        Delete Class</h1>
+                                                                        Delete Subject</h1>
                                                                     <button type="button" class="btn-close"
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="Close"></button>
@@ -162,7 +178,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <p>{{ $school_classes->links() }}</p>
+                            <p>{{ $subjects->links() }}</p>
                             <!-- /.card-body -->
                         </div>
                     </div>

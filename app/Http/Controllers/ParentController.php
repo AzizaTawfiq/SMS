@@ -19,7 +19,7 @@ class ParentController extends Controller
 
     public function add()
     {
-        $data['header_title' ]= 'Add New parent';
+        $data['header_title' ]= 'Add parent';
         return view('admin.Parent.add', $data);
     }
 

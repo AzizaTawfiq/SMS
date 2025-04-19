@@ -120,7 +120,8 @@
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-outline-primary">Uplode</button>
+                      <button type="submit" class="btn btn-outline-primary">Save</button>
+                      <a href="{{ url('admin/parent/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
                   </form>
                 </div>

@@ -25,10 +25,8 @@ class StudentController extends Controller
     }
     public function insert(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
-            'last_name' => 'required',
             'admission_number' => 'max:50',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
@@ -47,7 +45,7 @@ class StudentController extends Controller
 
         ]);
 
-        $student= new User;
+        $student = new User;
 
         if(!empty($request->file('profile_pic'))){
             $ext = $request->file('profile_pic')->getClientOriginalExtension();
@@ -58,7 +56,6 @@ class StudentController extends Controller
             $student->profile_pic = $filename;
             }
         $student->name = trim($request->name);
-        $student->last_name = trim($request->last_name);
         $student->admission_number = trim($request->admission_number);
         $student->roll_number = trim($request->roll_number);
         $student->class_id = trim($request->class_id);
@@ -78,10 +75,12 @@ class StudentController extends Controller
         $student->height = trim($request->height);
         $student->weight = trim($request->weight);
         $student->status = trim($request->status);
+        $student->address = trim($request->address);  // Add this line before save()
         $student->email = trim($request->email);
         $student->password = Hash::make($request->password);
         $student->role = 3;
         $student->save();
+        
         return redirect('admin/student/list')->with('success', 'Student added successfully');
 
     }
@@ -102,7 +101,6 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'last_name' => 'required',
             'admission_number' => 'max:50',
             'email' => 'required|email|unique:users,email'.$id,
             'password' => 'min:6',
@@ -132,7 +130,6 @@ class StudentController extends Controller
             $student->profile_pic = $filename;
             }
         $student->name = trim($request->name);
-        $student->last_name = trim($request->last_name);
         $student->admission_number = trim($request->admission_number);
         $student->roll_number = trim($request->roll_number);
         $student->class_id = trim($request->class_id);

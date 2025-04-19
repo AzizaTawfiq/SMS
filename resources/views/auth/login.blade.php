@@ -35,35 +35,31 @@
 
     <!-- <link rel="stylesheet" href="{{url('public/dist/css/adminlte.css')}}" /> -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}" />
-
+    <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}" />
   </head>
   <body class="login-page bg-body-secondary">
     <div class="login-box">
       <div class="card card-outline card-primary">
-        <div class="card-header">
-          <a
-            href=""
-            class="link-dark text-center link-offset-2 link-opacity-100 link-opacity-50-hover"
-          >
-            <h1 class="mb-0">Login</h1>
-          </a>
+        <div class="card-header text-center">
+            <h1 class="mb-0">Welcome Back</h1>
+
         </div>
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Sign in to start your session</p>
+          <p class="login-box-msg">Log in, so we can get to know you </p>
           @include('_message')
           <form action="{{ url('login')}}" method="post">
             {{ csrf_field() }}
-            <div class="input-group mb-1">
+            <div class="input-group mb-4">
               <div class="form-floating">
-                <input id="loginEmail" type="email" class="form-control" required name="email" value="" placeholder="" />
-                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" class="form-control" required name="email" value="" placeholder="Enter your email" />
+                <label for="loginEmail">Enter your email</label>
               </div>
               <div class="input-group-text"><span class="bi bi-envelope"></span></div>
             </div>
-            <div class="input-group mb-1">
+            <div class="input-group mb-4">
               <div class="form-floating">
                 <input id="loginPassword" type="password" class="form-control" name="password" placeholder="" />
-                <label for="loginPassword">Password</label>
+                <label for="loginPassword">Enter your password</label>
               </div>
               <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
             </div>
@@ -76,12 +72,12 @@
               </div>
               <div class="col-4">
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-primary">Sign In</button>
+                  <button type="submit" class="btn btn-primary">Login In</button>
                 </div>
               </div>
             </div>
           </form>
-          <p class="mb-1"><a href="{{url('forgot-password')}}">I forgot my password</a></p>
+          <div class="mb-4"><a class="text-primary" href="{{url('forgot-password')}}">I forgot my password</a></div>
         </div>
       </div>
     </div>

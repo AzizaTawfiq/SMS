@@ -6,7 +6,7 @@
       <div class="app-content-header">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Add New Parent</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Add parent</h3></div>
             </div>
         </div>
         </div>
@@ -120,7 +120,8 @@
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-outline-primary">Submit</button>
+                      <button type="submit" class="btn btn-outline-primary">Add</button>
+                      <a href="{{ url('admin/parent/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
                   </form>
                 </div>

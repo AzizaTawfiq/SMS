@@ -58,12 +58,10 @@
                         </div>
                       </div>
                     </div>
-                    <!--end::Body-->
-                    <!--begin::Footer-->
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Add</button>
+                      <a href="{{ url('admin/admin/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
-                    <!--end::Footer-->
                   </form>
                 </div>
               </div>

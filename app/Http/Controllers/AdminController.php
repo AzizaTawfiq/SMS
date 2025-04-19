@@ -55,14 +55,14 @@ class AdminController extends Controller
          $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'required|min:6'
+            /* 'password' => 'required|min:6' */
         ]);
         $user=  User::getSingle($id);
         $user->name = trim($request->name);
         $user->email = trim($request->email);
-        if(!empty($request->password)){
+      /*   if(!empty($request->password)){
             $user->password = Hash::make($request->password);
-        }
+        } */
         $user->save();
         return redirect('admin/admin/list')->with('success', 'Admin updated successfully');
 

@@ -1,0 +1,28 @@
+:root {
+  --bs-primary: #b21f89;
+
+  --bs-primary-rgb: 111, 66, 193;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #b21f89;
+  --bs-btn-hover-border-color: #b21f89;
+}
+
+.card-primary.card-outline {
+  border-top-color: var(--bs-primary);
+}
+
+.text-primary {
+  color: var(--bs-primary) !important;
+}
+
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+}
+
+.border-primary {
+  border-color: var(--bs-primary) !important;
+}

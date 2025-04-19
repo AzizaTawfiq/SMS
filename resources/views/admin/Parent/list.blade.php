@@ -2,18 +2,14 @@
 @section("content")
 <main class="app-main">
         <div class="app-content-header">
-          <!--begin::Container-->
           <div class="container-fluid">
-            <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Parent list (Count: {{$getRecord->total()}}) </h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Parents ({{$getRecord->total()}}) </h3></div>
               <div class="col-sm-6 text-end">
-                <a href="{{ url('admin/parent/add') }}" class="btn btn-outline-primary">Add Now Parent</a>
+                <a href="{{ url('admin/parent/add') }}" class="btn btn-primary">Add parent</a>
               </div>
             </div>
-            <!--end::Row-->
           </div>
-          <!--end::Container-->
         </div>
 
         <div class="app-content">
@@ -90,23 +86,20 @@
                          placeholder="Search for created date" name="created_at" value="{{ Request::get('created_at') }}" />
                       </div>
                       <div class="form-group col-md-3" style="margin-top: 30px;">
-                       <button class="btn btn-outline-primary" type="submit">Search</button>
-                       <a href="{{ url('admin/student/list') }}" class="btn btn-outline-success">Reset</a>
-                      </div>
+                      <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                      <a href="{{ url('admin/student/list') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
+                     </div>
                     </div>
                   </form>
                 </div>
               @include('_message')
                 <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-title">Parent list</h3>
-                  </div>
-                  <!-- /.card-header -->
                   <div class="card-body p-0">
-                    <table class="table table-striped ">
+                    @if($getRecord->count() > 0)
+                    <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th >#</th>
+                          <th>#</th>
                           <th>Profile pic</th>
                           <th>Name</th>
                           <th>Email</th>
@@ -114,15 +107,15 @@
                           <th>Mobile Number</th>
                           <th>occupation</th>
                           <th>address </th>
-                          <th >Status</th>
-                          <th >Created date</th>
-                          <th >Actions</th>
+                          <th>Status</th>
+                          <th>Created date</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($getRecord as $value)
+                      @foreach($getRecord as $key => $value)
                         <tr>
-                            <td>{{ $value->id }}</td>
+                            <td>{{ $getRecord->firstItem() + $key }}</td>
                             <td>
                                 @if(!empty($value->getProfile()))
                                 <img src="{{ $value->getProfile() }}" alt="Profile pic" style="width: 50px; height: 50px; border-radius: 50%;">
@@ -136,14 +129,32 @@
                             <td>{{ $value->address }}</td>
                             <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
-                            <td><a href="{{url('admin/parent/edit/' .$value->id)}}" class="btn btn-outline-primary">Edit</a></td>
+                            <td>
+                              <a href="{{url('admin/parent/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
+                              <x-confirm-delete 
+                                :url="url('admin/parent/delete/' .$value->id)" 
+                                :id="$value->id"
+                                title="Delete Parent"
+                                description="Are you sure you want to delete this parent?"
+                              />
+                              <a href="{{url('admin/parent/my.student/' .$value->id)}}" class="text-primary fs-5 ms-4"><i class="bi bi-mortarboard"></i></a>
+                            </td>
+                           <!--  <td><a href="{{url('admin/parent/edit/' .$value->id)}}" class="btn btn-outline-primary">Edit</a></td>
                             <td><a href="{{url('admin/parent/delete/' .$value->id)}}" class="btn btn-outline-danger">Delete</a></td>
-                            <td><a href="{{url('admin/parent/my.student/' .$value->id)}}" class="btn btn-outline-primary">My student</a></td>
+                            <td><a href="{{url('admin/parent/my.student/' .$value->id)}}" class="btn btn-outline-primary">My student</a></td> -->
                         </tr>
                         @endforeach
                       </tbody>
                     </table>
-                    <div class=" padding:10px; justify-content-center mt-4">
+                    <div class="d-flex justify-content-center mt-4">
+                        {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
+                    </div>
+                    @else
+                        <x-empty-state message="No parents found in the system." />
+                    @endif
+                  </div>
+                </div>
+                <div class=" padding:10px; justify-content-center mt-4">
 
                         {!! $getRecord-> appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                     </div>

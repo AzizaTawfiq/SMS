@@ -3,10 +3,10 @@
 <main class="app-main">
         <div class="app-content-header">
 
-          <div class="container-fluid">
+          <div class="container-fluid">   
             <div class="row">
 
-              <div class="col-sm-6"><h3 class="mb-0">Teacher list (Count: {{$getRecord->total()}}) </h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Teachers ({{$getRecord->total()}}) </h3></div>
               <div class="col-sm-6 text-end">
                 <a href="{{ url('admin/teacher/add') }}" class="btn btn-primary">Add Teacher</a>
               </div>
@@ -122,9 +122,9 @@
                         />
                       </div>
                       <div class="form-group col-md-3" style="margin-top: 30px;">
-                       <button class="btn btn-primary" type="submit">Search</button>
-                       <a href="{{ url('admin/teacher/list') }}" class="btn btn-success">Reset</a>
-                      </div>
+                       <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                       <a href="{{ url('admin/teacher/list') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
+                      </div>   
                     </div>
                   </form>
                 </div>
@@ -135,6 +135,7 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body p-0">
+                  @if($getRecord->count() > 0)
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -156,9 +157,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($getRecord as $value)
+                      @foreach($getRecord as $key => $value)
                         <tr>
-                            <td>{{ $value->id }}</td>
+                            <td>{{ $getRecord->firstItem() + $key }}</td>
                             <td>
                                 @if(!empty($value->getProfile()))
                                 <img src="{{ $value->getProfile() }}" alt="Profile pic" style="width: 50px; height: 50px; border-radius: 50%;">
@@ -185,8 +186,16 @@
                             <td>{{ $value->experience }}</td>
                             <td>{{ $value->note }}</td>
                             <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
-                            <td><a href="{{url('admin/teacher/edit/' .$value->id)}}" class="btn btn-primary">Edit</a></td>
-                            <td><a href="{{url('admin/teacher/delete/' .$value->id)}}" class="btn btn-danger">Delete</a></td>
+                            <td>
+                              <a href="{{url('admin/teacher/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
+                              <x-confirm-delete 
+                                :url="url('admin/teacher/delete/' .$value->id)" 
+                                :id="$value->id"
+                                title="Delete Teacher"
+                                description="Are you sure you want to delete this teacher?"
+                              />
+                            </td>
+                            
                         </tr>
                         @endforeach
                       </tbody>
@@ -195,7 +204,9 @@
 
                         {!! $getRecord-> appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                     </div>
-
+                    @else
+                        <x-empty-state message="No administrators found in the system." />
+                    @endif
                   </div>
                   <!-- /.card-body -->
                 </div>

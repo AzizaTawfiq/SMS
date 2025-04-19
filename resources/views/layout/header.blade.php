@@ -151,7 +151,7 @@
                   </p>
                 </li>
                 <li class="user-footer">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{url('admin/account')}}" class="btn btn-default btn-flat">Profile</a>
                  
                 <a class="btn btn-default btn-flat float-end" href="{{url('logout')}}">
                   <p>Logout</p>
@@ -188,46 +188,40 @@
                 <li class="nav-item">
                 <a href="{{url('admin/admin/list')}}" class="nav-link {{request()->is('admin/admin/*') ? 'active':''}}">
                   <i class="nav-icon bi bi-person-gear"></i>
-                  <p>Admin</p>
+                  <p>Admins</p>
                 </a>
               </li>
                 <li class="nav-item">
                 <a href="{{url('admin/teacher/list')}}" class="nav-link {{request()->is('admin/teacher/*') ? 'active':''}}">
-                  <i class="nav-icon fa fa-user"></i>
-                  <p>Teacher</p>
+                  <i class="nav-icon bi bi-person-workspace"></i>
+                  <p>Teachers</p>
                 </a>
               </li>
                 <li class="nav-item">
                 <a href="{{url('admin/student/list')}}" class="nav-link {{request()->is('admin/student/*') ? 'active':''}}">
                   <i class="nav-icon bi bi-mortarboard"></i>
-                  <p>Student</p>
+                  <p>Students</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{url('admin/parent/list')}}" class="nav-link {{request()->is('admin/parent/*') ? 'active':''}}">
                   <i class="nav-icon bi bi-people"></i>
-                  <p>Parent</p>
+                  <p>Parents</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="{{url('admin/school_classes/list')}}" class="nav-link {{request()->is('admin/school_classes/*') ? 'active':''}}">
                   <i class="nav-icon bi bi-journal-text"></i>
-                  <p>School Classes</p>
+                  <p>Classes</p>
                 </a>
               </li>
-              <li class="nav-item">
-                  <a href="{{url('admin/account')}}" class="nav-link">
-                  <i class="nav-icon far fa-user"></i>
-                  <p>My account</p>
-                </a>
-                </li>
 
               <li class="nav-item">
                 <a href="{{url('admin/subjects/list')}}" class="nav-link {{request()->is('admin/subjects/*') ? 'active':''}}">
-                  <i class="nav-icon fa fa-user"></i>
-                  <p>School Subjects</p>
+                  <i class="nav-icon bi bi-book"></i>
+                  <p>Subjects</p>
                 </a>
               </li>
 
@@ -236,12 +230,6 @@
                   <a href="{{url('teacher/dashboard')}}" class="nav-link">
                   <i class="nav-icon fa fa-tachometer-alt"></i>
                   <p>Dashboard</p>
-                </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{url('teacher/account')}}" class="nav-link">
-                  <i class="nav-icon far fa-user"></i>
-                  <p>My account</p>
                 </a>
                 </li>
                   @elseif(Auth::user()->role == 3)

@@ -53,6 +53,7 @@
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Save</button>
+                      <a href="{{ url('admin/dashboard') }}" class="btn btn-outline-primary">Cancel</a>
                     </div>
                   </form>
                 </div>

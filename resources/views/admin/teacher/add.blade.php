@@ -239,6 +239,8 @@
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Add</button>
+                      <a href="{{ url('admin/teacher/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
+
                     </div>
                   </form>
                 </div>

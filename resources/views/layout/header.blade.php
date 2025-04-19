@@ -192,6 +192,12 @@
                 </a>
               </li>
                 <li class="nav-item">
+                <a href="{{url('admin/teacher/list')}}" class="nav-link {{request()->is('admin/teacher/*') ? 'active':''}}">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>Teacher</p>
+                </a>
+              </li>
+                <li class="nav-item">
                 <a href="{{url('admin/student/list')}}" class="nav-link {{request()->is('admin/student/*') ? 'active':''}}">
                   <i class="nav-icon bi bi-mortarboard"></i>
                   <p>Student</p>
@@ -211,6 +217,12 @@
                   <p>School Classes</p>
                 </a>
               </li>
+              <li class="nav-item">
+                  <a href="{{url('admin/account')}}" class="nav-link">
+                  <i class="nav-icon far fa-user"></i>
+                  <p>My account</p>
+                </a>
+                </li>
 
               <li class="nav-item">
                 <a href="{{url('admin/subjects/list')}}" class="nav-link {{request()->is('admin/subjects/*') ? 'active':''}}">
@@ -224,6 +236,12 @@
                   <a href="{{url('teacher/dashboard')}}" class="nav-link">
                   <i class="nav-icon fa fa-tachometer-alt"></i>
                   <p>Dashboard</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{url('teacher/account')}}" class="nav-link">
+                  <i class="nav-icon far fa-user"></i>
+                  <p>My account</p>
                 </a>
                 </li>
                   @elseif(Auth::user()->role == 3)

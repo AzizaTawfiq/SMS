@@ -35,27 +35,23 @@
 
     <!-- <link rel="stylesheet" href="{{url('public/dist/css/adminlte.css')}}" /> -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}" />
+    <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}" />
 
   </head>
   <body class="login-page bg-body-secondary">
     <div class="login-box">
       <div class="card card-outline card-primary">
-        <div class="card-header">
-          <a
-            href=""
-            class="link-dark text-center link-offset-2 link-opacity-100 link-opacity-50-hover"
-          >
+        <div class="card-header text-center">
             <h1 class="mb-0">Forgot password</h1>
-          </a>
         </div>
         <div class="card-body login-card-body">
           @include('_message')
           <form action="{{ url('forgot-password')}}" method="post">
             {{ csrf_field() }}
-            <div class="row input-group mb-1">
+            <div class="row input-group mb-4">
               <div class="form-floating">
                 <input id="loginEmail" type="email" class="form-control" required name="email" value="" placeholder="" />
-                <label for="loginEmail">Email</label>
+                <label class="ps-4" for="loginEmail">Enter your email</label>
               </div>
               </div>
 
@@ -67,10 +63,10 @@
               </div>
             </div>
           </form>
-          <p class="mb-1">
+          <div class="mb-4">
               <br/>
-            <a href="{{ url('login')}}">Login</a>
-        </p>
+            <a class="text-primary" href="{{ url('/')}}">Login</a>
+</div>
         </div>
       </div>
     </div>

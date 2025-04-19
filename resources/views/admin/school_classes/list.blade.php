@@ -7,15 +7,12 @@
                 <!--begin::Row-->
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Classes list</h3>
+                        <h3 class="mb-0">Classes</h3>
                     </div>
                     <div class="col-sm-6 text-end">
                         <a href="{{ url('admin/school_classes/add') }}" class="btn btn-primary">Add Class</a>
                     </div>
                 </div>
-                <!--end::Row-->
-
-                     <!--begin::Row-->
                      <div class="row">
                       <div class="col-sm-6">
                           <p class="mb-0">Search</p>
@@ -24,6 +21,9 @@
                         <input type="text" class="form-control my-2" name="search" value="{{ request('search') }}" placeholder="Search ...">
                         <button type="submit" class="btn btn-secondary"><i class="las la-search"></i> Search</button>
                     </form>
+
+                        
+
                   </div>
                   <!--end::Row-->
             </div>

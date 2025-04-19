@@ -14,7 +14,7 @@
           <div class="container-fluid">
             <div class="row g-4">
               <div class="col-md-12">
-                <div class="card card-primary card-outline mb-4">
+                <div class="card card-primary card-outline mb-4">     
                   <form action="{{ url('admin/student/add')}}" method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
 
@@ -33,21 +33,6 @@
                                 />
                                 <div class="text-danger">
                                 {{$errors->first('name')}}
-                                </div>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="last_name" class="form-label text-bold">Last name<span class="text-danger">*</span></label>
-                                <input
-                                type="text"
-                                class="form-control"
-                                id="last_name"
-                                placeholder="Enter last name"
-                                name="last_name"
-
-                                value="{{ old('last_name') }}"
-                                />
-                                <div class="text-danger">
-                                {{$errors->first('last_name')}}
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
@@ -286,6 +271,7 @@
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Add</button>
+                      <a href="{{ url('admin/student/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
                   </form>
                 </div>

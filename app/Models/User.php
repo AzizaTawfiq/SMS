@@ -59,7 +59,7 @@ class User extends Authenticatable
             $return = $return->whereDate('created_at', '=', Request::get('email'));
         }
         $return= $return->orderBy('id', 'desc')
-        ->paginate(1);
+        ->paginate(10);
 
         return $return;
     }
@@ -82,9 +82,6 @@ class User extends Authenticatable
         ->where('users.is_deleted', '=','0');
         if (!empty(Request::get('name'))) {
             $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
-        }
-        if (!empty(Request::get('last_name'))) {
-            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
         }
         if (!empty(Request::get('email'))) {
             $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
@@ -160,7 +157,7 @@ class User extends Authenticatable
 
 
 static public function getSearchstudent() {
-    if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
+    if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('email'))) {
 
         $return = self::select('users.*', 'class-num as class_name')
             ->leftJoin('class', 'class.id', '=', 'users.class_id' ,'left')
@@ -175,9 +172,6 @@ static public function getSearchstudent() {
             $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
         }
 
-        if (!empty(Request::get('last_name'))) {
-            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
-        }
 
         if (!empty(Request::get('email'))) {
             $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');

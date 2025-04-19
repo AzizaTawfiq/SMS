@@ -2,19 +2,15 @@
 @section("content")
 <main class="app-main">
         <div class="app-content-header">
-          <!--begin::Container-->
           <div class="container-fluid">
-            <!--begin::Row-->
             <div class="row">
 
-              <div class="col-sm-6"><h3 class="mb-0">Student list (Count: {{$getRecord->total()}}) </h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Students ({{$getRecord->total()}}) </h3></div>
               <div class="col-sm-6 text-end">
                 <a href="{{ url('admin/student/add') }}" class="btn btn-primary">Add Student</a>
               </div>
             </div>
-            <!--end::Row-->
           </div>
-          <!--end::Container-->
         </div>
 
         <div class="app-content">
@@ -37,18 +33,6 @@
                           placeholder="Search for name"
                           name="name"
                           value="{{ Request::get('name') }}"
-                        />
-
-                      </div>
-                      <div class="form-group col-md-2">
-                        <label for="last_name" class="form-label text-bold">Last name</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="last_name"
-                          placeholder="Search for last name"
-                          name="last_name"
-                          value="{{ Request::get('last_name') }}"
                         />
 
                       </div>
@@ -213,23 +197,20 @@
                         />
                       </div>
                       <div class="form-group col-md-3" style="margin-top: 30px;">
-                       <button class="btn btn-primary" type="submit">Search</button>
-                       <a href="{{ url('admin/student/list') }}" class="btn btn-success">Reset</a>
+                       <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                       <a href="{{ url('admin/student/list') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
                       </div>
                     </div>
                   </form>
                 </div>
               @include('_message')
                 <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-title">Students list</h3>
-                  </div>
-                  <!-- /.card-header -->
                   <div class="card-body p-0">
+                    @if($getRecord->count() > 0)
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th >#</th>
+                          <th>#</th>
                           <th>Profile pic</th>
                           <th>Student Name</th>
                           <th>Parent Name</th>
@@ -243,17 +224,17 @@
                           <th>Religion</th>
                           <th>Mobile</th>
                           <th>Admission Date</th>
-                          <th >Blood group</th>
-                          <th >Height</th>
-                          <th >Weight</th>
-                          <th >Status</th>
-                          <th >Actions</th>
+                          <th>Blood group</th>
+                          <th>Height</th>
+                          <th>Weight</th>
+                          <th>Status</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($getRecord as $value)
+                      @foreach($getRecord as $key => $value)
                         <tr>
-                            <td>{{ $value->id }}</td>
+                            <td>{{ $getRecord->firstItem() + $key }}</td>
                             <td>
                                 @if(!empty($value->getProfile()))
                                 <img src="{{ $value->getProfile() }}" alt="Profile pic" style="width: 50px; height: 50px; border-radius: 50%;">
@@ -270,31 +251,41 @@
                                 @if(!empty($value->date_of_birth))
                                 {{ date('d-m-Y', strtotime($value->date_of_birth)) }}
                                 @endif
+                            </td>
                             <td>{{ $value->caste }}</td>
                             <td>{{ $value->religion }}</td>
                             <td>{{ $value->mobile }}</td>
                             <td>
-                            @if(!empty($value->admission_date))
+                                @if(!empty($value->admission_date))
                                 {{ date('d-m-Y', strtotime($value->admission_date)) }}
                                 @endif
-                                </td>
+                            </td>
                             <td>{{ $value->blood_group }}</td>
                             <td>{{ $value->height }}</td>
                             <td>{{ $value->weight }}</td>
                             <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
-                            <td><a href="{{url('admin/student/edit/' .$value->id)}}" class="btn btn-primary">Edit</a></td>
-                            <td><a href="{{url('admin/student/delete/' .$value->id)}}" class="btn btn-danger">Delete</a></td>
+                            <td>
+                              <a href="{{url('admin/student/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
+                              <x-confirm-delete 
+                                :url="url('admin/student/delete/' .$value->id)" 
+                                :id="$value->id"
+                                title="Delete Student"
+                                description="Are you sure you want to delete this student?"
+                              />
+                            </td>
+                            <!-- <td><a href="{{url('admin/student/edit/' .$value->id)}}" class="btn btn-primary">Edit</a></td>
+                            <td><a href="{{url('admin/student/delete/' .$value->id)}}" class="btn btn-danger">Delete</a></td> -->
                         </tr>
                         @endforeach
                       </tbody>
                     </table>
                     <div class="d-flex justify-content-center mt-4">
-
-                        {!! $getRecord-> appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
+                        {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                     </div>
-
+                    @else
+                        <x-empty-state message="No students found in the system." />
+                    @endif
                   </div>
-                  <!-- /.card-body -->
                 </div>
               </div>
             </div>

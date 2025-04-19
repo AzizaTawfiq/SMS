@@ -35,21 +35,6 @@
                                 {{$errors->first('name')}}
                                 </div>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label for="last_name" class="form-label text-bold">Last name<span class="text-danger">*</span></label>
-                                <input
-                                type="text"
-                                class="form-control"
-                                id="last_name"
-                                placeholder="Enter last name"
-                                name="last_name"
-
-                                value="{{ old('last_name', $getRecord->last_name) }}"
-                                />
-                                <div class="text-danger">
-                                {{$errors->first('last_name')}}
-                                </div>
-                            </div>
                             <div class="col-md-6 form-group mt-3">
                                 <label for="admission_number" class="form-label text-bold">Admission number<span class="text-danger">*</span></label>
                                 <input
@@ -287,6 +272,7 @@
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Save</button>
+                      <a href="{{ url('admin/student/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
                   </form>
                 </div>

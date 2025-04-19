@@ -2,18 +2,14 @@
 @section("content")
 <main class="app-main">
         <div class="app-content-header">
-          <!--begin::Container-->
           <div class="container-fluid">
-            <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Admin list (Count: {{$getRecord->total()}}) </h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Admins ({{$getRecord->total()}}) </h3></div>
               <div class="col-sm-6 text-end">
                 <a href="{{ url('admin/admin/add') }}" class="btn btn-primary">Add Admin</a>
               </div>
             </div>
-            <!--end::Row-->
           </div>
-          <!--end::Container-->
         </div>
 
         <div class="app-content">
@@ -62,49 +58,53 @@
                         />
                       </div>
                       <div class="form-group col-md-3" style="margin-top: 30px;">
-                       <button class="btn btn-primary" type="submit">Search</button>
-                       <a href="{{ url('admin/admin/list') }}" class="btn btn-success">Reset</a>
+                       <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                       <a href="{{ url('admin/admin/list') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
                       </div>
                     </div>
                   </form>
                 </div>
               @include('_message')
                 <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-title">Admins list</h3>
-                  </div>
-                  <!-- /.card-header -->
                   <div class="card-body p-0">
+                    @if($getRecord->count() > 0)
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th >#</th>
+                          <th>#</th>
                           <th>Name</th>
                           <th>Email</th>
-                          <th >Created date</th>
-                          <th >Actions</th>
+                          <th>Created date</th>
+                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($getRecord as $value)
+                        @foreach($getRecord as $key => $value)
                         <tr>
-                            <td>{{ $value->id }}</td>
+                            <td>{{ $getRecord->firstItem() + $key }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
-                            <td><a href="{{url('admin/admin/edit/' .$value->id)}}" class="btn btn-primary">Edit</a></td>
-                            <td><a href="{{url('admin/admin/delete/' .$value->id)}}" class="btn btn-danger">Delete</a></td>
+                            <td>
+                              <a href="{{url('admin/admin/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
+                              <x-confirm-delete 
+                                :url="url('admin/admin/delete/' .$value->id)" 
+                                :id="$value->id"
+                                title="Delete Admin"
+                                description="Are you sure you want to delete this administrator?"
+                              />
+                            </td>
                         </tr>
                         @endforeach
                       </tbody>
                     </table>
                     <div class="d-flex justify-content-center mt-4">
-
-                        {!! $getRecord-> appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
+                        {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                     </div>
-
+                    @else
+                        <x-empty-state message="No administrators found in the system." />
+                    @endif
                   </div>
-                  <!-- /.card-body -->
                 </div>
               </div>
             </div>

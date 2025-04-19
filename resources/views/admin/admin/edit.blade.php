@@ -15,7 +15,7 @@
             <div class="row g-4">
               <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
-                  <form action="" method="post">
+                  <form action="" method="post">    
                   {{ csrf_field() }}
 
                     <div class="card-body">
@@ -49,20 +49,18 @@
                         {{$errors->first('email')}}
                         </div>
                       </div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label for="password" class="form-label">Password</label>
                         <input type="text" class="form-control" id="password" placeholder="Enter password" name="password"  />
                         <div class="text-danger">
                         {{$errors->first('password')}}
                         </div>
-                      </div>
+                      </div> -->
                     </div>
-                    <!--end::Body-->
-                    <!--begin::Footer-->
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Save</button>
+                      <a href="{{ url('admin/admin/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
-                    <!--end::Footer-->
                   </form>
                 </div>
               </div>

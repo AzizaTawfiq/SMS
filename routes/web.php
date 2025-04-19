@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ParentController;
+use App\Http\Controllers\SubjectController;
 
 
 /*
@@ -33,14 +34,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/admin/add', [AdminController::class, 'add']);
     Route::post('admin/admin/add', [AdminController::class, 'insert']);
 
-    Route::get('admin/school_classes/list', [SchoolClassController::class, 'list'])->name('school_classes.list');
-    Route::get('admin/school_classes/add', [SchoolClassController::class, 'add'])->name('school_classes.add');
-    Route::post('admin/school_classes/add', [SchoolClassController::class, 'store'])->name('school_classes.store');
-    Route::get('admin/school_classes/{id}/edit', [SchoolClassController::class, 'edit'])->name('school_classes.edit');
-    Route::put('admin/school_classes/{id}/update', [SchoolClassController::class, 'update'])->name('school_classes.update');
-    Route::delete('admin/school_classes/{id}/destroy', [SchoolClassController::class, 'destroy'])->name('school_classes.destroy');
-    Route::get('admin/school_classes/search', [SchoolClassController::class, 'search'])->name('school_classes.search');
-
     Route::get('admin/admin/edit/{id}', [AdminController::class, 'edit']);
     Route::post('admin/admin/edit/{id}', [AdminController::class, 'update']);
     Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete']);
@@ -65,7 +58,23 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/parent/assign_student_parent/{student_id}/{parent_id}', [ParentController::class, 'AssignStudentParent']);
     Route::get('admin/parent/assign_student_parent-delete/{student_id}', [ParentController::class, 'AssignStudentParentDelete']);
 
-   
+    //School classes
+    Route::get('admin/school_classes/list', [SchoolClassController::class, 'list'])->name('school_classes.list');
+    Route::get('admin/school_classes/add', [SchoolClassController::class, 'add'])->name('school_classes.add');
+    Route::post('admin/school_classes/add', [SchoolClassController::class, 'store'])->name('school_classes.store');
+    Route::get('admin/school_classes/{id}/edit', [SchoolClassController::class, 'edit'])->name('school_classes.edit');
+    Route::put('admin/school_classes/{id}/update', [SchoolClassController::class, 'update'])->name('school_classes.update');
+    Route::delete('admin/school_classes/{id}/destroy', [SchoolClassController::class, 'destroy'])->name('school_classes.destroy');
+    Route::get('admin/school_classes/search', [SchoolClassController::class, 'search'])->name('school_classes.search');
+
+    //School subjects
+    Route::get('admin/subjects/list', [SubjectController::class, 'list'])->name('subjects.list');
+    Route::get('admin/subjects/add', [SubjectController::class, 'add'])->name('subjects.add');
+    Route::post('admin/subjects/add', [SubjectController::class, 'store'])->name('subjects.store');
+    Route::get('admin/subjects/{id}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');
+    Route::put('admin/subjects/{id}/update', [SubjectController::class, 'update'])->name('subjects.update');
+    Route::delete('admin/subjects/{id}/destroy', [SubjectController::class, 'destroy'])->name('subjects.destroy');
+    Route::get('admin/subjects/search', [SubjectController::class, 'search'])->name('subjects.search');
 
   
 });

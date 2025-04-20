@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 use Str;
 
 
@@ -12,7 +15,7 @@ class StudentController extends Controller
 {
     public function list()
     {
-        $data['getRecord'] = User::getStudent();
+         $data['getRecord'] = User::getStudent();
         $data['header_title' ]= 'Students List';
         return view('admin.student.list', $data);
     }
@@ -25,7 +28,10 @@ class StudentController extends Controller
     }
     public function insert(Request $request)
     {
-        $request->validate([
+
+        //return 111111;
+
+      /*   $request->validate([
             'name' => 'required',
             'admission_number' => 'max:50',
             'email' => 'required|email|unique:users,email',
@@ -39,49 +45,60 @@ class StudentController extends Controller
             'blood_group' => ' max:10',
             'religion' => 'max:50',
             'caste' => 'max:50',
-        'status' => 'required',
-        'admission_date' => 'required',
-        'roll_number' => 'max:50',
+            'status' => 'required',
+            'admission_date' => 'required',
+            'roll_number' => 'max:50',
 
-        ]);
+        ]); */
 
-        $student = new User;
+//return $request->all();
 
-        if(!empty($request->file('profile_pic'))){
-            $ext = $request->file('profile_pic')->getClientOriginalExtension();
-            $file = $request->file('profile_pic');
-            $randomStr = date('Ymdhis').Str::random(20);
-            $filename = strtolower($randomStr).'.'.$ext;
-            $file->move('upload/profile/', $filename);
-            $student->profile_pic = $filename;
-            }
-        $student->name = trim($request->name);
-        $student->admission_number = trim($request->admission_number);
-        $student->roll_number = trim($request->roll_number);
-        $student->class_id = trim($request->class_id);
-        $student->gender = trim($request->gender);
-        if(!empty($request->date_of_birth))
-        {
-            $student->date_of_birth = trim($request->date_of_birth);
+try {
+
+    $student = new User;
+
+    if(!empty($request->file('profile_pic'))){
+        $ext = $request->file('profile_pic')->getClientOriginalExtension();
+        $file = $request->file('profile_pic');
+        $randomStr = date('Ymdhis').Str::random(20);
+        $filename = strtolower($randomStr).'.'.$ext;
+        $file->move('upload/profile/', $filename);
+        $student->profile_pic = $filename;
         }
-        $student->caste = trim($request->caste);
-        $student->religion = trim($request->religion);
-        $student->mobile_number = trim($request->mobile_number);
-        if(!empty($request->admission_date))
-        {
-            $student->admission_date = trim($request->admission_date);
-        }
-        $student->blood_group = trim($request->blood_group);
-        $student->height = trim($request->height);
-        $student->weight = trim($request->weight);
-        $student->status = trim($request->status);
-        $student->address = trim($request->address);  // Add this line before save()
-        $student->email = trim($request->email);
-        $student->password = Hash::make($request->password);
-        $student->role = 3;
-        $student->save();
-        
-        return redirect('admin/student/list')->with('success', 'Student added successfully');
+    $student->name = trim($request->name);
+    $student->admission_number = trim($request->admission_number);
+    $student->roll_number = trim($request->roll_number);
+    $student->class_id = trim($request->class_id);
+    $student->gender = trim($request->gender);
+    if(!empty($request->date_of_birth))
+    {
+        $student->date_of_birth = trim($request->date_of_birth);
+    }
+    $student->caste = trim($request->caste);
+    $student->religion = trim($request->religion);
+    $student->mobile_number = trim($request->mobile_number);
+    if(!empty($request->admission_date))
+    {
+        $student->admission_date = trim($request->admission_date);
+    }
+    $student->blood_group = trim($request->blood_group);
+    $student->height = trim($request->height);
+    $student->weight = trim($request->weight);
+    $student->status = trim($request->status);
+    $student->email = trim($request->email);
+    $student->password = Hash::make($request->password);
+    $student->role = 3;
+    $student->save();
+
+    return redirect('admin/student/list')->with('success', 'Student added successfully');
+
+ } catch (ModelNotFoundException $e) {
+     return response()->json(['error' => 'User not found.'], 404);
+ } catch (Exception $e) {
+     Log::error('Data failed: '.$e->getMessage());
+     return response()->json(['error' => 'Failed to data user.'], 500);
+ }
+
 
     }
 
@@ -99,10 +116,10 @@ class StudentController extends Controller
 
     public function update($id, Request $request)
     {
-        $request->validate([
+      /*   $request->validate([
             'name' => 'required',
             'admission_number' => 'max:50',
-            'email' => 'required|email|unique:users,email'.$id,
+            'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'min:6',
             'gender' => 'required',
             'mobile_number' => 'max:15|min:8',
@@ -117,7 +134,7 @@ class StudentController extends Controller
         'admission_date' => 'required',
         'roll_number' => 'required|max:50',
 
-        ]);
+        ]); */
 
         $student= User::getSingle($id);
 
@@ -150,10 +167,10 @@ class StudentController extends Controller
         $student->weight = trim($request->weight);
         $student->status = trim($request->status);
         $student->email = trim($request->email);
-        if(!empty($request->password))
+       /*  if(!empty($request->password))
         {
             $student->password = Hash::make($request->password);
-        }
+        } */
         $student->role = 3;
         $student->save();
         return redirect('admin/student/list')->with('success', 'Student updated successfully');

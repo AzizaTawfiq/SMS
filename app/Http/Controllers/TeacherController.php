@@ -26,12 +26,12 @@ class TeacherController extends Controller
     public function insert(Request $request)
     {
 
-        $request->validate([
+        /* $request->validate([
             'email' => 'required|email|unique:users,email',
             'mobile_number' => 'max:15|min:8',
             'marital_status' => ' max:50',
 
-        ]);
+        ]); */
 
         $teacher= new User;
 
@@ -44,7 +44,7 @@ class TeacherController extends Controller
             $teacher->profile_pic = $filename;
             }
         $teacher->name = trim($request->name);
-        $teacher->last_name = trim($request->last_name);
+        /* $teacher->last_name = trim($request->last_name); */
         $teacher->gender = trim($request->gender);
         if(!empty($request->date_of_birth))
         {
@@ -84,9 +84,9 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'last_name' => 'required',
+            /* 'last_name' => 'required', */
             'admission_number' => 'max:50',
-            'email' => 'required|email|unique:users,email'.$id,
+            'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'min:6',
             'gender' => 'required',
             'mobile_number' => 'max:15|min:8',
@@ -114,7 +114,7 @@ class TeacherController extends Controller
             $teacher->profile_pic = $filename;
             }
         $teacher->name = trim($request->name);
-        $teacher->last_name = trim($request->last_name);
+       /*  $teacher->last_name = trim($request->last_name); */
         $teacher->admission_number = trim($request->admission_number);
         $teacher->roll_number = trim($request->roll_number);
         $teacher->class_id = trim($request->class_id);

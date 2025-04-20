@@ -3,7 +3,7 @@
 <main class="app-main">
         <div class="app-content-header">
 
-          <div class="container-fluid">   
+          <div class="container-fluid">
             <div class="row">
 
               <div class="col-sm-6"><h3 class="mb-0">Teachers ({{$getRecord->total()}}) </h3></div>
@@ -37,7 +37,7 @@
                         />
 
                       </div>
-                      <div class="form-group col-md-2">
+                      <!-- <div class="form-group col-md-2">
                         <label for="last_name" class="form-label text-bold">Last name</label>
                         <input
                           type="text"
@@ -48,7 +48,7 @@
                           value="{{ Request::get('last_name') }}"
                         />
 
-                      </div>
+                      </div> -->
                       <div class="form-group col-md-2">
                         <label for="email" class="form-label">Email</label>
                         <input
@@ -124,7 +124,7 @@
                       <div class="form-group col-md-3" style="margin-top: 30px;">
                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
                        <a href="{{ url('admin/teacher/list') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
-                      </div>   
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -188,14 +188,14 @@
                             <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
                             <td>
                               <a href="{{url('admin/teacher/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
-                              <x-confirm-delete 
-                                :url="url('admin/teacher/delete/' .$value->id)" 
+                              <x-confirm-delete
+                                :url="url('admin/teacher/delete/' .$value->id)"
                                 :id="$value->id"
                                 title="Delete Teacher"
                                 description="Are you sure you want to delete this teacher?"
                               />
                             </td>
-                            
+
                         </tr>
                         @endforeach
                       </tbody>

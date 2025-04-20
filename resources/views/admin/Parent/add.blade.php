@@ -15,7 +15,7 @@
             <div class="row g-4">
               <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
-                  <form action="{{ url('admin/Parent/add')}}" method="post" enctype="multipart/form-data">
+                  <form action="{{ url('admin/parent/add')}}"  method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
 
                     <div class="card-body">
@@ -36,7 +36,7 @@
                                 {{$errors->first('last_name')}}
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6 form-group mt-3">
                                 <label for="gender" class="form-label text-bold">Gender<span class="text-danger">*</span></label>
                                 <select class="form-control" id="gender" name="gender" >
@@ -50,7 +50,7 @@
 
                             </div>
 
-                           
+
                             <div class="col-md-6 form-group mt-3">
                                 <label for="caste" class="form-label text-bold">occupation</label>
                                 <input type="text" class="form-control" id="occupation"
@@ -64,7 +64,7 @@
                             <div class="col-md-6 form-group mt-3">
                                 <label for="mobile_number" class="form-label text-bold">Mobile number</label>
                                 <input  type="text"  class="form-control"  id="mobile_number"
-                                placeholder="Enter mobile number" name="mobile_number" 
+                                placeholder="Enter mobile number" name="mobile_number"
                                 value="{{ old('mobile_number') }}" />
                                 <div class="text-danger">
                                 {{$errors->first('mobile_number')}}
@@ -79,7 +79,7 @@
                                 {{$errors->first('address')}}
                                 </div>
                             </div>
-                           
+
                             <div class="col-md-6 form-group mt-3">
                                 <label for="profile_pic" class="form-label text-bold">Profile pic</label>
                                 <input type="file" class="form-control" id="profile_pic" name="profile_pic" />
@@ -88,7 +88,7 @@
                                 </div>
 
                             </div>
-                            
+
                             <div class="col-md-6 form-group mt-3 mb-3">
                                 <label for="status" class="form-label text-bold">Status<span class="text-danger">*</span></label>
                                 <select class="form-control" id="status" name="status">
@@ -120,7 +120,7 @@
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-outline-primary">Add</button>
+                      <button type="submit" class="btn btn-primary">Add</button>
                       <a href="{{ url('admin/parent/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
                   </form>

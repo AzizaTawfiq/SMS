@@ -48,7 +48,7 @@
                                     <!--begin::Footer-->
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Add</button>
-                                        <a href="{{ url('admin/school-class/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
+                                        <a href="{{ url('admin/school_classes/list') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                                     </div>
                                     <!--end::Footer-->
                                 </form>

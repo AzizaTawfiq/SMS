@@ -41,7 +41,7 @@ class SchoolClassController extends Controller
     public function edit(Request $request)
     {
         $school_class = School_Class::findOrFail($request->id);
-        
+
     }
 
     public function update(Request $request,$id)
@@ -56,7 +56,7 @@ class SchoolClassController extends Controller
     {
         $school_class = School_Class::findOrFail($request->id);
         $school_class->delete();
-        return redirect()->route('school_classes.list')->with('success', 'class deleted successfuly');
+        return redirect()->route('school_classes.list')->with('success', 'class deleted successfully');
 
     }
 
@@ -64,14 +64,14 @@ class SchoolClassController extends Controller
     {
         $search = $request->input('search');
         if(empty($search)){
-            $search = $request->input('search_date');   
+            $search = $request->input('search_date');
         }
-       
+
 
         $school_classes = School_Class::when($search, function ($query, $search) {
         if($search=='Active'){$search=0;}
         if($search=='InActive'){$search=1;}
-        
+
             return $query->where('name', 'like', "%{$search}%")
                          ->orWhere('status', 'like', $search)
                          ->orWhereDate('created_at', $search);

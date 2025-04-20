@@ -15,7 +15,7 @@
             <div class="row g-4">
               <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
-                  <form action="{{ url('admin/student/add')}}" method="post" enctype="multipart/form-data">
+                  <form action="" method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
 
                     <div class="card-body">
@@ -261,14 +261,14 @@
                         {{$errors->first('email')}}
                         </div>
                       </div>
-                      <div class="form-group">
+                     <!--  <div class="form-group">
                         <label for="password" class="form-label">Password</label>
                         <input type="text" class="form-control" id="password" placeholder="Enter password" name="password"  />
                         <p>If you want to change password then enter new password otherwise leave it blank</p>
                         <div class="text-danger">
                         {{$errors->first('password')}}
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Save</button>

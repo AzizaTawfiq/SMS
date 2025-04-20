@@ -240,7 +240,7 @@
                                 <img src="{{ $value->getProfile() }}" alt="Profile pic" style="width: 50px; height: 50px; border-radius: 50%;">
                                 @endif
                             </td>
-                            <td>{{ $value->name }}{{ $value->last_name }}</td>
+                            <td>{{ $value->name }}<!-- {{ $value->last_name }} --></td>
                             <td>{{ $value->parent_name }}{{ $value->parent_last_name }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->admission_number }}</td>
@@ -266,8 +266,8 @@
                             <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
                             <td>
                               <a href="{{url('admin/student/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
-                              <x-confirm-delete 
-                                :url="url('admin/student/delete/' .$value->id)" 
+                              <x-confirm-delete
+                                :url="url('admin/student/delete/' .$value->id)"
                                 :id="$value->id"
                                 title="Delete Student"
                                 description="Are you sure you want to delete this student?"

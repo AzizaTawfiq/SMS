@@ -24,6 +24,21 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'status',
+        'profile_pic',
+        'admission_number',
+        'roll_number',
+        'class_id',
+        'gender',
+        'mobile_number',
+        'height',
+        'weight',
+        'blood_group',
+        'religion',
+        'caste',
+        'admission_date',
+        'date_of_birth',
+        'date_of_birth',
     ];
 
     /**
@@ -144,9 +159,9 @@ class User extends Authenticatable
         if (!empty(Request::get('name'))) {
             $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
         }
-        if (!empty(Request::get('last_name'))) {
+        /* if (!empty(Request::get('last_name'))) {
             $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
-        }
+        } */
         if (!empty(Request::get('email'))) {
             $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
         }

@@ -225,6 +225,13 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="{{url('admin/assign_subject/list')}}" class="nav-link {{request()->is('admin/assign_subject/*') ? 'active':''}}">
+                  <i class="nav-icon bi bi-book"></i>
+                  <p>Assign Subjects</p>
+                </a>
+              </li>
+
                   @elseif(Auth::user()->role == 2)
                   <li class="nav-item">
                   <a href="{{url('teacher/dashboard')}}" class="nav-link">

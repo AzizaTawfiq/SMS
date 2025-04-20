@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ParentController;
+use App\Http\Controllers\SubjectClassController;
 use App\Http\Controllers\SubjectController;
 
 
@@ -86,7 +87,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('admin/subjects/{id}/destroy', [SubjectController::class, 'destroy'])->name('subjects.destroy');
     Route::get('admin/subjects/search', [SubjectController::class, 'search'])->name('subjects.search');
 
-
+   //Assign Subject to Class
+   Route::get('admin/assign_subject/list', [SubjectClassController::class, 'list'])->name('assign_subjects.list');
+   Route::get('admin/assign_subject/add', [SubjectClassController::class, 'add'])->name('assign_subjects.add');
 
 });
 

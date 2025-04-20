@@ -15,4 +15,9 @@ class School_Class extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function subject(){
+        return $this->belongsToMany(Subject::class);
+    }
+    
 }

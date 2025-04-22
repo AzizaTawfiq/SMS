@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('subject_school_class', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_class_id')->constrained()->onDelete('cascade');
-            $table->foreignId('subject_id')->constrained()->onDelete('cascade');
+            $table->foreignId('schoolclass_id')->constrained('school_classes')->onDelete('cascade');
+            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->string('status')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->softDeletes();

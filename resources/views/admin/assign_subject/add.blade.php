@@ -14,7 +14,8 @@
 
                 <!--begin::Row-->
                 <div class="row">
-                    <form action="" method="POST">
+                    <form action="{{ url('admin/assign_subject/add') }}" method="POST">
+                        @csrf
                         <div class="col-sm-6">
                             <div class="form-group mb-3">
                                 <label class="form-label fw-bold">Select Classes</label>

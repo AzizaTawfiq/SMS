@@ -23,6 +23,6 @@ class Subject extends Model
 
     public function school_class()
     {
-    return $this->belongsToMany(School_Class::class);
+    return $this->belongsToMany(School_Class::class,'subject_school_class','schoolclass_id','subject_id');
     }
 }

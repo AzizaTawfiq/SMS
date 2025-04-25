@@ -91,6 +91,10 @@ Route::group(['middleware' => 'admin'], function () {
    //Assign Subject to Class
    Route::get('admin/assign_subject/list', [SubjectClassController::class, 'list'])->name('assign_subjects.list');
    Route::get('admin/assign_subject/add', [SubjectClassController::class, 'add'])->name('assign_subjects.add');
+   Route::post('admin/assign_subject/add', [SubjectClassController::class, 'store'])->name('assign_subjects.store');
+
+
+   Route::get('admin/assign_subject/get_assignsubjects', [SubjectClassController::class, 'get_assignsubjects'])->name('assign_subjects.get_assignsubjects');
 
    //Class timetable
    Route::get('admin/class_timetable/list', [ClassTimetableController::class, 'list'])->name('class_timetable.list');

@@ -64,15 +64,19 @@
                                         </tr>
                                     </thead>
                                    <tbody>
+                                    @foreach ($school_classes as $class)
+                                    @foreach ($class->subjects as $subject)
                                     <tr>
                                         <td>#</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
+                                        <td>{{ $subject->name }}</td>
+                                        <td>{{ $class->name }}</td>
+                                        <td>{{ $class->status }}</td>
+                                        <td>{{ $subject->user->name }}</td>
+                                        <td>{{ $subject->created_at }}</td>
                                         <td>--</td>
                                     </tr>
+                                    @endforeach
+                                    @endforeach
                                    </tbody>
                                 </table>
                             </div>

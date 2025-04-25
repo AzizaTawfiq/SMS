@@ -16,8 +16,8 @@ class School_Class extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function subject(){
-        return $this->belongsToMany(Subject::class);
+    public function subjects(){
+        return $this->belongsToMany(Subject::class,'subject_school_class','schoolclass_id','subject_id');
     }
 
 }

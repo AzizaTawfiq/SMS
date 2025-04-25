@@ -19,5 +19,5 @@ class School_Class extends Model
     public function subject(){
         return $this->belongsToMany(Subject::class);
     }
-    
+
 }

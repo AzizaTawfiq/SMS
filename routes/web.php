@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\SubjectClassController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ClassTimetableController;
 
 
 /*
@@ -91,6 +92,11 @@ Route::group(['middleware' => 'admin'], function () {
    Route::get('admin/assign_subject/list', [SubjectClassController::class, 'list'])->name('assign_subjects.list');
    Route::get('admin/assign_subject/add', [SubjectClassController::class, 'add'])->name('assign_subjects.add');
 
+   //Class timetable
+   Route::get('admin/class_timetable/list', [ClassTimetableController::class, 'list'])->name('class_timetable.list');
+   Route::post('admin/class_timetable/get_subject', [ClassTimetableController::class, 'getSubject'])->name('class_timetable.getSubject');
+
+
 });
 
 
@@ -98,6 +104,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'student'], function () {
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('student/my_subjects', [SubjectController::class, 'mySubjects']);
 });
 
 

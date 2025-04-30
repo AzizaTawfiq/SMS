@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <!--end::Row-->
-
+                @include('_message')
                 <!--begin::Row-->
                 <div class="row">
                     <form action="{{ url('admin/assign_subject/add') }}" method="POST">

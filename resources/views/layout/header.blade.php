@@ -267,6 +267,14 @@
   </ul>
 </li>
 
+              <li class="nav-item">
+                <a href="{{ url('admin/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                 <i class="nav-icon bi bi-shield-lock"></i>
+                 <p>Change Password</p>
+               </a>
+              </li>
+
+
                   @elseif(Auth::user()->role == 2)
                   <li class="nav-item">
                   <a href="{{url('teacher/dashboard')}}" class="nav-link">
@@ -274,6 +282,13 @@
                   <p>Dashboard</p>
                 </a>
                 </li>
+
+                <li class="nav-item">
+                <a href="{{ url('teacher/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                 <i class="nav-icon bi bi-shield-lock"></i>
+                 <p>Change Password</p>
+               </a>
+              </li>
 
                   @elseif(Auth::user()->role == 3)
                   <li class="nav-item">
@@ -288,6 +303,14 @@
                   <p>Subjects</p>
                 </a>
               </li>
+
+            <li class="nav-item">
+                <a href="{{ url('student/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                 <i class="nav-icon bi bi-shield-lock"></i>
+                 <p>Change Password</p>
+               </a>
+              </li>
+
                   @else(Auth::user()->role == 4)
                   <li class="nav-item">
                   <a href="{{url('parent/dashboard')}}" class="nav-link">
@@ -295,6 +318,14 @@
                   <p>Dashboard</p>
                 </a>
                 </li>
+
+                <li class="nav-item">
+                <a href="{{ url('parent/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                 <i class="nav-icon bi bi-shield-lock"></i>
+                 <p>Change Password</p>
+               </a>
+              </li>
+
                   @endif
 
               </li>

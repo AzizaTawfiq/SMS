@@ -91,9 +91,9 @@ Route::group(['middleware' => 'admin'], function () {
    Route::get('admin/assign_subject/list', [SubjectClassController::class, 'list'])->name('assign_subjects.list');
    Route::get('admin/assign_subject/add', [SubjectClassController::class, 'add'])->name('assign_subjects.add');
    Route::post('admin/assign_subject/add', [SubjectClassController::class, 'store'])->name('assign_subjects.store');
+   Route::delete('admin/assign_subject/{class_id}/{subject_id}/destroy', [SubjectClassController::class, 'destroy'])->name('assign_subjects.destroy');
 
-
-   Route::get('admin/assign_subject/get_assignsubjects', [SubjectClassController::class, 'get_assignsubjects'])->name('assign_subjects.get_assignsubjects');
+//    Route::get('admin/assign_subject/get_assignsubjects', [SubjectClassController::class, 'get_assignsubjects'])->name('assign_subjects.get_assignsubjects');
 
 });
 

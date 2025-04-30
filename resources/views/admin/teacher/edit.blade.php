@@ -35,7 +35,7 @@
                                 {{$errors->first('name')}}
                                 </div>
                             </div>
-                            <div class="col-md-6 form-group">
+                           <!--  <div class="col-md-6 form-group">
                                 <label for="last_name" class="form-label text-bold">Last name<span class="text-danger">*</span></label>
                                 <input
                                 type="text"
@@ -49,7 +49,7 @@
                                 <div class="text-danger">
                                 {{$errors->first('last_name')}}
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-6 form-group mt-3">
                                 <label for="admission_number" class="form-label text-bold">Admission number<span class="text-danger">*</span></label>
                                 <input

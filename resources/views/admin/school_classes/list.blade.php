@@ -7,7 +7,7 @@
                 <!--begin::Row-->
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Classes</h3>
+                        <h3 class="mb-0">Classes ({{ $school_classes->total() }})</h3>
                     </div>
                     <div class="col-sm-6 text-end">
                         <a href="{{ url('admin/school_classes/add') }}" class="btn btn-primary">Add Class</a>
@@ -15,24 +15,25 @@
                 </div>
                      <div class="row">
                       <div class="col-sm-6">
-                          <p class="mb-0">Search:  By (Class Name & status & Date)</p>
+                          <p class="mb-0">Search</p>
                       </div>
                       <form action="{{ route('school_classes.search') }}" method="GET">
                         <div class="row">
                             <div class="col-4">
-                                <input type="text" class="form-control" name="search" value="{{ request('search') }}" placeholder="Search ...">
+                                <input type="text" class="form-control" name="search" value="{{ request('search') }}" placeholder="Search for class name">
                             </div>
                             <div class="col-4">
                                 <input type="date" class="form-control" name="search_date" value="{{ request('search_by_date') }}" placeholder="Search ...">
                             </div>
                             <div class="col-4">
-                                <button type="submit" class="btn btn-secondary"><i class="las la-search"></i> Search</button>
-                                <a href="{{route('school_classes.list')}}" class="btn btn-secondary"><i class="las la-ban"></i> Reset</a>
+                                 <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                                <a href="{{route('school_classes.list')}}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
+
                             </div>
                         </div>
                     </form>
 
-                        
+
 
                   </div>
                   <!--end::Row-->
@@ -51,6 +52,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0">
+                            @if($school_classes->count() > 0)
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -65,13 +67,13 @@
                                     <tbody>
                                         @foreach ($school_classes as $item)
                                             <tr>
-                                                <td>#</td>
+                                            <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>
                                                     @if ($item->status == 0)
-                                                        <span class="badge bg-success">Active</span>
+                                                        <span class="badge bg-primary">Active</span>
                                                     @else
-                                                        <span class="badge bg-danger">InActive</span>
+                                                        <span class="badge bg-warning">InActive</span>
                                                     @endif
                                                 </td>
                                                 <td>{{ $item->user->name }}</td>
@@ -82,9 +84,9 @@
                                                         @csrf
                                                         @method('PUT')
                                                         <a href="{{ route('school_classes.edit', $item->id) }}"
-                                                            class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                                            class="text-primary" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal{{ $item->id }}"
-                                                            style="width:75px !important;">Edit</a>
+                                                            style="width:75px !important;"><i class="bi bi-pencil"></i></a>
                                                         <div class="modal fade" id="exampleModal{{ $item->id }}"
                                                             tabindex="-1" aria-labelledby="exampleModalLabel"
                                                             aria-hidden="true">
@@ -117,9 +119,9 @@
                                                                       </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
+                                                                        <button class="btn btn-primary">Save</button>
+                                                                        <button type="button" class="btn btn-outline-primary"
                                                                             data-bs-dismiss="modal">Cancel</button>
-                                                                        <button class="btn btn-primary">Save Changes</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -129,9 +131,9 @@
                                                       method="POST" style="display: inline !important;">
                                                       @csrf
                                                       @method('DELETE')
-                                                      <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                      <button type="button" class="text-primary" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModal2{{ $item->id }}"
-                                                        style="width:75px !important;">Delete</button>
+                                                        style="width:75px !important;"><i class="bi bi-trash"></i></button>
                                                     <div class="modal fade" id="exampleModal2{{ $item->id }}"
                                                         tabindex="-1" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
@@ -145,12 +147,12 @@
                                                                         aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                  Are you sure you want to delete <span style="color:red;">{{$item->name}}</span>?
+                                                                  Are you sure you want to delete <span class="text-primary">{{$item->name}}</span>?
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
+                                                                    <button class="btn btn-primary">Delete</button>
+                                                                    <button type="button" class="btn btn-outline-primary"
                                                                         data-bs-dismiss="modal">Cancel</button>
-                                                                    <button class="btn btn-danger">Delete</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -163,6 +165,9 @@
                                 </table>
                             </div>
                             <p>{{ $school_classes->links() }}</p>
+                            @else
+                        <x-empty-state message="No classes found in the system." />
+                    @endif
                             <!-- /.card-body -->
                         </div>
                     </div>

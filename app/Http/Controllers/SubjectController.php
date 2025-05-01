@@ -44,7 +44,7 @@ class SubjectController extends Controller
     public function edit(Request $request)
     {
         $subject = Subject::findOrFail($request->id);
-        
+
     }
 
     public function update(Request $request,$id)
@@ -67,9 +67,9 @@ class SubjectController extends Controller
     {
         $search = $request->input('search');
         if(empty($search)){
-            $search = $request->input('search_date');   
+            $search = $request->input('search_date');
         }
-       
+
 
         $subjects = Subject::when($search, function ($query, $search) {
         if($search=='Theory'){$search=0;}
@@ -77,7 +77,7 @@ class SubjectController extends Controller
 
         elseif($search=='Active'){$search=0;}
         elseif($search=='InActive'){$search=1;}
-        
+
             return $query->where('name', 'like', "%{$search}%")
                          ->orWhere('type', 'like', $search)
                          ->orWhere('status', 'like', $search)
@@ -86,5 +86,16 @@ class SubjectController extends Controller
 
         return view('admin.subjects.list', compact('subjects','search'));
 
+    }
+
+    public function mySubjects()
+
+    {
+       /*  $data['getRecord'] = Subject::getRecord();
+        $data['header_title' ]= 'My Subjects';
+        return view('student.my_subjects', $data); */
+        $user = Auth::user();
+        $subjects = Subject::where('user_id', $user->id)->get();
+        return view('student.my_subjects', compact('subjects'));
     }
 }

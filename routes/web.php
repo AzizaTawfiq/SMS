@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\SubjectClassController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ClassTimetableController;
 
 
 /*
@@ -99,12 +100,18 @@ Route::group(['middleware' => 'admin'], function () {
    Route::get('admin/change_password', [UserController::class, 'change_password'])->name('change_password');
    Route::post('admin/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 
+   //Class timetable
+   Route::get('admin/class_timetable/list', [ClassTimetableController::class, 'list'])->name('class_timetable.list');
+   Route::post('admin/class_timetable/get_subject', [ClassTimetableController::class, 'getSubject'])->name('class_timetable.getSubject');
+
+
 });
 
 
 //student url
 Route::group(['middleware' => 'student'], function () {
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('student/my_subjects', [SubjectController::class, 'mySubjects']);
 
     Route::get('student/change_password', [UserController::class, 'edit'])->name('change_password');
     Route::post('student/change_password', [UserController::class, 'update'])->name('update_change_password');

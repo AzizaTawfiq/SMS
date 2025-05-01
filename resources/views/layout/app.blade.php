@@ -62,7 +62,8 @@
       crossorigin="anonymous"
     />
     <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
-  </head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
   <!--end::Head-->
   <!--begin::Body-->
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -329,7 +330,9 @@
       const sparkline3 = new ApexCharts(document.querySelector('#sparkline-3'), option_sparkline3);
       sparkline3.render();
     </script>
-    <!--end::Script-->
+
+@yield('scripts')
+<!--end::Script-->
   </body>
   <!--end::Body-->
 </html>

@@ -100,10 +100,12 @@ Route::group(['middleware' => 'admin'], function () {
    Route::get('admin/change_password', [UserController::class, 'change_password'])->name('change_password');
    Route::post('admin/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 
+   //change passeord
+   Route::get('admin/change_password', [UserController::class, 'change_password'])->name('change_password');
+   Route::post('admin/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
    //Class timetable
    Route::get('admin/class_timetable/list', [ClassTimetableController::class, 'list'])->name('class_timetable.list');
    Route::post('admin/class_timetable/get_subject', [ClassTimetableController::class, 'getSubject'])->name('class_timetable.getSubject');
-
 
 });
 

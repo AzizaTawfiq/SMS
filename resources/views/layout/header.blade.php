@@ -295,6 +295,13 @@
                   <a href="{{url('student/dashboard')}}" class="nav-link">
                   <i class="nav-icon fa fa-tachometer-alt"></i>
                   <p>Dashboard</p>
+                 </a>
+               </li>
+
+            <li class="nav-item">
+                 <a href="{{ url('student/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                  <i class="nav-icon bi bi-shield-lock"></i>
+                  <p>Change Password</p>
                 </a>
             </li>
             <li class="nav-item">
@@ -320,11 +327,24 @@
                 </li>
 
                 <li class="nav-item">
-                <a href="{{ url('parent/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
-                 <i class="nav-icon bi bi-shield-lock"></i>
-                 <p>Change Password</p>
-               </a>
-              </li>
+                  <a href="{{url('parent/account')}}" class="nav-link">
+                  <i class="nav-icon bi-person-lines-fill"></i>
+                  <p>My Account</p>
+                 </a>
+               </li>
+
+                <li class="nav-item">
+                 <a href="{{ url('parent/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                  <i class="nav-icon bi bi-shield-lock"></i>
+                  <p>Change Password</p>
+                </a>
+               </li>
+
+               <li class="nav-item">
+                 <a href="{{ url('logout') }}" class="nav-link ">
+                  <i class="nav-icon bi bi-shield-lock"></i>
+                  <p>Logeout </p>
+                </a>
 
                   @endif
 

@@ -21,8 +21,8 @@ class UserController extends Controller
             return view('teacher.my-account',$data);
         } else if (Auth::user()->role == 3) {
             return view('student.my-account',$data);
-        } else{
-            return view('parent.my-account',$data);
+        } else if (Auth::user()->role == 4){
+            return view('parent.account',$data);
 
         }
 
@@ -39,30 +39,31 @@ class UserController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->save();
-        return redirect('admin/account')->with('success', 'Account updated successfully');   
-      }
+        return redirect('admin/account')->with('success', 'Account updated successfully');
+     }
 
-      public function change_password()
-    {
-        $data['header_title'] = 'Change Password';
-        return view('Profile.change_password', $data);
-    }
+     public function updateMyParentAccount(Request $request)
+     {
+        dd($request->all());
+     }
 
-    public function update_change_password(Request $request)
-    {
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|min:6|confirmed',
-        ]);
-
-        $user = User::find(Auth::id());
-
-        if (Hash::check($request->old_password, $user->password)) {
-            $user->password = Hash::make($request->new_password);
-            $user->save();
-            return redirect()->back()->with('success', 'Password updated successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Old password is not correct!');
+        public function change_password()
+        {
+            $data['header_title'] = 'Change Password';
+            return view('Profile.change_password', $data);
         }
-    }
+        public function update_change_password(Request $request)
+        {
+            $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required|min:6|confirmed', ]);
+                $user = User::find(Auth::id());
+                if (Hash::check($request->old_password, $user->password))
+                 {
+                    $user->password = Hash::make($request->new_password);
+                    $user->save();
+                    return redirect()->back()->with('success', 'Password updated successfully!');
+                }
+                 else { return redirect()->back()->with('error', 'Old password is not correct!'); }
+        }
 }

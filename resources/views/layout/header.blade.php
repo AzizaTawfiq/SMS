@@ -333,18 +333,19 @@
                  </a>
                </li>
 
+               <li class="nav-item">
+               <a href="{{ url('parent/my_student') }}" class="nav-link">
+               <i class="nav-icon bi-people-fill	"></i>
+                  <p>My Students</p>
+                 </a>
+               </li>
+
                 <li class="nav-item">
                  <a href="{{ url('parent/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
                   <i class="nav-icon bi bi-shield-lock"></i>
                   <p>Change Password</p>
                 </a>
                </li>
-
-               <li class="nav-item">
-                 <a href="{{ url('logout') }}" class="nav-link ">
-                  <i class="nav-icon bi bi-shield-lock"></i>
-                  <p>Logeout </p>
-                </a>
 
                   @endif
 

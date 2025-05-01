@@ -59,7 +59,8 @@
       @section('scripts')
 <script type="text/javascript">
     $(document).ready(function() {
-        // Remove the debugger statement
+
+        // Remove the  statement
         $('.getClass').on('change', function(){
             var class_id = $(this).val();
             console.log('Class ID selected:', class_id);
@@ -70,8 +71,11 @@
                     _token: '{{ csrf_token() }}',
                     class_id: class_id
                 },
-                success: function(data){
-                    $('#subject_id').html(data);
+                dataType: 'json',
+
+                success: function(response){
+
+                    $('.getSubject').html(response.html);
                 }
             });
         });

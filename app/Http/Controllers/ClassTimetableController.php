@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\School_Class;
+use App\Models\AssignSubject;
 
 
 class ClassTimetableController extends Controller
@@ -18,7 +19,15 @@ class ClassTimetableController extends Controller
 
     public function getSubject( Request $request)
     {
-        dd($request->all());
+       $getSubject =  AssignSubject::MySubject($request->class_id);
+       $html="<option value=''>Select subject</option>";
+       foreach($getSubject as $value){
+            $html .= "<option value='" . $value->subject_id . "'>' . $value->subject_name . '</option>";
+        }
+
+        $json['html']= $html;
+        echo json_encode($json);
+
 
     }
 

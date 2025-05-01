@@ -66,7 +66,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/parent/edit/{id}', [ParentController::class, 'edit']);
     Route::post('admin/parent/edit/{id}', [ParentController::class, 'update']);
     Route::get('admin/parent/edit/{id}', [ParentController::class, 'delete']);
-    Route::get('admin/parent/my.student/{id}', [ParentController::class, 'MyStudent']);
+    Route::get('admin/parent/my_student/{id}', [ParentController::class, 'MyStudent']);
     Route::get('admin/parent/assign_student_parent/{student_id}/{parent_id}', [ParentController::class, 'AssignStudentParent']);
     Route::get('admin/parent/assign_student_parent-delete/{student_id}', [ParentController::class, 'AssignStudentParentDelete']);
 
@@ -138,10 +138,15 @@ Route::group(['middleware' => 'teacher'], function () {
 
 //parent url
 Route::group(['middleware' => 'parent'], function () {
-    Route::get('parent/dashboard', [DashboardController::class, 'dashboard']);
 
+    Route::get('parent/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('parent/change_password', [UserController::class, 'change_password'])->name('change_password');
-   Route::post('parent/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
+    Route::post('parent/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
+    Route::get('parent/account', [UserController::class, 'myAccount']);
+    Route::post('parent/account', [UserController::class, 'updateMyAdminAccount']);
+
+    Route::get('parent/my_student', [ParentController::class, 'myStudentParent']);
+
  
 
 });

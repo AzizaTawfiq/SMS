@@ -39,7 +39,7 @@ class UserController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->save();
-        return redirect('admin/account')->with('success', 'Account updated successfully');    
+        return redirect('admin/account')->with('success', 'Account updated successfully');
      }
 
      public function updateMyParentAccount(Request $request)

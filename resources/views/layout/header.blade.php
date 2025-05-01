@@ -43,7 +43,7 @@
                       </p>
                     </div>
                   </div>
-                  
+
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
@@ -136,10 +136,10 @@
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>    
+                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                <li class="user-header bg-primary text-white">  
+                <li class="user-header bg-primary text-white">
                   <img
                     src="{{ asset('dist/assets/img/user2-160x160.jpg') }}"
                     class="rounded-circle shadow"
@@ -152,7 +152,7 @@
                 </li>
                 <li class="user-footer">
                   <a href="{{url('admin/account')}}" class="btn btn-default btn-flat">Profile</a>
-                 
+
                 <a class="btn btn-default btn-flat float-end" href="{{url('logout')}}">
                   <p>Logout</p>
                 </a>
@@ -233,11 +233,12 @@
               </li>
 
               <li class="nav-item">
-                 <a href="{{ url('admin/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
-                  <i class="nav-icon bi bi-shield-lock"></i>
-                  <p>Change Password</p>
-                </a>
-               </li>
+                <a href="{{ url('admin/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                 <i class="nav-icon bi bi-shield-lock"></i>
+                 <p>Change Password</p>
+               </a>
+              </li>
+
 
                   @elseif(Auth::user()->role == 2)
                   <li class="nav-item">
@@ -246,12 +247,13 @@
                   <p>Dashboard</p>
                 </a>
                 </li>
+
                 <li class="nav-item">
-                 <a href="{{ url('teacher/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
-                  <i class="nav-icon bi bi-shield-lock"></i>
-                  <p>Change Password</p>
-                </a>
-               </li>
+                <a href="{{ url('teacher/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                 <i class="nav-icon bi bi-shield-lock"></i>
+                 <p>Change Password</p>
+               </a>
+              </li>
 
                   @elseif(Auth::user()->role == 3)
                   <li class="nav-item">
@@ -266,7 +268,14 @@
                   <i class="nav-icon bi bi-shield-lock"></i>
                   <p>Change Password</p>
                 </a>
-               </li>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ url('student/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                 <i class="nav-icon bi bi-shield-lock"></i>
+                 <p>Change Password</p>
+               </a>
+              </li>
 
                   @else(Auth::user()->role == 4)
                   <li class="nav-item">
@@ -295,8 +304,6 @@
                   <i class="nav-icon bi bi-shield-lock"></i>
                   <p>Logeout </p>
                 </a>
-               </li>
-
 
                   @endif
 

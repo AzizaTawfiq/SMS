@@ -5,6 +5,11 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-sm-6"><h3 class="mb-0">My timetable </h3></div>
+                <div class="col-sm-6 text-end">
+                    <a href="{{ url('teacher/my_class_subject') }}" class="btn btn-primary btn-sm">
+                        <i class="bi bi-arrow-left"></i> Back
+                    </a>
+                </div>
             </div>
           </div>
         </div>
@@ -13,14 +18,13 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
-                @foreach($getRecord as $value)
                     <div class="card mb-4">
-                        <div class="card-header">
-                        <h3 class="card-title">{{$value['name']}} </h3>
-                        </div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">{{$getClass->name}}({{$getSubject->name}}) </h3>
+                    </div>
                       <div class="card-body p-0">
                         <table class="table table-striped">
-                        <thead>
+                          <thead>
                             <tr>
                               <th>Week</th>
                               <th>Start time</th>
@@ -30,15 +34,16 @@
                           </thead>
                           <tbody>
                           @php $hasData = false; @endphp
-                          @foreach($value['week'] as $week)
+                          @foreach($getRecord as $week)
                               @if(!empty($week['start_time']) || !empty($week['end_time']) || !empty($week['room_number']))
                                 @php $hasData = true; @endphp
-                          <tr>
-                            <th>{{$week['week_name']}}</th>
-                            <td>{{$week['start_time']}}</td>
-                            <td>{{$week['end_time']}}</td>
-                            <td>{{$week['room_number']}}</td>
-                            @endif
+                                <tr>
+                                  <th>{{$week['week_name']}}</th>
+                                  <td>{{$week['start_time']}}</td>
+                                  <td>{{$week['end_time']}}</td>
+                                  <td>{{$week['room_number']}}</td>
+                                </tr>
+                              @endif
                           @endforeach
                           @if(!$hasData)
                             <tr>
@@ -49,8 +54,6 @@
                         </table>
                       </div>
                     </div>
-                    @endforeach
-
               </div>
             </div>
           </div>
@@ -59,32 +62,7 @@
 
       @endsection
 
-      @section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
 
-        // Remove the  statement
-        $('.getClass').on('change', function(){
-            var class_id = $(this).val();
-            console.log('Class ID selected:', class_id);
-            $.ajax({
-                url: "{{ url('admin/class_timetable/get_subject') }}",
-                method: "POST",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    class_id: class_id
-                },
-                dataType: 'json',
-
-                success: function(response){
-
-                    $('.getSubject').html(response.html);
-                }
-            });
-        });
-    });
-</script>
-@endsection
 
 
 

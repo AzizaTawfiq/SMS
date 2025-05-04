@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\School_Class;
+use App\Models\Subject;
 use App\Models\AssignSubject;
 use App\Models\WeekModel;
 use App\Models\ClassSubjectTimetableModel;
@@ -97,8 +98,6 @@ class ClassTimetableController extends Controller
             foreach($getWeek as $weekVal){
                 $weekData = array();
                 $weekData['week_name'] = $weekVal->name;
-
-                // Debug the values being passed
                 $classSubject = ClassSubjectTimetableModel::getRecordClassSubject(
                     $value->class_id,
                     $value->subject_id,
@@ -125,5 +124,32 @@ class ClassTimetableController extends Controller
 
         $data['getRecord'] = $result;
         return view('student.my_timetable', $data);
+    }
+
+    //teacher side
+    public function myTimetableTeacher($class_id, $subject_id)
+    {
+        $data['getClass'] = School_Class::getSingle($class_id);
+        $data['getSubject'] = Subject::getSingle($subject_id);
+            $getWeek = WeekModel::getRecord();
+            $week = array();
+            foreach($getWeek as $value){
+                $weekData = array();
+                $weekData['week_name'] = $value->name;
+                $classSubject = ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $value->id);
+                if(!empty($classSubject)){
+                    $weekData['start_time'] = $classSubject->start_time;
+                    $weekData['end_time'] = $classSubject->end_time;
+                    $weekData['room_number'] = $classSubject->room_number;
+                } else {
+                    $weekData['start_time'] = '';
+                    $weekData['end_time'] = '';
+                    $weekData['room_number'] = '';
+                }
+                $result[] = $weekData;
+            }
+
+        $data['getRecord'] = $result;
+        return view('teacher.my_timetable', $data);
     }
 }

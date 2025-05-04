@@ -13,4 +13,7 @@ class WeekModel extends Model
     static public function getRecord(){
          return WeekModel::get();
     }
+    static public function getWeekByName($weekName){
+         return WeekModel::where('name', '=', $weekName )->first();
+    }
 }

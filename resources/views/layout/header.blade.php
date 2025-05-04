@@ -288,7 +288,19 @@
                   <p>Dashboard</p>
                 </a>
                 </li>
-
+                <li class="nav-item">
+                <a href="{{url('teacher/my_students')}}" class="nav-link {{request()->is('teacher/my_students/*') ? 'active':''}}">
+                  <i class="nav-icon bi bi-mortarboard"></i>
+                  <p>Students</p>
+                </a>
+              </li>
+                <li class="nav-item">
+                <a href="{{url('teacher/my_class_subject')}}" class="nav-link {{request()->is('teacher/my_class_subject/*') ? 'active':''}}">
+                    <i class="nav-icon bi bi-book"></i>
+                    <p>Classes and Subjects</p>
+                </a>
+                </li>
+                </li>
                 <li class="nav-item">
                 <a href="{{ url('teacher/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
                  <i class="nav-icon bi bi-shield-lock"></i>

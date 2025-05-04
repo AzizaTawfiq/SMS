@@ -64,7 +64,7 @@ class User extends Authenticatable
     {
 
         $return = self::select('users.*')->where('role', '=', '1')
-            ->where('is_deleted', '=', '0');
+            ->where('is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {
             $return = $return->where('name', 'like', '%' . Request::get('name'). '%');
         }
@@ -99,7 +99,7 @@ class User extends Authenticatable
     {
 
         $return = self::select('users.*')->where('users.role', '=', '3')
-            ->where('users.is_deleted', '=', '0');
+            ->where('users.is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {
             $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
         }
@@ -156,11 +156,26 @@ class User extends Authenticatable
 
         return $return;
     }
+    static public function getTeacherStudents($teacher_id)
+    {
+        $return = self::select('users.*',"school_classes.name as class_name")->
+        join('school_classes', 'school_classes.id', '=', 'users.class_id')->
+        join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'school_classes.id')->
+        where('assign_class_teacher.teacher_id', '=', $teacher_id)->
+        where('assign_class_teacher.is_deleted', '=', 0)->
+        where('assign_class_teacher.status', '=', 0)->
+        where('users.role', '=', '3')
+        ->where('users.is_deleted', '=', 0);
+        $return = $return->orderBy('users.id', 'desc')->groupBy('users.id')
+            ->paginate(10);
+
+        return $return;
+    }
     static public function getTeacher()
     {
 
         $return = self::select('users.*')->where('users.role', '=', '2')
-            ->where('users.is_deleted', '=', '0');
+            ->where('users.is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {
             $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
         }
@@ -204,7 +219,7 @@ class User extends Authenticatable
     {
 
         $return = self::select('users.*')->where('role', '=', '4')
-            ->where('is_deleted', '=', '0');
+            ->where('is_deleted', '=', 0);
         $return = $return->orderBy('id', 'desc')
             ->paginate(20);
 
@@ -272,7 +287,7 @@ class User extends Authenticatable
     static public function getTeacherClass()
     {
         $return = self::select('users.*')->where('role', '=', '2')
-        ->where('is_deleted', '=', '0');
+        ->where('is_deleted', '=', 0);
     $return = $return->orderBy('id', 'desc')
         ->get();
 

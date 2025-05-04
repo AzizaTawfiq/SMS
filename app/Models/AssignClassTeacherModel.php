@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
+use App\Models\WeekModel;
+use App\Models\ClassSubjectTimetableModel;
 
 class AssignClassTeacherModel extends Model
 {
@@ -25,6 +27,22 @@ class AssignClassTeacherModel extends Model
 
     static public function deleteTeacher( $class_id){
       return self::where('class_id', '=', $class_id)->delete();
+    }
+
+    static public function getMyClassSubject($teacher_id){
+        $return = AssignClassTeacherModel::select('assign_class_teacher.*','school_classes.name as class_name','subjects.name as subject_name','subjects.type as subject_type','school_classes.id as class_id','subjects.id as subject_id',)
+        ->join('school_classes','school_classes.id','=','assign_class_teacher.class_id')
+        ->join('subject_school_class','subject_school_class.schoolclass_id','=','school_classes.id')
+        ->join('subjects','subjects.id','=','subject_school_class.subject_id')
+        ->where('assign_class_teacher.is_deleted','=',0)
+        ->where('assign_class_teacher.status','=',0)
+        ->where('subjects.status','=',0)
+        ->where('subjects.deleted_at','=',null)
+        ->where('subject_school_class.status','=',0)
+        ->where('subject_school_class.deleted_at','=',null)
+        ->where('assign_class_teacher.teacher_id','=',$teacher_id)
+        ->get();
+        return $return;
     }
 
     static public function getRecord(){
@@ -51,6 +69,15 @@ class AssignClassTeacherModel extends Model
         $return = $return->orderBy('assign_class_teacher.id','desc')
         ->paginate(10);
         return $return;
+    }
+
+    static public function getMyTimetable($class_id, $subject_id){
+        $getWeek = WeekModel::getWeekByName(date('l'));
+        if (!$getWeek) {
+            return null;
+        }
+
+        $return =  ClassSubjectTimetableModel::getRecordClassSubject($class_id, $subject_id, $getWeek->id);
     }
 }
 

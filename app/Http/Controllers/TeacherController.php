@@ -18,8 +18,6 @@ class TeacherController extends Controller
     }
     public function add()
     {
-
-
         $data['header_title' ]= 'Add teacher';
         return view('admin.teacher.add', $data);
     }
@@ -34,17 +32,8 @@ class TeacherController extends Controller
         ]); */
 
         $teacher= new User;
-
-        if(!empty($request->file('profile_pic'))){
-            $ext = $request->file('profile_pic')->getClientOriginalExtension();
-            $file = $request->file('profile_pic');
-            $randomStr = date('Ymdhis').Str::random(20);
-            $filename = strtolower($randomStr).'.'.$ext;
-            $file->move('upload/profile/', $filename);
-            $teacher->profile_pic = $filename;
-            }
         $teacher->name = trim($request->name);
-        /* $teacher->last_name = trim($request->last_name); */
+        $teacher->last_name = trim($request->last_name);
         $teacher->gender = trim($request->gender);
         if(!empty($request->date_of_birth))
         {
@@ -54,10 +43,22 @@ class TeacherController extends Controller
         {
             $teacher->admission_date = trim($request->admission_date);
         }
+        if(!empty($request->file('profile_pic'))){
+            $ext = $request->file('profile_pic')->getClientOriginalExtension();
+            $file = $request->file('profile_pic');
+            $randomStr = date('Ymdhis').Str::random(20);
+            $filename = strtolower($randomStr).'.'.$ext;
+            $file->move('upload/profile/', $filename);
+            $teacher->profile_pic = $filename;
+            }
+
+
+            $teacher->marital_status = trim($request->marital_status);
         $teacher->mobile_number = trim($request->mobile_number);
         $teacher->address = trim($request->address);
+        $teacher->permanent_address = trim($request->permanent_address);
         $teacher->qualification = trim($request->qualification);
-        $teacher->experience = trim($request->experience);
+        $teacher->work_experience = trim($request->work_experience);
         $teacher->note = trim($request->note);
         $teacher->status = trim($request->status);
         $teacher->email = trim($request->email);

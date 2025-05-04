@@ -259,6 +259,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a href="{{url('admin/assign_class_teacher/list')}}" class="nav-link {{request()->is('admin/assign_class_teacher/*') ? 'active':''}}">
+      <i class="nav-icon bi bi-person-check"></i>
+        <p>Assign Class Teacher</p>
+      </a>
+    </li>
+    <li class="nav-item">
       <a href="{{url('admin/class_timetable/list')}}" class="nav-link {{request()->is('admin/class_timetable/*') ? 'active':''}}">
       <i class="nav-icon bi bi-calendar3"></i>
         <p>Class Timetable</p>
@@ -308,6 +314,12 @@
                 <a href="{{url('student/my_subjects')}}" class="nav-link {{request()->is('student/my_subjects/*') ? 'active':''}}">
                   <i class="nav-icon bi bi-book"></i>
                   <p>Subjects</p>
+                </a>
+              </li>
+            <li class="nav-item">
+                <a href="{{url('student/my_timetable')}}" class="nav-link {{request()->is('student/my_timetable/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-calendar3"></i>
+                  <p>Timetable</p>
                 </a>
               </li>
 

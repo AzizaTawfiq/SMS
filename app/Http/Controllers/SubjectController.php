@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use App\Models\AssignSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,11 +92,13 @@ class SubjectController extends Controller
     public function mySubjects()
 
     {
-       /*  $data['getRecord'] = Subject::getRecord();
+        /* $data['getRecord'] = Subject::getRecord();
         $data['header_title' ]= 'My Subjects';
         return view('student.my_subjects', $data); */
-        $user = Auth::user();
+        $data['getRecord'] = AssignSubject::MySubject(Auth::user()->class_id);
+        return view('student.my_subjects',  $data);
+        /* $user = Auth::user();
         $subjects = Subject::where('user_id', $user->id)->get();
-        return view('student.my_subjects', compact('subjects'));
+        return view('student.my_subjects', compact('subjects')); */
     }
 }

@@ -7,14 +7,47 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\School_Class;
 use App\Models\AssignSubject;
+use App\Models\WeekModel;
+use App\Models\ClassSubjectTimetableModel;
+use Illuminate\Support\Facades\Auth;
 
 
 class ClassTimetableController extends Controller
 {
-    public function list()
+    public function list(Request $request)
     {
-        $school_classes = School_Class::get();
-        return view('admin.class_timetable.list', compact('school_classes'));
+        $data['school_classes'] = School_Class::get();
+        if(!empty($request->class_id)){
+            $data['getSubject'] =  AssignSubject::MySubject($request->class_id);
+        }
+        $getWeek = WeekModel::getRecord();
+        $week = array();
+        foreach($getWeek as $value){
+            $weekData = array();
+            $weekData['week_id'] = $value->id;
+            $weekData['week_name'] = $value->name;
+
+            if(!empty($request->class_id) && !empty($request->subject_id)){
+                $classSubject = ClassSubjectTimetableModel::getRecordClassSubject($request->class_id, $request->subject_id, $value->id);
+                if(!empty($classSubject)){
+                    $weekData['start_time'] = $classSubject->start_time;
+                    $weekData['end_time'] = $classSubject->end_time;
+                    $weekData['room_number'] = $classSubject->room_number;
+                } else {
+                    $weekData['start_time'] = '';
+                    $weekData['end_time'] = '';
+                    $weekData['room_number'] = '';
+                }
+            } else {
+                $weekData['start_time'] = '';
+                $weekData['end_time'] = '';
+                $weekData['room_number'] = '';
+            }
+
+            $week[] = $weekData;
+        }
+        $data['week'] = $week;
+        return view('admin.class_timetable.list', $data);
     }
 
     public function getSubject( Request $request)
@@ -22,7 +55,7 @@ class ClassTimetableController extends Controller
        $getSubject =  AssignSubject::MySubject($request->class_id);
        $html="<option value=''>Select subject</option>";
        foreach($getSubject as $value){
-            $html .= "<option value='" . $value->subject_id . "'>' . $value->subject_name . '</option>";
+            $html .= "<option value='" .$value->subject_id . "'>$value->subject_name</option>";
         }
 
         $json['html']= $html;
@@ -31,62 +64,66 @@ class ClassTimetableController extends Controller
 
     }
 
-    public function insert(Request $request)
+    public function insert_update(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6'
-        ]);
-        $user = new User;
-        $user->name = trim($request->name);
-        $user->email = trim($request->email);
-        $user->password = Hash::make($request->password);
-        $user->role = 1;
-        $user->save();
-        return redirect('admin/admin/list')->with('success', 'Admin added successfully');
+
+        ClassSubjectTimetableModel::where('class_id','=',$request->class_id)->
+        where('subject_id','=',$request->subject_id)->delete();
+        foreach($request->timetable as $timetable){
+            if(!empty($timetable['week_id']) && !empty($timetable['start_time']) && !empty($timetable['end_time']) && !empty($timetable['room_number']))
+            {
+              $save= new ClassSubjectTimetableModel;
+              $save->class_id = $request->class_id;
+              $save->subject_id = $request->subject_id;
+              $save->week_id = $timetable['week_id'];
+              $save->start_time = $timetable['start_time'];
+              $save->end_time = $timetable['end_time'];
+              $save->room_number = $timetable['room_number'];
+              $save->save();
+
+            }
+        }
+        return redirect()->back()->with('success', 'Class timetable saved successfully');
 
     }
-
-    public function edit( $id)
+    public function myTimetable(Request $request)
     {
-        $data['getRecord'] = User::getSingle($id);
-        if (!empty($data['getRecord'])) {
-            $data['header_title' ]= 'Edit admin';
-            return view('admin.admin.edit', $data);
-        } else {
-            abort(404);
+        $result = array();
+        $getRecord = AssignSubject::MySubject(Auth::user()->class_id);
+        foreach($getRecord as $value){
+            $subjectData['name'] = $value->subject_name;
+            $getWeek = WeekModel::getRecord();
+            $week = array();
+            foreach($getWeek as $weekVal){
+                $weekData = array();
+                $weekData['week_name'] = $weekVal->name;
+
+                // Debug the values being passed
+                $classSubject = ClassSubjectTimetableModel::getRecordClassSubject(
+                    $value->class_id,
+                    $value->subject_id,
+                    $weekVal->id
+                );
+
+                if(!empty($classSubject)){
+                    $weekData['start_time'] = $classSubject->start_time;
+                    $weekData['end_time'] = $classSubject->end_time;
+                    $weekData['room_number'] = $classSubject->room_number;
+                } else {
+                    $weekData['start_time'] = '';
+                    $weekData['end_time'] = '';
+                    $weekData['room_number'] = '';
+                }
+                $week[] = $weekData;
+            }
+            $subjectData['week'] = $week;
+            $result[] = $subjectData;
         }
 
-    }
+        // Add this temporary debug line
+        dd($result);
 
-    public function update($id, Request $request)
-    {
-         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            /* 'password' => 'required|min:6' */
-        ]);
-        $user=  User::getSingle($id);
-        $user->name = trim($request->name);
-        $user->email = trim($request->email);
-      /*   if(!empty($request->password)){
-            $user->password = Hash::make($request->password);
-        } */
-        $user->save();
-        return redirect('admin/admin/list')->with('success', 'Admin updated successfully');
-
-    }
-
-    public function delete($id)
-    {
-        $user = User::getSingle($id);
-        if (!empty($user)) {
-            $user->is_deleted=1;
-            $user->save();
-            return redirect('admin/admin/list')->with('success', 'Admin deleted successfully');
-        } else {
-            abort(404);
-        }
+        $data['getRecord'] = $result;
+        return view('student.my_timetable', $data);
     }
 }

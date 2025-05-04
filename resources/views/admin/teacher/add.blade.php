@@ -35,7 +35,7 @@
                                 {{$errors->first('name')}}
                                 </div>
                             </div>
-                           <!--  <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group">
                                 <label for="last_name" class="form-label text-bold">Last name<span class="text-danger">*</span></label>
                                 <input
                                 type="text"
@@ -49,7 +49,7 @@
                                 <div class="text-danger">
                                 {{$errors->first('last_name')}}
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="col-md-6 form-group mt-3">
                                 <label for="gender" class="form-label text-bold">Gender<span class="text-danger">*</span></label>
                                 <select
@@ -140,7 +140,7 @@
                             </div>
 
                             <div class="col-md-6 form-group mt-3">
-                                <label for="address" class="form-label text-bold">Address<span class="text-danger">*</span></label>
+                                <label for="address" class="form-label text-bold">Current address<span class="text-danger">*</span></label>
                                 <textarea
 
                                 class="form-control"
@@ -152,6 +152,21 @@
                                 </textarea>
                                 <div class="text-danger">
                                 {{$errors->first('address')}}
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group mt-3">
+                                <label for="permanent_address" class="form-label text-bold">Permanent address<span class="text-danger">*</span></label>
+                                <textarea
+
+                                class="form-control"
+                                id="permanent_address"
+                                name="permanent_address"
+                                placeholder="Enter permanent address"
+                                >
+                                {{ old('permanent_address') }}
+                                </textarea>
+                                <div class="text-danger">
+                                {{$errors->first('permanent_address')}}
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
@@ -169,17 +184,17 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3 mb-3">
-                                <label for="experience" class="form-label text-bold">Experience</label>
+                                <label for="work_experience" class="form-label text-bold">Experience</label>
                                 <textarea
                                 class="form-control"
-                                id="experience"
-                                name="experience"
+                                id="work_experience"
+                                name="work_experience"
                                 placeholder="Enter experience"
                                 >
-                                {{ old('experience') }}
+                                {{ old('work_experience') }}
                                 </textarea>
                                 <div class="text-danger">
-                                {{$errors->first('experience')}}
+                                {{$errors->first('work_experience')}}
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3 mb-3">

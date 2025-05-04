@@ -73,6 +73,14 @@
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($getRecord as $value)
+
+                        <tr>
+                            <td>kk</td>
+                            <td>{{$value->subject_name}}</td>
+                            <td>{{ $value->subject_type == 0 ? 'Theory' : 'Practical' }}</td>
+                        </tr>
+                        @endforeach
 
                       </tbody>
                     </table>

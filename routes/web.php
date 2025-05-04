@@ -12,6 +12,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\SubjectClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ClassTimetableController;
+use App\Http\Controllers\AssignClassTeacherController;
 
 
 /*
@@ -93,21 +94,29 @@ Route::group(['middleware' => 'admin'], function () {
    Route::get('admin/assign_subject/add', [SubjectClassController::class, 'add'])->name('assign_subjects.add');
    Route::post('admin/assign_subject/add', [SubjectClassController::class, 'store'])->name('assign_subjects.store');
    Route::delete('admin/assign_subject/{class_id}/{subject_id}/destroy', [SubjectClassController::class, 'destroy'])->name('assign_subjects.destroy');
-
-//    Route::get('admin/assign_subject/get_assignsubjects', [SubjectClassController::class, 'get_assignsubjects'])->name('assign_subjects.get_assignsubjects');
+   //Assign Class to Teacher
+   Route::get('admin/assign_class_teacher/list', [AssignClassTeacherController::class, 'list'])->name('assign_class_teacher.list');
+   Route::get('admin/assign_class_teacher/add', [AssignClassTeacherController::class, 'add'])->name('assign_class_teacher.add');
+   Route::post('admin/assign_class_teacher/add', [AssignClassTeacherController::class, 'insert'])->name('assign_class_teacher.insert');
+   Route::get('admin/assign_class_teacher/edit/{id}', [AssignClassTeacherController::class, 'edit']);
+   Route::post('admin/assign_class_teacher/edit/{id}', [AssignClassTeacherController::class, 'update']);
+   Route::get('admin/assign_class_teacher/edit_single/{id}', [AssignClassTeacherController::class, 'edit_single']);
+   Route::post('admin/assign_class_teacher/edit_single/{id}', [AssignClassTeacherController::class, 'update_single']);
+   Route::get('admin/assign_class_teacher/delete/{id}', [AssignClassTeacherController::class, 'delete']);
 
    //admin/change_password
    Route::get('admin/change_password', [UserController::class, 'change_password'])->name('change_password');
    Route::post('admin/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
- 
 
 
-   //change passeord
+
+   //change password
    Route::get('admin/change_password', [UserController::class, 'change_password'])->name('change_password');
    Route::post('admin/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
    //Class timetable
    Route::get('admin/class_timetable/list', [ClassTimetableController::class, 'list'])->name('class_timetable.list');
    Route::post('admin/class_timetable/get_subject', [ClassTimetableController::class, 'getSubject'])->name('class_timetable.getSubject');
+   Route::post('admin/class_timetable/add', [ClassTimetableController::class, 'insert_update'])->name('class_timetable.insert_update');
 
 });
 
@@ -116,10 +125,11 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['middleware' => 'student'], function () {
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('student/my_subjects', [SubjectController::class, 'mySubjects']);
+    Route::get('student/my_timetable', [ClassTimetableController::class, 'myTimetable']);
 
     Route::get('student/change_password', [UserController::class, 'change_password'])->name('change_password');
    Route::post('student/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
- 
+
 
 });
 
@@ -131,8 +141,8 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('teacher/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('teacher/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
-  
- 
+
+
 });
 
 
@@ -147,6 +157,6 @@ Route::group(['middleware' => 'parent'], function () {
 
     Route::get('parent/my_student', [ParentController::class, 'myStudentParent']);
 
- 
+
 
 });

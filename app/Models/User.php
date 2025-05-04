@@ -66,10 +66,10 @@ class User extends Authenticatable
         $return = self::select('users.*')->where('role', '=', '1')
             ->where('is_deleted', '=', '0');
         if (!empty(Request::get('name'))) {
-            $return = $return->where('name', 'like', '%' . Request::get('name') . '%');
+            $return = $return->where('name', 'like', '%' . Request::get('name'). '%');
         }
         if (!empty(Request::get('email'))) {
-            $return = $return->where('email', 'like', '%' . Request::get('email') . '%');
+            $return = $return->where('email', 'like', '%' . Request::get('email'). '%');
         }
         if (!empty(Request::get('created_at'))) {
             $return = $return->whereDate('created_at', '=', Request::get('email'));
@@ -101,16 +101,16 @@ class User extends Authenticatable
         $return = self::select('users.*')->where('users.role', '=', '3')
             ->where('users.is_deleted', '=', '0');
         if (!empty(Request::get('name'))) {
-            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+            $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
         }
         if (!empty(Request::get('email'))) {
-            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+            $return = $return->where('users.email', 'like', '%' . Request::get('email'). '%');
         }
         if (!empty(Request::get('admission_number'))) {
-            $return = $return->where('users.admission_number', 'like', '%' . Request::get('admission_number') . '%');
+            $return = $return->where('users.admission_number', 'like', '%' . Request::get('admission_number'). '%');
         }
         if (!empty(Request::get('roll_number'))) {
-            $return = $return->where('users.roll_number', 'like', '%' . Request::get('roll_number') . '%');
+            $return = $return->where('users.roll_number', 'like', '%' . Request::get('roll_number'). '%');
         }
         if (!empty(Request::get('class_id'))) {
             $return = $return->where('users.class_id', '=', Request::get('class_id'));
@@ -119,16 +119,16 @@ class User extends Authenticatable
             $return = $return->where('users.gender', '=', Request::get('gender'));
         }
         if (!empty(Request::get('caste'))) {
-            $return = $return->where('users.caste', 'like', '%' . Request::get('caste') . '%');
+            $return = $return->where('users.caste', 'like', '%' . Request::get('caste'). '%');
         }
         if (!empty(Request::get('religion'))) {
-            $return = $return->where('users.religion', 'like', '%' . Request::get('religion') . '%');
+            $return = $return->where('users.religion', 'like', '%' . Request::get('religion'). '%');
         }
         if (!empty(Request::get('mobile'))) {
-            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile') . '%');
+            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile'). '%');
         }
         if (!empty(Request::get('blood_group'))) {
-            $return = $return->where('users.blood_group', 'like', '%' . Request::get('blood_group') . '%');
+            $return = $return->where('users.blood_group', 'like', '%' . Request::get('blood_group'). '%');
         }
         if (!empty(Request::get('admission_date'))) {
             $return = $return->whereDate('users.admission_date', '=', Request::get('admission_date'));
@@ -137,10 +137,10 @@ class User extends Authenticatable
             $return = $return->whereDate('users.date_of_birth', '=', Request::get('date_of_birth'));
         }
         if (!empty(Request::get('height'))) {
-            $return = $return->where('users.height', 'like', '%' . Request::get('height') . '%');
+            $return = $return->where('users.height', 'like', '%' . Request::get('height'). '%');
         }
         if (!empty(Request::get('weight'))) {
-            $return = $return->where('users.weight', 'like', '%' . Request::get('weight') . '%');
+            $return = $return->where('users.weight', 'like', '%' . Request::get('weight'). '%');
         }
         if (!empty(Request::get('status'))) {
             $status = (Request::get('status')) == 100 ? 0 : 1;
@@ -162,25 +162,25 @@ class User extends Authenticatable
         $return = self::select('users.*')->where('users.role', '=', '2')
             ->where('users.is_deleted', '=', '0');
         if (!empty(Request::get('name'))) {
-            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+            $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
         }
-        /* if (!empty(Request::get('last_name'))) {
-            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
-        } */
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name'). '%');
+        }
         if (!empty(Request::get('email'))) {
-            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+            $return = $return->where('users.email', 'like', '%' . Request::get('email'). '%');
         }
         if (!empty(Request::get('gender'))) {
             $return = $return->where('users.gender', '=', Request::get('gender'));
         }
         if (!empty(Request::get('mobile'))) {
-            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile') . '%');
+            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile'). '%');
         }
         if (!empty(Request::get('marital_status'))) {
-            $return = $return->where('users.marital_status', 'like', '%' . Request::get('marital_status') . '%');
+            $return = $return->where('users.marital_status', 'like', '%' . Request::get('marital_status'). '%');
         }
         if (!empty(Request::get('address'))) {
-            $return = $return->where('users.address', 'like', '%' . Request::get('address') . '%');
+            $return = $return->where('users.address', 'like', '%' . Request::get('address'). '%');
         }
         if (!empty(Request::get('admission_date'))) {
             $return = $return->whereDate('users.admission_date', '=', Request::get('admission_date'));
@@ -235,12 +235,12 @@ class User extends Authenticatable
             }
 
             if (!empty(Request::get('name'))) {
-                $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+                $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
             }
 
 
             if (!empty(Request::get('email'))) {
-                $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+                $return = $return->where('users.email', 'like', '%' . Request::get('email'). '%');
             }
 
             $return = $return->orderBy('users.id', 'desc')
@@ -267,6 +267,16 @@ class User extends Authenticatable
             ->get();
 
         return $return;
+    }
+
+    static public function getTeacherClass()
+    {
+        $return = self::select('users.*')->where('role', '=', '2')
+        ->where('is_deleted', '=', '0');
+    $return = $return->orderBy('id', 'desc')
+        ->get();
+
+    return $return;
     }
 
     // get user name by user id in blade

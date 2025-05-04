@@ -48,6 +48,7 @@
                           <th>Height</th>
                           <th>Weight</th>
                           <th >Created date</th>
+                          <th >Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -82,6 +83,10 @@
                             <td>{{ $value->weight }}</td>
 
                             <td>{{ date('d.m-y H:i A ', strtotime($value->created_at)) }}</td>
+                            <td>
+                              <a class="btn btn-primary btn-sm" href="{{url('parent/my_student/my_student_subject/'. $value->id)}}"> 
+                              <i class="bi bi-journal-bookmark-fill"></i>  Subject</a>
+                            </td>
                         </tr>
                         @endforeach
                        

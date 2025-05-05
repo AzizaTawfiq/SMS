@@ -318,6 +318,12 @@
                   <p>Exam timetable</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{url('teacher/my_calendar')}}" class="nav-link {{request()->is('teacher/my_calendar/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-calendar-date"></i>
+                  <p>Calendar</p>
+                </a>
+              </li>
 
                   @elseif(Auth::user()->role == 3)
                   <li class="nav-item">
@@ -349,6 +355,12 @@
                 <a href="{{url('student/my_exam_timetable')}}" class="nav-link {{request()->is('student/my_exam_timetable/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-file-earmark-text"></i>
                   <p>Exam timetable</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('student/my_calendar')}}" class="nav-link {{request()->is('student/my_calendar/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-calendar-date"></i>
+                  <p>Calendar</p>
                 </a>
               </li>
 

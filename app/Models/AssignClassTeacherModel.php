@@ -45,6 +45,20 @@ class AssignClassTeacherModel extends Model
         return $return;
     }
 
+    static public function getMyCalendarTeacher($teacher_id){
+        $return = AssignClassTeacherModel::select('class_subject_timetable.*','school_classes.name as class_name',
+        'subjects.name as subject_name','week.name as week_name' ,'week.fullcalendar_day')
+        ->join('school_classes','school_classes.id','=','assign_class_teacher.class_id')
+        ->join('subject_school_class','subject_school_class.schoolclass_id','=','school_classes.id')
+        ->join('class_subject_timetable','class_subject_timetable.subject_id','=','subject_school_class.subject_id')
+        ->join('subjects','subjects.id','=','class_subject_timetable.subject_id')
+        ->join('week','week.id','=','class_subject_timetable.week_id')
+        ->where('assign_class_teacher.teacher_id','=',$teacher_id)
+        ->where('assign_class_teacher.is_deleted','=',0)
+        ->where('assign_class_teacher.status','=',0)
+        ->get();
+        return $return;
+    }
     static public function getMyClassSubjectGroup($teacher_id){
         $return = AssignClassTeacherModel::select('assign_class_teacher.*','school_classes.name as class_name', 'school_classes.id as class_id')
         ->join('school_classes','school_classes.id','=','assign_class_teacher.class_id')

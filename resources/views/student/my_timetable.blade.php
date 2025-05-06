@@ -59,32 +59,7 @@
 
       @endsection
 
-      @section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
 
-        // Remove the  statement
-        $('.getClass').on('change', function(){
-            var class_id = $(this).val();
-            console.log('Class ID selected:', class_id);
-            $.ajax({
-                url: "{{ url('admin/class_timetable/get_subject') }}",
-                method: "POST",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    class_id: class_id
-                },
-                dataType: 'json',
-
-                success: function(response){
-
-                    $('.getSubject').html(response.html);
-                }
-            });
-        });
-    });
-</script>
-@endsection
 
 
 

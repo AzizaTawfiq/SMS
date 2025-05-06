@@ -274,6 +274,12 @@
                     <p>Exam schedule</p>
                 </a>
                 </li>
+                <li class="nav-item">
+                <a href="{{url('admin/examinations/mark_register')}}" class="nav-link {{request()->is('admin/examinations/mark_register/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Marks register</p>
+                </a>
+                </li>
 
             </ul>
             </li>

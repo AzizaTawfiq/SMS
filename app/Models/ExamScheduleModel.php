@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
+use App\Models\MarkRegisterModel;
 
 class ExamScheduleModel extends Model
 {
@@ -39,6 +40,14 @@ class ExamScheduleModel extends Model
         where('exam_schedule.class_id', '=', $class_id)->get();
     }
 
+    static public function getSubject($exam_id, $class_id)
+    {
+        return ExamScheduleModel::select('exam_schedule.*','subjects.name as subject_name','subjects.type as subject_type')->
+        join('subjects','subjects.id', '=', 'exam_schedule.subject_id' )->
+        where('exam_schedule.exam_id', '=', $exam_id)->
+        where('exam_schedule.class_id', '=', $class_id)->get();
+    }
+
     static public function getExamTimetableTeacher($teacher_id)
     {
         return ExamScheduleModel::select('exam_schedule.*',
@@ -50,6 +59,11 @@ class ExamScheduleModel extends Model
         ->join('exam','exam.id','=','exam_schedule.exam_id')
         ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
         ->get();
+    }
+    static public function getMark($exam_id, $class_id, $student_id, $subject_id)
+    {
+        return MarkRegisterModel::checkAlreadyMark($exam_id,$class_id,$student_id,$subject_id);
+
     }
 
 }

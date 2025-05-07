@@ -136,6 +136,7 @@ Route::group(['middleware' => 'admin'], function () {
    //mark register
    Route::get('admin/examinations/mark_register', [ExaminationsController::class, 'mark_register']);
    Route::post('admin/examinations/submit_mark_register', [ExaminationsController::class, 'submit_mark_register']);
+   Route::post('admin/examinations/single_submit_mark_register', [ExaminationsController::class, 'single_submit_mark_register']);
 });
 
 

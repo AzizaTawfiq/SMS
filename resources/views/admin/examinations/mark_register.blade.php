@@ -85,36 +85,81 @@
                           <td>{{$student->name}} {{$student->last_name}}</td>
                             @php
                             $i = 1;
+                            $totalStudentMark = 0;
+                            $totalFullMark = 0;
+                            $totalPassingMark = 0;
                             @endphp
                       @foreach($getSubject as $subject)
                             @php
+                            $totalMark = 0;
                             $getMark = $subject->getMark(Request::get('exam_id'),Request::get('class_id'),$student->id, $subject->subject_id);
+                            if(!empty($getMark)){
+                             $totalMark = $getMark->class_work + $getMark->home_work + $getMark->test_work + $getMark->exam;
+                            $totalStudentMark += $totalMark;
+                            $totalFullMark += $subject->full_mark;
+                            $totalPassingMark += $subject->passing_mark;
+                            }
+
                             @endphp
                           <td>
                             <div class="mb-2">
                                 Classwork
                                 <input type="hidden" name="mark[{{$i}}][subject_id]" value="{{ $subject->subject_id}}">
-                                <input style="width:200px"  name="mark[{{$i}}][class_work]" class="form-control" type="text" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" placeholder="Enter mark" />
+                                <input type="hidden" name="mark[{{$i}}][id]" value="{{ $subject->id}}">
+                                <input style="width:200px" id="class_work_{{ $student->id}}{{ $subject->subject_id}}"  name="mark[{{$i}}][class_work]" class="form-control" type="text" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" placeholder="Enter mark" />
                             </div>
 
                             <div class="mb-2">
                                 Homework
-                                <input style="width:200px" name="mark[{{$i}}][home_work]" class="form-control" type="text" value="{{ !empty($getMark->home_work) ? $getMark->home_work : '' }}" placeholder="Enter mark" />
+                                <input style="width:200px" id="home_work_{{ $student->id}}{{ $subject->subject_id}}" name="mark[{{$i}}][home_work]" class="form-control" type="text" value="{{ !empty($getMark->home_work) ? $getMark->home_work : '' }}" placeholder="Enter mark" />
                             </div>
                             <div class="mb-2">
                                 Test
-                                <input style="width:200px" name="mark[{{$i}}][test_work]" class="form-control" type="text" value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter mark" />
+                                <input style="width:200px" id="test_work_{{ $student->id}}{{ $subject->subject_id}}" name="mark[{{$i}}][test_work]" class="form-control" type="text" value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter mark" />
                             </div>
                             <div class="mb-2">
                                 Exam
-                                <input style="width:200px" name="mark[{{$i}}][exam]" class="form-control" type="text" value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter mark" />
+                                <input style="width:200px" id="exam{{ $student->id}}{{ $subject->subject_id}}" name="mark[{{$i}}][exam]" class="form-control" type="text" value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter mark" />
                             </div>
+                            <div class="mb-2">
+                            <button style="width:200px" type="button" class="btn btn-primary singleSubject"
+                            id='{{$student->id}}'
+                            data-val='{{$subject->subject_id}}'
+                            data-exam="{{ Request::get('exam_id')}}"
+                            data-class="{{ Request::get('class_id')}}"
+                            data-schedule="{{ $subject->id}}"
+
+                            > Save </button>
+                           </div>
+                           @if(!empty($getMark))
+                           <div class="mb-2">
+                            <b>Total mark</b>: {{$totalMark}}/{{$subject->full_mark}}
+                            @if($totalMark >= $subject->passing_mark)
+                            <span class="badge bg-primary">Passed</span>
+                            @else
+                            <span class="badge bg-warning">Failed</span>
+                            @endif
+                           </div>
+                           @endif
                          </td>
                          @php
                             $i++;
                         @endphp
                           @endforeach
-                          <td class="align-middle"><button type="submit" class="btn btn-primary">Save</button></td>                            </tr>
+                          <td class="align-middle"><button type="submit" class="btn btn-primary">Save</button> <br/>
+                          @if(!empty($totalStudentMark))
+                          @php
+                          $percentage = $totalStudentMark * 100 / $totalFullMark
+                          @endphp
+                          <b>Final mark</b> : {{$totalStudentMark}} /{{$totalFullMark}}
+                          @if($totalStudentMark >= $totalPassingMark)
+                            <span class="badge bg-primary">Passed {{round($percentage,2)}} %</span>
+                            @else
+                            <span class="badge bg-warning">Failed {{round($percentage,2)}} %</span>
+                            @endif
+                            @endif
+
+                        </td>
                         </tr>
                         </form>
 
@@ -145,6 +190,42 @@
                     type: 'POST',
                     url: "{{url('admin/examinations/submit_mark_register')}}",
                     data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response){
+                        if(response.message) {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        alert('Error saving marks: ' + error);
+                    }
+                });
+            });
+            $('.singleSubject').click(function(e){
+               var id = $(this).attr('data-schedule');
+               var student_Id = $(this).attr('id');
+               var subject_Id = $(this).attr('data-val');
+               var exam_Id = $(this).attr('data-exam');
+               var class_Id = $(this).attr('data-class');
+               var class_work = $('#class_work_'+student_Id+subject_Id).val();
+               var home_work = $('#home_work_'+student_Id+subject_Id).val();
+               var test_work = $('#test_work_'+student_Id+subject_Id).val();
+               var exam = $('#exam'+student_Id+subject_Id).val();
+               $.ajax({
+                    type: 'POST',
+                    url: "{{url('admin/examinations/single_submit_mark_register')}}",
+                    data: {
+                        '_token': '{{csrf_token()}}',
+                       id: id,
+                        subject_Id: subject_Id,
+                        student_Id: student_Id,
+                        exam_Id: exam_Id,
+                        class_Id: class_Id,
+                        class_work: class_work,
+                        home_work: home_work,
+                        test_work: test_work,
+                        exam: exam
+                    },
                     dataType: 'json',
                     success: function(response){
                         if(response.message) {

@@ -88,7 +88,7 @@ class ExaminationsController extends Controller
              $subjectData['subject_id'] = $subject->subject_id;
              $subjectData['subject_name'] = $subject->subject_name;
              $subjectData['subject_type'] = $subject->subject_type;
-             $examSchedule = ExamScheduleModel::getSingle($request->get('exam_id'), $request->get('class_id'),$subject->subject_id);
+             $examSchedule = ExamScheduleModel::getRecordSingle($request->get('exam_id'), $request->get('class_id'),$subject->subject_id);
              if(!empty($examSchedule)){
                 $subjectData['exam_date'] = $examSchedule->exam_date;
                 $subjectData['start_time'] = $examSchedule->start_time;
@@ -156,32 +156,80 @@ class ExaminationsController extends Controller
     public function submit_mark_register(Request $request)
     {
       if(!empty($request->mark)) {
+        $validation = 0;
             foreach($request->mark as $mark ){
+                $getExamSchedule = ExamScheduleModel::getSingle($mark['id']);
+                $full_mark = $getExamSchedule->full_mark;
                 $class_work = !empty($mark['class_work'])?$mark['class_work']:0;
                 $home_work = !empty($mark['home_work'])?$mark['home_work']:0;
                 $test_work = !empty($mark['test_work'])?$mark['test_work']:0;
                 $exam = !empty($mark['exam'])?$mark['exam']:0;
-                $getMarks = MarkRegisterModel::checkAlreadyMark($request->exam_id,$request->class_id,$request->student_id,$mark['subject_id']);
-                if(!empty($getMarks)){
-                    $markRegister = $getMarks;
-                }
-                else {
-                    $markRegister = new MarkRegisterModel;
-                    $markRegister->created_by = Auth::user()->id;
-                }
-                $markRegister->exam_id = $request->exam_id;
-                $markRegister->class_id = $request->class_id;
-                $markRegister->student_id = $request->student_id;
-                $markRegister->subject_id = $mark['subject_id'];
-                $markRegister->class_work = $class_work;
-                $markRegister->home_work = $home_work;
-                $markRegister->test_work = $test_work;
-                $markRegister->exam = $exam;
-                $markRegister->save();
+                $total_mark = $class_work+$home_work+$test_work+$exam;
+                if($full_mark >= $total_mark){
 
+                    $getMarks = MarkRegisterModel::checkAlreadyMark($request->exam_id,$request->class_id,$request->student_id,$mark['subject_id']);
+                    if(!empty($getMarks)){
+                        $markRegister = $getMarks;
+                    }
+                    else {
+                        $markRegister = new MarkRegisterModel;
+                        $markRegister->created_by = Auth::user()->id;
+                    }
+                    $markRegister->exam_id = $request->exam_id;
+                    $markRegister->class_id = $request->class_id;
+                    $markRegister->student_id = $request->student_id;
+                    $markRegister->subject_id = $mark['subject_id'];
+                    $markRegister->class_work = $class_work;
+                    $markRegister->home_work = $home_work;
+                    $markRegister->test_work = $test_work;
+                    $markRegister->exam = $exam;
+                    $markRegister->save();
+                } else {
+                    $validation = 1;
+                }
             }
         }
-     $json['message'] = 'Mark register added successfully';
+        if($validation == 1){
+            $json['message'] = 'Mark register added successfully but some subjects marks are more than full marks';
+        } else {
+            $json['message'] = 'Mark register added successfully';
+        }
+        echo json_encode($json);
+    }
+
+    public function single_submit_mark_register(Request $request)
+    {
+        $id = $request->id;
+        $getExamSchedule = ExamScheduleModel::getSingle($id);
+        $full_mark = $getExamSchedule->full_mark;
+        $class_work = !empty($request['class_work'])?$request['class_work']:0;
+        $home_work = !empty($request['home_work'])?$request['home_work']:0;
+        $test_work = !empty($request['test_work'])?$request['test_work']:0;
+        $exam = !empty($request['exam'])?$request['exam']:0;
+        $total_mark = $class_work+$home_work+$test_work+$exam;
+        if($full_mark >= $total_mark){
+            $getMarks = MarkRegisterModel::checkAlreadyMark($request->exam_id,$request->class_id,$request->student_id,$request->subject_id);
+            if(!empty($getMarks)){
+                $markRegister = $getMarks;
+            }
+            else {
+                $markRegister = new MarkRegisterModel;
+                $markRegister->created_by = Auth::user()->id;
+            }
+            $markRegister->exam_id = $request->exam_id;
+            $markRegister->class_id = $request->class_id;
+            $markRegister->student_id = $request->student_id;
+            $markRegister->subject_id = $request->subject_id;
+            $markRegister->class_work = $class_work;
+            $markRegister->home_work = $home_work;
+            $markRegister->test_work = $test_work;
+            $markRegister->exam = $exam;
+            $markRegister->save();
+
+         $json['message'] = 'Mark register added successfully';
+        } else {
+            $json['message'] = 'Marks not added : Total mark is greater than full mark';
+        }
         echo json_encode($json);
     }
 

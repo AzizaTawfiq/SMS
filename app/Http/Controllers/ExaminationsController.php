@@ -10,6 +10,7 @@ use App\Models\AssignSubject;
 use App\Models\ExamScheduleModel;
 use App\Models\AssignClassTeacherModel;
 use App\Models\MarkRegisterModel;
+use App\Models\MarksGradeModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -237,6 +238,70 @@ class ExaminationsController extends Controller
             $json['message'] = 'Marks not added : Total mark is greater than full mark';
         }
         echo json_encode($json);
+    }
+
+    public function marks_grade()
+    {
+        $data['getRecord'] = MarksGradeModel::getRecord();
+        return view('admin.examinations.marks_grade.list', $data);
+    }
+
+    public function marks_grade_add()
+    {
+        return view('admin.examinations.marks_grade.add');
+    }
+    public function marks_grade_insert(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'percent_from' => 'required',
+            'percent_to' => 'required',
+        ]);
+        $grade = new MarksGradeModel;
+        $grade->name = trim($request->name);
+        $grade->percent_from = trim($request->percent_from);
+        $grade->percent_to = trim($request->percent_to);
+        $grade->created_by = Auth::user()->id;
+        $grade->save();
+        return redirect('admin/examinations/marks_grade')->with('success', 'Marks grade added successfully');
+
+    }
+
+    public function marks_grade_edit( $id)
+    {
+        $data['getRecord'] = MarksGradeModel::getSingle($id);
+        if (!empty($data['getRecord'])) {
+            return view('admin.examinations.marks_grade.edit', $data);
+        } else {
+            abort(404);
+        }
+
+    }
+
+    public function marks_grade_update($id, Request $request)
+    {
+         $request->validate([
+            'name' => 'required',
+            'percent_from' => 'required',
+            'percent_to' => 'required',
+        ]);
+        $grade=  MarksGradeModel::getSingle($id);
+        $grade->percent_from = trim($request->percent_from);
+        $grade->percent_to = trim($request->percent_to);
+        $grade->save();
+        return redirect('admin/examinations/marks_grade')->with('success', 'Marks grade updated successfully');
+
+    }
+
+    public function marks_grade_delete($id)
+    {
+        $grade = MarksGradeModel::getSingle($id);
+        if (!empty($grade)) {
+            $grade->delete();
+            return redirect('admin/examinations/marks_grade')->with('success', 'Marks grade deleted successfully');
+        } else {
+            abort(404);
+        }
     }
 
     //student menu

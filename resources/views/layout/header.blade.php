@@ -265,19 +265,25 @@
                 <li class="nav-item">
                 <a href="{{url('admin/examinations/exam/list')}}" class="nav-link {{request()->is('admin/examinations/exam/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-clipboard-check"></i>
-                    <p>Exam list</p>
+                    <p>Exam List</p>
                 </a>
                 </li>
                 <li class="nav-item">
                 <a href="{{url('admin/examinations/exam_schedule')}}" class="nav-link {{request()->is('admin/examinations/exam_schedule/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-calendar2-week"></i>
-                    <p>Exam schedule</p>
+                    <p>Exam Schedule</p>
                 </a>
                 </li>
                 <li class="nav-item">
                 <a href="{{url('admin/examinations/mark_register')}}" class="nav-link {{request()->is('admin/examinations/mark_register/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-pencil-square"></i>
-                    <p>Marks register</p>
+                    <p>Marks Register</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('admin/examinations/marks_grade')}}" class="nav-link {{request()->is('admin/examinations/marks_grade/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-bar-chart-fill"></i>
+                    <p>Marks Grade</p>
                 </a>
                 </li>
 

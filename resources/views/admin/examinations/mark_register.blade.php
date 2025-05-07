@@ -136,10 +136,16 @@
                            @if(!empty($getMark))
                            <div class="mb-2">
                             <b>Total mark</b>: {{$totalMark}}/{{$subject->full_mark}}
+                            @php
+                            $getLoopGrade = App\Models\MarksGradeModel::getGrade($totalMark)
+                            @endphp
                             @if($totalMark >= $subject->passing_mark)
                             <span class="badge bg-primary">Passed</span>
                             @else
                             <span class="badge bg-warning">Failed</span>
+                            @endif
+                            @if($getLoopGrade)
+                            <span class="badge bg-primary">Grade {{$getLoopGrade}} </span>
                             @endif
                            </div>
                            @endif
@@ -151,14 +157,21 @@
                           <td class="align-middle"><button type="submit" class="btn btn-primary">Save</button> <br/>
                           @if(!empty($totalStudentMark))
                           @php
-                          $percentage = $totalStudentMark * 100 / $totalFullMark
+                          $percentage = $totalStudentMark * 100 / $totalFullMark;
+                          $getGrade = App\Models\MarksGradeModel::getGrade($percentage);
+
                           @endphp
                           <b>Final mark</b> : {{$totalStudentMark}} /{{$totalFullMark}}
+
                           @if($totalStudentMark >= $totalPassingMark)
                             <span class="badge bg-primary">Passed {{round($percentage,2)}} %</span>
                             @else
                             <span class="badge bg-warning">Failed {{round($percentage,2)}} %</span>
                             @endif
+                            @if($getGrade)
+                            <span class="badge bg-primary">Grade {{$getGrade}} </span>
+                            @endif
+
                             @endif
 
                         </td>

@@ -25,8 +25,8 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Class name</th>
-                                            <th>Subject name</th>
+                                            <th>Class</th>
+                                            <th>Subject</th>
                                             <th>Subject type</th>
                                             <th>Class timetable</th>
                                             <th>Created date</th>

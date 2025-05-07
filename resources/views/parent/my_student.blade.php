@@ -2,15 +2,11 @@
 @section("content")
 <main class="app-main">
         <div class="app-content-header">
-          <!--begin::Container-->
           <div class="container-fluid">
-            <!--begin::Row-->
             <div class="row">
               <div class="col-sm-6"><h3 class="mb-0">My Student List </h3></div>
             </div>
-            <!--end::Row-->
-          </div>
-          <!--end::Container-->
+        </div>
         </div>
 
         <div class="app-content">
@@ -18,16 +14,11 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
-        
               @include('_message')
-
-         
-
                 <div class="card mb-4">
                   <div class="card-header">
                     <h3 class="card-title">My Student List</h3>
                   </div>
-                  <!-- /.card-header -->
                   <div class="card-body p-0" >
                   <table class="table table-striped " style="overflow:auto;">
                       <thead>
@@ -84,19 +75,18 @@
 
                             <td>{{ date('d.m-y H:i A ', strtotime($value->created_at)) }}</td>
                             <td>
-                              <a class="btn btn-primary btn-sm" href="{{url('parent/my_student/my_student_subject/'. $value->id)}}"> 
+                              <a class="btn btn-primary btn-sm" href="{{url('parent/my_student/my_student_subject/'. $value->id)}}">
                               <i class="bi bi-journal-bookmark-fill"></i>  Subject</a>
                             </td>
                         </tr>
                         @endforeach
-                       
+
                       </tbody>
                     </table>
                     <div class=" padding:10px; justify-content-center mt-4">
                     </div>
 
                   </div>
-                  <!-- /.card-body -->
                 </div>
               </div>
             </div>

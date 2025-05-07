@@ -24,7 +24,7 @@
                         <table class="table table-striped">
                         <thead>
                         <tr>
-                          <th>Subject name</th>
+                          <th>Subject</th>
                           <th>Day</th>
                           <th>Date</th>
                           <th>Start time</th>

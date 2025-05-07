@@ -26,8 +26,8 @@
                           <option value="">Select exam</option>
                           @foreach ($getExam as $exam)
                             <option
-                            {{( Request::get('exam_id') == $exam->id ? 'selected' : '')}}
-                             value="{{ $exam->id }}">{{ $exam->name }}</option>
+                            {{( Request::get('exam_id') == $exam->exam_id ? 'selected' : '')}}
+                             value="{{ $exam->exam_id }}">{{ $exam->exam_name }}</option>
                           @endforeach
                         </select>
 
@@ -39,8 +39,8 @@
                           <option value="">Select class</option>
                           @foreach ($getClass as $class)
                             <option
-                            {{( Request::get('class_id') == $class->id ? 'selected' : '')}}
-                             value="{{ $class->id }}">{{ $class->name }}
+                            {{( Request::get('class_id') == $class->class_id ? 'selected' : '')}}
+                             value="{{ $class->class_id }}">{{ $class->class_name }}
                             </option>
                           @endforeach
                         </select>
@@ -48,12 +48,13 @@
                       </div>
                       <div class="form-group col-md-3" style="margin-top: 30px;">
                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-                       <a href="{{ url('admin/examinations/mark_register') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
+                       <a href="{{ url('teacher/mark_register') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
                       </div>
                     </div>
                   </form>
                 </div>
                 @include('_message')
+
               @if(!empty($getSubject) && !empty($getSubject->count()) )
 
                 <div class="card mb-4">
@@ -188,7 +189,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: "{{url('admin/examinations/submit_mark_register')}}",
+                    url: "{{url('teacher/submit_mark_register')}}",
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response){
@@ -213,7 +214,7 @@
                var exam = $('#exam'+student_id+subject_id).val();
                $.ajax({
                     type: 'POST',
-                    url: "{{url('admin/examinations/single_submit_mark_register')}}",
+                    url: "{{url('teacher/single_submit_mark_register')}}",
                     data: {
                         '_token': '{{csrf_token()}}',
                        id: id,

@@ -105,6 +105,8 @@
                           <td>
                             <div class="mb-2">
                                 Classwork
+                                 <input type="hidden" name="mark[{{$i}}][full_mark]" value="{{ $subject->full_mark}}">
+                                <input type="hidden" name="mark[{{$i}}][passing_mark]" value="{{ $subject->passing_mark}}">
                                 <input type="hidden" name="mark[{{$i}}][subject_id]" value="{{ $subject->subject_id}}">
                                 <input type="hidden" name="mark[{{$i}}][id]" value="{{ $subject->id}}">
                                 <input style="width:200px" id="class_work_{{ $student->id}}{{ $subject->subject_id}}"  name="mark[{{$i}}][class_work]" class="form-control" type="text" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" placeholder="Enter mark" />

@@ -68,7 +68,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Subject name</th>
+                          <th>Subject</th>
                           <th>Subject type</th>
                         </tr>
                       </thead>

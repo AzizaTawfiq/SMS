@@ -370,6 +370,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{url('student/my_exam_result')}}" class="nav-link {{request()->is('student/my_exam_result/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Exam Result</p>
+                </a>
+                </li>
+              <li class="nav-item">
                 <a href="{{url('student/my_calendar')}}" class="nav-link {{request()->is('student/my_calendar/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-calendar-date"></i>
                   <p>Calendar</p>

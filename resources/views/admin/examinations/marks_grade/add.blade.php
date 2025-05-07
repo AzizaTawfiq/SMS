@@ -34,7 +34,8 @@
                         {{$errors->first('name')}}
                         </div>
                       </div>
-                      <div class="form-group">
+                      <div class="row mt-3">
+                      <div class="form-group col-6">
                         <label for="percent_from" class="form-label text-bold">Percent from</label>
                         <input
                           type="number"
@@ -49,7 +50,7 @@
                         {{$errors->first('percent_from')}}
                         </div>
                       </div>
-                      <div class="form-group">
+                      <div class="form-group col-6">
                         <label for="percent_to" class="form-label text-bold">Percent to</label>
                         <input
                           type="number"
@@ -63,6 +64,7 @@
                         <div class="text-danger">
                         {{$errors->first('percent_to')}}
                         </div>
+                      </div>
                       </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Add</button>

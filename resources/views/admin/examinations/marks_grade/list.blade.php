@@ -29,33 +29,11 @@
                           type="text"
                           class="form-control"
                           id="name"
-                          placeholder="Search for name"
+                          placeholder="Search for grade name"
                           name="name"
                           value="{{ Request::get('name') }}"
                         />
 
-                      </div>
-                      <div class="form-group col-md-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="email"
-                          placeholder="Search for email"
-                          name="email"
-                          value="{{ Request::get('email') }}"
-                        />
-                      </div>
-                      <div class="form-group col-md-3">
-                        <label for="created_at" class="form-label">Date</label>
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="created_at"
-                          placeholder="Search for date"
-                          name="created_at"
-                          value="{{ Request::get('created_at') }}"
-                        />
                       </div>
                       <div class="form-group col-md-3" style="margin-top: 30px;">
                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>

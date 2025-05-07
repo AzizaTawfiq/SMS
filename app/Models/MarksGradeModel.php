@@ -21,11 +21,6 @@ class MarksGradeModel extends Model
          if (!empty(Request::get('name'))) {
             $return = $return->where('marks_grade.name', 'like', '%' . Request::get('name'). '%');
         }
-
-
-        if (!empty(Request::get('created_at'))) {
-            $return = $return->whereDate('marks_grade.created_at', '=', Request::get('created_at'));
-        }
          $return = $return-> get();
          return $return;
     }

@@ -69,8 +69,17 @@
                         @endforeach
                         <tr>
                             <td colspan="2"><b>Final score : </b>{{$totalScore}} / {{$fullMark}} </td>
-                            <td colspan="2"><b>Final percent : </b>{{ $fullMark > 0 ? round(($totalScore * 100) / $fullMark, 2) : 0 }} % </td>
-                            <td colspan="5"><b>Final status : </b>
+                            @php
+                            $percentage = ($totalScore * 100) / $fullMark;
+                            $getLoopGrade = App\Models\MarksGradeModel::getGrade($percentage);
+                            @endphp
+                            <td colspan="2"><b>Final percent : </b>{{ $fullMark > 0 ? round($percentage, 2) : 0 }} % </td>
+                            @if($getLoopGrade)
+                            <td colspan="2">
+                            <span class="badge bg-primary"><b>Final grade : </b> {{$getLoopGrade}} </span>
+                            @endif
+                           </td>
+                            <td colspan="3"><b>Final status : </b>
                                 @if($result_validation == 0)
                                     <span class="badge bg-primary">Passed</span>
                                 @else

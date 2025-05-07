@@ -16,7 +16,7 @@ class MarksGradeModel extends Model
     }
 
     static public function getRecord(){
-         $return = self::select('marks_grade.*','users.name as created_name')->
+         $return = MarksGradeModel::select('marks_grade.*','users.name as created_name')->
          join('users', 'users.id', '=', 'marks_grade.created_by');
          if (!empty(Request::get('name'))) {
             $return = $return->where('marks_grade.name', 'like', '%' . Request::get('name'). '%');
@@ -24,6 +24,12 @@ class MarksGradeModel extends Model
          $return = $return-> get();
          return $return;
     }
-
+    static public function getGrade($percentage){
+        $return = MarksGradeModel::select('marks_grade.*')->
+        where('percent_from','<=', $percentage)->
+        where('percent_to', '>=', $percentage)->
+        first();
+        return !empty($return->name) ? $return->name : '';
+    }
 
 }

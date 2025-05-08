@@ -15,6 +15,7 @@ use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\AttendanceController;
 
 
 /*
@@ -145,7 +146,17 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_edit']);
     Route::post('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
     Route::get('admin/examinations/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
+    // attendance
+     Route::get('admin/attendance/student', [AttendanceController::class, 'attendanceStudent']);
+     Route::post('admin/attendance/student/save', [AttendanceController::class, 'submitAttendanceStudent']);
+     /*
+     Route::get('admin/attendance/marks_grade/add', [ExaminationsController::class, 'marks_grade_add']);
+     Route::get('admin/attendance/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_edit']);
+     Route::post('admin/attendance/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
+     Route::get('admin/attendance/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']); */
+
 });
+
 
 
 //student url

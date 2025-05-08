@@ -289,6 +289,24 @@
 
             </ul>
             </li>
+            <li class="nav-item {{request()->is('admin/attendance/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('admin/attendance/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-calendar2-check"></i>
+                <p>
+                Attendance
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('admin/attendance/student')}}" class="nav-link {{request()->is('admin/attendance/student/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-person-check-fill"></i>
+                    <p>Student Attendance</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
 
               <li class="nav-item">
                 <a href="{{ url('admin/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">

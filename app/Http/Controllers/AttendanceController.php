@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\School_Class;
 use App\Models\getStudentClass;
 use App\Models\StudentAttendanceModel;
+use App\Models\AssignClassTeacherModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Str;
@@ -49,6 +50,27 @@ class AttendanceController extends Controller
         $data['getRecord'] = StudentAttendanceModel::getRecord();
 
         return view('admin.attendance.report', $data);
+    }
+
+    //teacher menu
+
+    public function attendanceStudentTeacher(Request $request)
+    {
+        $data['getClass'] =  AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+
+
+        if(!empty($request->get('class_id')) && !empty($request->get('attendance_date'))){
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
+        }
+        return view('teacher.attendance.student', $data);
+    }
+
+    public function attendanceReportTeacher(Request $request)
+    {
+        $data['getClass'] =  AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+        $data['getRecord'] = StudentAttendanceModel::getRecord();
+
+        return view('teacher.attendance.report', $data);
     }
 
 }

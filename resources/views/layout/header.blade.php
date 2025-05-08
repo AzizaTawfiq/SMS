@@ -366,6 +366,30 @@
                     <p>Marks register</p>
                 </a>
                 </li>
+                <li class="nav-item {{request()->is('teacher/attendance/*') ? 'menu-open' : ''}}">
+                    <a href="#" class="nav-link {{request()->is('teacher/attendance/*') ? 'active' : ''}}">
+                    <i class="nav-icon bi bi-calendar2-check"></i>
+                        <p>
+                        Attendance
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('teacher/attendance/student')}}" class="nav-link {{request()->is('teacher/attendance/student/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-person-check-fill"></i>
+                    <p>Student Attendance</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('teacher/attendance/report')}}" class="nav-link {{request()->is('teacher/attendance/report/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-clipboard2-data"></i>
+                    <p>Attendance Report</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
 
                   @elseif(Auth::user()->role == 3)
                   <li class="nav-item">

@@ -26,8 +26,8 @@
                           <option value="">Select class</option>
                           @foreach ($getClass as $class)
                             <option
-                            {{( Request::get('class_id') == $class->id ? 'selected' : '')}}
-                             value="{{ $class->id }}">{{ $class->name }}
+                            {{( Request::get('class_id') == $class->class_id ? 'selected' : '')}}
+                             value="{{ $class->class_id }}">{{ $class->class_name }}
                             </option>
                           @endforeach
                         </select>
@@ -46,13 +46,13 @@
                       </div>
                       <div class="form-group col-md-3" style="margin-top: 30px;">
                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-                       <a href="{{ url('admin/attendance/student') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
+                       <a href="{{ url('teacher/attendance/student') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
                       </div>
                     </div>
                   </form>
                 </div>
                 @include('_message')
-              @if(!empty(Request::get('class_id')) && !empty(Request::get('attendance_date')) && !empty($getStudent->count()))
+              @if(!empty(Request::get('class_id')) && !empty(Request::get('attendance_date') && !empty($getStudent->count())))
 
                 <div class="card mb-4">
                   <div class="card-body p-0">
@@ -130,7 +130,7 @@
 
                $.ajax({
                     type: 'POST',
-                    url: "{{url('admin/attendance/student/save')}}",
+                    url: "{{url('teacher/attendance/student/save')}}",
                     data: {
                         '_token': '{{csrf_token()}}',
                         student_id: student_id,

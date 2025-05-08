@@ -149,11 +149,7 @@ Route::group(['middleware' => 'admin'], function () {
     // attendance
      Route::get('admin/attendance/student', [AttendanceController::class, 'attendanceStudent']);
      Route::post('admin/attendance/student/save', [AttendanceController::class, 'submitAttendanceStudent']);
-     /*
-     Route::get('admin/attendance/marks_grade/add', [ExaminationsController::class, 'marks_grade_add']);
-     Route::get('admin/attendance/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_edit']);
-     Route::post('admin/attendance/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
-     Route::get('admin/attendance/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']); */
+     Route::get('admin/attendance/report', [AttendanceController::class, 'attendanceReport']);
 
 });
 

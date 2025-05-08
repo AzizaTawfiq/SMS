@@ -14,7 +14,7 @@ use Str;
 
 class AttendanceController extends Controller
 {
-    public function AttendanceStudent(Request $request)
+    public function attendanceStudent(Request $request)
     {
         $data['getClass'] = School_Class::get();
 
@@ -41,6 +41,14 @@ class AttendanceController extends Controller
         $attendance->save();
         $json['message'] = 'Attendance saved successfully';
         echo json_encode($json);
+    }
+
+    public function attendanceReport(Request $request)
+    {
+        $data['getClass'] = School_Class::get();
+        $data['getRecord'] = StudentAttendanceModel::getRecord();
+
+        return view('admin.attendance.report', $data);
     }
 
 }

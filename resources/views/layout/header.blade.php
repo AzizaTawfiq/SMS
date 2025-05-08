@@ -304,6 +304,12 @@
                     <p>Student Attendance</p>
                 </a>
                 </li>
+                <li class="nav-item">
+                <a href="{{url('admin/attendance/report')}}" class="nav-link {{request()->is('admin/attendance/report/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-clipboard2-data"></i>
+                    <p>Attendance Report</p>
+                </a>
+                </li>
 
             </ul>
             </li>

@@ -22,4 +22,30 @@ class StudentAttendanceModel extends Model
          return $return;
     }
 
+    static public function getRecord(){
+        $return = StudentAttendanceModel::select('student_attendance.*','student.name as student_name',
+        'student.last_name as student_last_name','school_classes.name as class_name'
+        ,'created_by.name as created_name')
+        ->join('users as student', 'student.id', '=', 'student_attendance.student_id')
+        ->join('school_classes','school_classes.id','=','student_attendance.class_id')
+        ->join('users as created_by','created_by.id','=','student_attendance.created_by');
+        if (!empty(Request::get('class_id'))) {
+           $return = $return->where('student_attendance.class_id', 'like', '%' . Request::get('class_id'). '%');
+       }
+        if (!empty(Request::get('student_name'))) {
+           $return = $return->where(function($query) {
+               $query->where('student.name', 'like', '%' . Request::get('student_name'). '%')
+                     ->orWhere('student.last_name', 'like', '%' . Request::get('student_name'). '%');
+           });
+       }
+        if (!empty(Request::get('attendance_type'))) {
+           $return = $return->where('student_attendance.attendance_type', 'like', '%' . Request::get('attendance_type'). '%');
+       }
+       if (!empty(Request::get('attendance_date'))) {
+           $return = $return->whereDate('student_attendance.attendance_date', '=', Request::get('attendance_date'));
+       }
+        $return = $return-> orderBy('student_attendance.id','desc')->paginate(20);
+        return $return;
+   }
+
 }

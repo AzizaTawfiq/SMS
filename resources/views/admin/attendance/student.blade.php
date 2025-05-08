@@ -62,7 +62,6 @@
                           <th>Student ID</th>
                           <th>Student name</th>
                           <th>Attendance</th>
-                          <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>

@@ -43,7 +43,7 @@
                       </p>
                     </div>
                   </div>
-                  
+
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
@@ -136,10 +136,10 @@
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>    
+                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                <li class="user-header bg-primary text-white">  
+                <li class="user-header bg-primary text-white">
                   <img
                     src="{{ asset('dist/assets/img/user2-160x160.jpg') }}"
                     class="rounded-circle shadow"
@@ -152,7 +152,7 @@
                 </li>
                 <li class="user-footer">
                   <a href="{{url('admin/account')}}" class="btn btn-default btn-flat">Profile</a>
-                 
+
                 <a class="btn btn-default btn-flat float-end" href="{{url('logout')}}">
                   <p>Logout</p>
                 </a>
@@ -211,26 +211,108 @@
                 </a>
               </li>
 
-              <li class="nav-item">
+
+            <li class="nav-item {{request()->is('admin/school_classes/*') || request()->is('admin/subjects/*') || request()->is('admin/assign_subject/*') || request()->is('admin/class_timetable/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('admin/school_classes/*') || request()->is('admin/subjects/*') || request()->is('admin/assign_subject/*') || request()->is('admin/class_timetable/*') ? 'active' : ''}}">
+                <i class="nav-icon bi bi-mortarboard-fill"></i>
+                <p>
+                Academics
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
                 <a href="{{url('admin/school_classes/list')}}" class="nav-link {{request()->is('admin/school_classes/*') ? 'active':''}}">
-                  <i class="nav-icon bi bi-journal-text"></i>
-                  <p>Classes</p>
+                    <i class="nav-icon bi bi-journal-text"></i>
+                    <p>Classes</p>
                 </a>
-              </li>
-
-              <li class="nav-item">
+                </li>
+                <li class="nav-item">
                 <a href="{{url('admin/subjects/list')}}" class="nav-link {{request()->is('admin/subjects/*') ? 'active':''}}">
-                  <i class="nav-icon bi bi-book"></i>
-                  <p>Subjects</p>
+                    <i class="nav-icon bi bi-book"></i>
+                    <p>Subjects</p>
                 </a>
-              </li>
-
-              <li class="nav-item">
+                </li>
+                <li class="nav-item">
                 <a href="{{url('admin/assign_subject/list')}}" class="nav-link {{request()->is('admin/assign_subject/*') ? 'active':''}}">
-                  <i class="nav-icon bi bi-book"></i>
-                  <p>Assign Subjects</p>
+                    <i class="nav-icon bi bi-book"></i>
+                    <p>Assign Subjects</p>
                 </a>
-              </li>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('admin/assign_class_teacher/list')}}" class="nav-link {{request()->is('admin/assign_class_teacher/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-person-check"></i>
+                    <p>Assign Class Teacher</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('admin/class_timetable/list')}}" class="nav-link {{request()->is('admin/class_timetable/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-calendar3"></i>
+                    <p>Class Timetable</p>
+                </a>
+                </li>
+            </ul>
+            </li>
+            <li class="nav-item {{request()->is('admin/examinations/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('admin/examinations/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-file-earmark-text"></i>
+                <p>
+                Examinations
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('admin/examinations/exam/list')}}" class="nav-link {{request()->is('admin/examinations/exam/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-clipboard-check"></i>
+                    <p>Exam List</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('admin/examinations/exam_schedule')}}" class="nav-link {{request()->is('admin/examinations/exam_schedule/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-calendar2-week"></i>
+                    <p>Exam Schedule</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('admin/examinations/mark_register')}}" class="nav-link {{request()->is('admin/examinations/mark_register/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Marks Register</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('admin/examinations/marks_grade')}}" class="nav-link {{request()->is('admin/examinations/marks_grade/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-bar-chart-fill"></i>
+                    <p>Marks Grade</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
+            <li class="nav-item {{request()->is('admin/attendance/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('admin/attendance/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-calendar2-check"></i>
+                <p>
+                Attendance
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('admin/attendance/student')}}" class="nav-link {{request()->is('admin/attendance/student/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-person-check-fill"></i>
+                    <p>Student Attendance</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('admin/attendance/report')}}" class="nav-link {{request()->is('admin/attendance/report/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-clipboard2-data"></i>
+                    <p>Attendance Report</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
 
               <li class="nav-item">
                 <a href="{{ url('admin/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
@@ -247,21 +329,118 @@
                   <p>Dashboard</p>
                 </a>
                 </li>
-
+                <li class="nav-item">
+                <a href="{{url('teacher/my_students')}}" class="nav-link {{request()->is('teacher/my_students/*') ? 'active':''}}">
+                  <i class="nav-icon bi bi-mortarboard"></i>
+                  <p>Students</p>
+                </a>
+              </li>
+                <li class="nav-item">
+                <a href="{{url('teacher/my_class_subject')}}" class="nav-link {{request()->is('teacher/my_class_subject/*') ? 'active':''}}">
+                    <i class="nav-icon bi bi-book"></i>
+                    <p>Classes and Subjects</p>
+                </a>
+                </li>
+                </li>
                 <li class="nav-item">
                 <a href="{{ url('teacher/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
                  <i class="nav-icon bi bi-shield-lock"></i>
                  <p>Change Password</p>
                </a>
               </li>
+              <li class="nav-item">
+                <a href="{{url('teacher/my_exam_timetable')}}" class="nav-link {{request()->is('teacher/my_exam_timetable/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-file-earmark-text"></i>
+                  <p>Exam timetable</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('teacher/my_calendar')}}" class="nav-link {{request()->is('teacher/my_calendar/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-calendar-date"></i>
+                  <p>Calendar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('teacher/mark_register')}}" class="nav-link {{request()->is('teacher/mark_register/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Marks register</p>
+                </a>
+                </li>
+                <li class="nav-item {{request()->is('teacher/attendance/*') ? 'menu-open' : ''}}">
+                    <a href="#" class="nav-link {{request()->is('teacher/attendance/*') ? 'active' : ''}}">
+                    <i class="nav-icon bi bi-calendar2-check"></i>
+                        <p>
+                        Attendance
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('teacher/attendance/student')}}" class="nav-link {{request()->is('teacher/attendance/student/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-person-check-fill"></i>
+                    <p>Student Attendance</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('teacher/attendance/report')}}" class="nav-link {{request()->is('teacher/attendance/report/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-clipboard2-data"></i>
+                    <p>Attendance Report</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
 
                   @elseif(Auth::user()->role == 3)
                   <li class="nav-item">
                   <a href="{{url('student/dashboard')}}" class="nav-link">
                   <i class="nav-icon fa fa-tachometer-alt"></i>
                   <p>Dashboard</p>
+                 </a>
+               </li>
+
+            <li class="nav-item">
+                 <a href="{{ url('student/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                  <i class="nav-icon bi bi-shield-lock"></i>
+                  <p>Change Password</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{url('student/my_subjects')}}" class="nav-link {{request()->is('student/my_subjects/*') ? 'active':''}}">
+                  <i class="nav-icon bi bi-book"></i>
+                  <p>Subjects</p>
+                </a>
+              </li>
+            <li class="nav-item">
+                <a href="{{url('student/my_timetable')}}" class="nav-link {{request()->is('student/my_timetable/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-calendar3"></i>
+                  <p>Timetable</p>
+                </a>
+              </li>
+            <li class="nav-item">
+                <a href="{{url('student/my_exam_timetable')}}" class="nav-link {{request()->is('student/my_exam_timetable/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-file-earmark-text"></i>
+                  <p>Exam timetable</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('student/my_exam_result')}}" class="nav-link {{request()->is('student/my_exam_result/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Exam Result</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('student/my_attendance')}}" class="nav-link {{request()->is('student/my_attendance/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Attendance</p>
+                </a>
+                </li>
+              <li class="nav-item">
+                <a href="{{url('student/my_calendar')}}" class="nav-link {{request()->is('student/my_calendar/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-calendar-date"></i>
+                  <p>Calendar</p>
+                </a>
+              </li>
 
             <li class="nav-item">
                 <a href="{{ url('student/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
@@ -279,11 +458,25 @@
                 </li>
 
                 <li class="nav-item">
-                <a href="{{ url('parent/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
-                 <i class="nav-icon bi bi-shield-lock"></i>
-                 <p>Change Password</p>
-               </a>
-              </li>
+                  <a href="{{url('parent/account')}}" class="nav-link">
+                  <i class="nav-icon bi-person-lines-fill"></i>
+                  <p>My Account</p>
+                 </a>
+               </li>
+
+               <li class="nav-item">
+               <a href="{{ url('parent/my_student') }}" class="nav-link">
+               <i class="nav-icon bi-people-fill	"></i>
+                  <p>My Students</p>
+                 </a>
+               </li>
+
+                <li class="nav-item">
+                 <a href="{{ url('parent/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
+                  <i class="nav-icon bi bi-shield-lock"></i>
+                  <p>Change Password</p>
+                </a>
+               </li>
 
                   @endif
 

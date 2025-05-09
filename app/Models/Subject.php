@@ -25,4 +25,9 @@ class Subject extends Model
     {
     return $this->belongsToMany(School_Class::class,'subject_school_class','schoolclass_id','subject_id');
     }
+
+    static public function getSingle($id)
+    {
+        return self::find($id);
+    }
 }

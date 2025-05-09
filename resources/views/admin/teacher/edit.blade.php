@@ -35,7 +35,7 @@
                                 {{$errors->first('name')}}
                                 </div>
                             </div>
-                           <!--  <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group">
                                 <label for="last_name" class="form-label text-bold">Last name<span class="text-danger">*</span></label>
                                 <input
                                 type="text"
@@ -49,7 +49,42 @@
                                 <div class="text-danger">
                                 {{$errors->first('last_name')}}
                                 </div>
-                            </div> -->
+                            </div>
+                            <div class="col-md-6 form-group mt-3">
+                                <label for="gender" class="form-label text-bold">Gender<span class="text-danger">*</span></label>
+                                <select
+                                class="form-control"
+                                id="gender"
+                                name="gender"
+                                >
+                                <option value="">Select gender</option>
+                                <option {{(old('gender',$getRecord->gender) == 'male') ? 'selected' :''}} value="male">Male</option>
+                                <option {{(old('gender',$getRecord->gender) == 'female') ? 'selected' :''}} value="female">Female</option>
+                              </select>
+                              <div class="text-danger">
+                                {{$errors->first('gender')}}
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 form-group mt-3">
+                                <label for="date_of_birth" class="form-label text-bold">Date of birth<span class="text-danger">*</span></label>
+                                <input
+                                type="date"
+                                class="form-control"
+                                id="date_of_birth"
+                                placeholder="Enter date of birth"
+                                name="date_of_birth"
+
+                                value="{{ old('date_of_birth', $getRecord->date_of_birth) }}"
+                                />
+                                <div class="text-danger">
+                                {{$errors->first('date_of_birth')}}
+                                </div>
+                            </div>
+
+
+
+
                             <div class="col-md-6 form-group mt-3">
                                 <label for="admission_number" class="form-label text-bold">Admission number<span class="text-danger">*</span></label>
                                 <input
@@ -97,38 +132,9 @@
                                         </div>
 
                             </div>
-                            <div class="col-md-6 form-group mt-3">
-                                <label for="gender" class="form-label text-bold">Gender<span class="text-danger">*</span></label>
-                                <select
-                                class="form-control"
-                                id="gender"
-                                name="gender"
-                                >
-                                <option value="">Select gender</option>
-                                <option {{(old('gender',$getRecord->gender) == 'male') ? 'selected' :''}} value="male">Male</option>
-                                <option {{(old('gender',$getRecord->gender) == 'female') ? 'selected' :''}} value="female">Female</option>
-                              </select>
-                              <div class="text-danger">
-                                {{$errors->first('gender')}}
-                                </div>
 
-                            </div>
 
-                            <div class="col-md-6 form-group mt-3">
-                                <label for="date_of_birth" class="form-label text-bold">Date of birth<span class="text-danger">*</span></label>
-                                <input
-                                type="date"
-                                class="form-control"
-                                id="date_of_birth"
-                                placeholder="Enter date of birth"
-                                name="date_of_birth"
 
-                                value="{{ old('date_of_birth', $getRecord->date_of_birth) }}"
-                                />
-                                <div class="text-danger">
-                                {{$errors->first('date_of_birth')}}
-                                </div>
-                            </div>
                             <div class="col-md-6 form-group mt-3">
                                 <label for="caste" class="form-label text-bold">Caste</label>
                                 <input

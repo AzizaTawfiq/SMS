@@ -26,18 +26,18 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-2">
-                        <label for="name" class="form-label text-bold">Name</label>
+                        <label for="name" class="form-label text-bold">First name</label>
                         <input
                           type="text"
                           class="form-control"
                           id="name"
-                          placeholder="Search for name"
+                          placeholder="Search for first name"
                           name="name"
                           value="{{ Request::get('name') }}"
                         />
 
                       </div>
-                      <!-- <div class="form-group col-md-2">
+                      <div class="form-group col-md-2">
                         <label for="last_name" class="form-label text-bold">Last name</label>
                         <input
                           type="text"
@@ -48,7 +48,7 @@
                           value="{{ Request::get('last_name') }}"
                         />
 
-                      </div> -->
+                      </div>
                       <div class="form-group col-md-2">
                         <label for="email" class="form-label">Email</label>
                         <input
@@ -69,14 +69,14 @@
                         </select>
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="mobile" class="form-label">Mobile</label>
+                        <label for="mobile_number" class="form-label">Mobile</label>
                         <input
                           type="text"
                           class="form-control"
-                          id="mobile"
+                          id="mobile_number"
                           placeholder="Search for mobile"
-                          name="mobile"
-                          value="{{ Request::get('mobile') }}"
+                          name="mobile_number"
+                          value="{{ Request::get('mobile_number') }}"
                         />
                       </div>
                       <div class="form-group col-md-2">
@@ -92,6 +92,27 @@
 
                       </div>
                       <div class="form-group col-md-2">
+                        <label for="address" class="form-label text-bold">Address</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="address"
+                          placeholder="Search for address"
+                          name="address"
+                          value="{{ Request::get('address') }}"
+                        />
+
+                      </div>
+
+                      <div class="form-group col-md-2">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-control" name="status">
+                          <option value="">Select status</option>
+                          <option value="100" {{ Request::get('status') == '100' ? 'selected' : '' }}>Active</option>
+                          <option value="1" {{ Request::get('status') == '1' ? 'selected' : '' }}>Inactive</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-2">
                         <label for="admission_date" class="form-label">Admission date</label>
                         <input
                           type="date"
@@ -101,14 +122,6 @@
                           name="admission_date"
                           value="{{ Request::get('admission_date') }}"
                         />
-                      </div>
-                      <div class="form-group col-md-2">
-                        <label for="status" class="form-label">Status</label>
-                        <select class="form-control" name="status">
-                          <option value="">Select status</option>
-                          <option value="100" {{ Request::get('status') == '100' ? 'selected' : '' }}>Active</option>
-                          <option value="1" {{ Request::get('status') == '1' ? 'selected' : '' }}>Inactive</option>
-                        </select>
                       </div>
                       <div class="form-group col-md-3">
                         <label for="created_at" class="form-label">created date</label>
@@ -130,10 +143,6 @@
                 </div>
               @include('_message')
                 <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-title">Teachers list</h3>
-                  </div>
-                  <!-- /.card-header -->
                   <div class="card-body p-0">
                   @if($getRecord->count() > 0)
                     <table class="table table-striped">
@@ -148,11 +157,13 @@
                           <th>Joining Date</th>
                           <th>Mobile</th>
                           <th>Marital status</th>
-                          <th >Address</th>
+                          <th >Current address</th>
+                          <th >Permanent address</th>
                           <th >Qualifications</th>
                           <th >Experience</th>
                           <th >Note</th>
                           <th >Status</th>
+                          <th >Created date</th>
                           <th >Actions</th>
                         </tr>
                       </thead>
@@ -179,13 +190,19 @@
                                 {{ date('d-m-Y', strtotime($value->admission_date)) }}
                                 @endif
                                 </td>
-                            <td>{{ $value->mobile }}</td>
+                            <td>{{ $value->mobile_number }}</td>
                             <td>{{ $value->marital_status }}</td>
                             <td>{{ $value->address }}</td>
+                            <td>{{ $value->permanent_address }}</td>
                             <td>{{ $value->qualification }}</td>
-                            <td>{{ $value->experience }}</td>
+                            <td>{{ $value->work_experience }}</td>
                             <td>{{ $value->note }}</td>
                             <td>{{ ($value->status == 0) ? 'Active' : 'Inactive' }}</td>
+                            <td>
+                            @if(!empty($value->created_at))
+                                {{ date('d-m-Y', strtotime($value->created_at)) }}
+                                @endif
+                                </td>
                             <td>
                               <a href="{{url('admin/teacher/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
                               <x-confirm-delete

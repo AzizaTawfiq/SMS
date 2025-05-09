@@ -4,7 +4,7 @@
         <div class="app-content-header">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Attendance report</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">My Attendance</h3></div>
             </div>
           </div>
         </div>
@@ -14,7 +14,7 @@
             <div class="row">
               <div class="col-md-12">
               <div class="card card-primary card-outline mb-4">
-                <div class="card-header">
+              <div class="card-header">
                     <h3 class="card-title">Search</h3>
                 </div>
                 <form action="" method="get">
@@ -25,22 +25,11 @@
                           <option value="">Select class</option>
                           @foreach ($getClass as $class)
                             <option
-                            {{( Request::get('class_id') == $class->id ? 'selected' : '')}}
-                             value="{{ $class->id }}">{{ $class->name }}
+                            {{( Request::get('class_id') == $class->class_id ? 'selected' : '')}}
+                             value="{{ $class->class_id }}">{{ $class->class_name }}
                             </option>
                           @endforeach
                         </select>
-                      </div>
-                      <div class="col-md-2 form-group">
-                        <label for="student_name" class="form-label">Student Name</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="student_name"
-                          placeholder="Search for name"
-                          name="student_name"
-                          value="{{ Request::get('student_name') }}"
-                        />
                       </div>
                       <div class="col-md-2 form-group">
                         <label for="attendance_type" class="form-label">Attendance type</label>
@@ -66,10 +55,11 @@
                       </div>
                       <div class="col-md-3 form-group" style="margin-top: 30px;">
                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-                       <a href="{{ url('admin/attendance/report') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
+                       <a href="{{ url('student/my_attendance') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
                       </div>
                     </div>
                   </form>
+                </div>
                 </div>
                 <div class="card mb-4">
                   <div class="card-body p-0">
@@ -77,20 +67,15 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th>Student ID</th>
-                          <th>Student</th>
                           <th>Class</th>
                           <th>Attendance</th>
                           <th>Attendance date</th>
-                          <th>Created by</th>
                           <th>Created date</th>
                         </tr>
                       </thead>
                       <tbody>
                       @foreach($getRecord as $value)
                         <tr>
-                            <td>{{ $value->student_id }}</td>
-                            <td>{{ $value->student_name }} {{ $value->student_last_name }}</td>
                             <td>{{ $value->class_name }}</td>
                             <td>
                                 @if ($value->attendance_type == 1)
@@ -104,7 +89,6 @@
                                 @endif
                             </td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->attendance_date)) }}</td>
-                            <td>{{ $value->created_name }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                             <td>
 

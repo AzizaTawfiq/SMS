@@ -98,9 +98,9 @@
                                 @elseif ($value->attendance_type == 2)
                                     <span class="badge bg-warning">Late</span>
                                 @elseif ($value->attendance_type == 3)
-                                    <span class="badge bg-warning">Absent</span>
+                                    <span class="badge bg-danger">Absent</span>
                                 @elseif ($value->attendance_type == 4)
-                                    <span class="badge bg-warning">Half day</span>
+                                    <span class="badge bg-info">Half day</span>
                                 @endif
                             </td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->attendance_date)) }}</td>

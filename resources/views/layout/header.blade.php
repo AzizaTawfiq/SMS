@@ -429,6 +429,12 @@
                     <p>Exam Result</p>
                 </a>
                 </li>
+                <li class="nav-item">
+                <a href="{{url('student/my_attendance')}}" class="nav-link {{request()->is('student/my_attendance/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Attendance</p>
+                </a>
+                </li>
               <li class="nav-item">
                 <a href="{{url('student/my_calendar')}}" class="nav-link {{request()->is('student/my_calendar/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-calendar-date"></i>

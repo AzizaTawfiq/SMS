@@ -73,4 +73,12 @@ class AttendanceController extends Controller
         return view('teacher.attendance.report', $data);
     }
 
+    //student menu
+    public function myAttendanceStudent(Request $request)
+    {
+        $data['getClass'] =  StudentAttendanceModel::getClassStudent(Auth::user()->id);
+        $data['getRecord'] =  StudentAttendanceModel::getRecordStudent(Auth::user()->id);
+        return view('student.my_attendance', $data);
+    }
+
 }

@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('class_id')->nullable();
             $table->string('gender')->nullable();
             $table->string('mobile_number')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('address')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
             $table->string('blood_group')->nullable();

@@ -20,4 +20,6 @@ class School_Class extends Model
         return $this->belongsToMany(Subject::class,'subject_school_class','schoolclass_id','subject_id')->withPivot('status','user_id','created_at','updated_at');
     }
     
+
+
 }

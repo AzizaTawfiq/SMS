@@ -309,4 +309,11 @@ class User extends Authenticatable
         $user = self::find($id);
         return $user ? $user->name : 'Unknown User';
     }
+
+    public static function getAttendance($student_id, $class_id, $attendance_date){
+        return StudentAttendanceModel::checkAlreadyAttendance($student_id, $class_id, $attendance_date);
+    }
+
+
+
 }

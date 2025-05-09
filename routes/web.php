@@ -15,6 +15,7 @@ use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\AttendanceController;
 
 
 /*
@@ -145,7 +146,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_edit']);
     Route::post('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_update']);
     Route::get('admin/examinations/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
+    // attendance
+     Route::get('admin/attendance/student', [AttendanceController::class, 'attendanceStudent']);
+     Route::post('admin/attendance/student/save', [AttendanceController::class, 'submitAttendanceStudent']);
+     Route::get('admin/attendance/report', [AttendanceController::class, 'attendanceReport']);
+
 });
+
 
 
 //student url
@@ -156,6 +163,7 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('student/my_timetable', [ClassTimetableController::class, 'myTimetable']);
     Route::get('student/my_exam_result', [ExaminationsController::class, 'myExamResult']);
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'myExamTimetable']);
+    Route::get('student/my_attendance', [AttendanceController::class, 'myAttendanceStudent']);
     Route::get('student/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('student/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 });
@@ -173,7 +181,9 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('teacher/my_class_subject', [AssignClassTeacherController::class, 'myClassSubject']);
     Route::get('teacher/my_class_subject/class_timetable/{class_id}/{subject_id}', [ClassTimetableController::class, 'myTimetableTeacher']);
     Route::get('teacher/my_exam_timetable', [ExaminationsController::class, 'myExamTimetableTeacher']);
-
+    Route::get('teacher/attendance/student', [AttendanceController::class, 'attendanceStudentTeacher']);
+    Route::post('teacher/attendance/student/save', [AttendanceController::class, 'submitAttendanceStudent']);
+    Route::get('teacher/attendance/report', [AttendanceController::class, 'attendanceReportTeacher']);
     Route::get('teacher/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('teacher/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 

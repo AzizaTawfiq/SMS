@@ -289,6 +289,30 @@
 
             </ul>
             </li>
+            <li class="nav-item {{request()->is('admin/attendance/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('admin/attendance/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-calendar2-check"></i>
+                <p>
+                Attendance
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('admin/attendance/student')}}" class="nav-link {{request()->is('admin/attendance/student/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-person-check-fill"></i>
+                    <p>Student Attendance</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('admin/attendance/report')}}" class="nav-link {{request()->is('admin/attendance/report/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-clipboard2-data"></i>
+                    <p>Attendance Report</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
 
               <li class="nav-item">
                 <a href="{{ url('admin/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
@@ -342,6 +366,30 @@
                     <p>Marks register</p>
                 </a>
                 </li>
+                <li class="nav-item {{request()->is('teacher/attendance/*') ? 'menu-open' : ''}}">
+                    <a href="#" class="nav-link {{request()->is('teacher/attendance/*') ? 'active' : ''}}">
+                    <i class="nav-icon bi bi-calendar2-check"></i>
+                        <p>
+                        Attendance
+                        <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('teacher/attendance/student')}}" class="nav-link {{request()->is('teacher/attendance/student/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-person-check-fill"></i>
+                    <p>Student Attendance</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('teacher/attendance/report')}}" class="nav-link {{request()->is('teacher/attendance/report/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-clipboard2-data"></i>
+                    <p>Attendance Report</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
 
                   @elseif(Auth::user()->role == 3)
                   <li class="nav-item">
@@ -379,6 +427,12 @@
                 <a href="{{url('student/my_exam_result')}}" class="nav-link {{request()->is('student/my_exam_result/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-pencil-square"></i>
                     <p>Exam Result</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('student/my_attendance')}}" class="nav-link {{request()->is('student/my_attendance/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Attendance</p>
                 </a>
                 </li>
               <li class="nav-item">

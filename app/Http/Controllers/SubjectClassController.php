@@ -13,14 +13,10 @@ class SubjectClassController extends Controller
 {
     public function list()
     {
+
         $school_classes = School_Class::with('subjects')->get();
         $subjects = Subject::get();
   
-        // $userName = DB::table('subject_school_class')
-        // ->join('users', 'subject_school_class.user_id', '=', 'users.id')->get();
-        // foreach($userName as $user){
-        //     $created_by = $user->name;
-        // }
         return view('admin.assign_subject.list', compact('school_classes', 'subjects'));
     }
 

@@ -61,7 +61,10 @@
                 <input id="loginPassword" type="password" class="form-control" name="password" placeholder="" />
                 <label for="loginPassword">Enter your password</label>
               </div>
-              <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
+
+              <button class="input-group-text" type="button" id="togglePassword">
+                <i class="bi bi-eye-fill"></i>
+              </button>
             </div>
             <div class="row">
               <div class="col-8 d-inline-flex align-items-center">
@@ -114,6 +117,21 @@
               clickScroll: Default.scrollbarClickScroll,
             },
           });
+        }
+      });
+      // Password visibility toggle
+      document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('loginPassword');
+        const icon = this.querySelector('i');
+
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          icon.classList.remove('bi-eye-fill');
+          icon.classList.add('bi-eye-slash-fill');
+        } else {
+          passwordInput.type = 'password';
+          icon.classList.remove('bi-eye-slash-fill');
+          icon.classList.add('bi-eye-fill');
         }
       });
     </script>

@@ -66,13 +66,13 @@ class User extends Authenticatable
         $return = self::select('users.*')->where('role', '=', '1')
             ->where('is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {
-            $return = $return->where('name', 'like', '%' . Request::get('name'). '%');
+            $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
         }
         if (!empty(Request::get('email'))) {
-            $return = $return->where('email', 'like', '%' . Request::get('email'). '%');
+            $return = $return->where('users.email', 'like', '%' . Request::get('email'). '%');
         }
         if (!empty(Request::get('created_at'))) {
-            $return = $return->whereDate('created_at', '=', Request::get('created_at'));
+            $return = $return->whereDate('users.created_at', '=', Request::get('created_at'));
         }
         $return = $return->orderBy('id', 'desc')
             ->paginate(10);

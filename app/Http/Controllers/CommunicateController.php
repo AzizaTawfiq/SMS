@@ -96,4 +96,11 @@ class CommunicateController extends Controller
         $data['getRecord'] = NoticeBoardModel::getRecordUser(Auth::getUser()->role);
         return view('student.my_notice_board', $data);
     }
+
+// teacher menu
+    public function myNoticeBoardTeacher()
+    {
+        $data['getRecord'] = NoticeBoardModel::getRecordUser(Auth::getUser()->role);
+        return view('student.my_notice_board', $data);
+    }
 }

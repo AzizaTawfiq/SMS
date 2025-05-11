@@ -194,6 +194,7 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('teacher/attendance/student', [AttendanceController::class, 'attendanceStudentTeacher']);
     Route::post('teacher/attendance/student/save', [AttendanceController::class, 'submitAttendanceStudent']);
     Route::get('teacher/attendance/report', [AttendanceController::class, 'attendanceReportTeacher']);
+    Route::get('teacher/my_notice_board', [CommunicateController::class, 'myNoticeBoardTeacher']);
     Route::get('teacher/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('teacher/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 

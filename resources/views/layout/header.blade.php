@@ -384,6 +384,7 @@
                     <p>Marks register</p>
                 </a>
                 </li>
+
                 <li class="nav-item {{request()->is('teacher/attendance/*') ? 'menu-open' : ''}}">
                     <a href="#" class="nav-link {{request()->is('teacher/attendance/*') ? 'active' : ''}}">
                     <i class="nav-icon bi bi-calendar2-check"></i>
@@ -408,6 +409,12 @@
 
             </ul>
             </li>
+            <li class="nav-item">
+                <a href="{{url('teacher/my_notice_board')}}" class="nav-link {{request()->is('teacher/my_notice_board/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pin-angle-fill"></i>
+                    <p>Notice Board</p>
+                </a>
+                </li>
 
                   @elseif(Auth::user()->role == 3)
                   <li class="nav-item">

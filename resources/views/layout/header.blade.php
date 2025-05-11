@@ -328,6 +328,12 @@
                     <p>Notice Board</p>
                 </a>
                 </li>
+                <li class="nav-item">
+                <a href="{{url('admin/communicate/send_email')}}" class="nav-link {{request()->is('admin/communicate/send_email/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-envelope-fill"></i>
+                    <p>Send Email</p>
+                </a>
+                </li>
 
             </ul>
             </li>

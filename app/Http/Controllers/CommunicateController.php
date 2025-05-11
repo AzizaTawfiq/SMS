@@ -17,6 +17,7 @@ class CommunicateController extends Controller
         $data['getRecord'] = NoticeBoardModel::getRecord();
         return view('admin.communicate.notice_board.list', $data);
     }
+
     public function addNoticeBoard()
     {
 
@@ -88,6 +89,12 @@ class CommunicateController extends Controller
         } else {
             abort(404);
         }
+    }
+
+    public function sendEmail()
+    {
+        $data['getRecord'] = NoticeBoardModel::getRecord();
+        return view('admin.communicate.send_email', $data);
     }
 
 // student menu

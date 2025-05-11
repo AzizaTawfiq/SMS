@@ -6,7 +6,7 @@
       <div class="app-content-header">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Add notice board</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Send email</h3></div>
             </div>
         </div>
         </div>
@@ -15,49 +15,35 @@
             <div class="row g-4">
               <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
-                  <form action="{{ url('admin/communicate/notice_board/add')}}" method="post">
+                  <form action="" method="post">
                   {{ csrf_field() }}
 
                     <div class="card-body">
                       <div class="form-group">
-                        <label for="title" class="form-label text-bold">Title</label>
+                        <label for="subject" class="form-label text-bold">Subject</label>
                         <input
                           type="text"
                           class="form-control"
-                          id="title"
-                          placeholder="Enter title"
-                          name="title"
+                          id="subject"
+                          placeholder="Enter subject"
+                          name="subject"
                         />
                         <div class="text-danger">
-                        {{$errors->first('title')}}
+                        {{$errors->first('subject')}}
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="notice_date" class="form-label text-bold">Notice date</label>
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="notice_date"
-                          placeholder="Enter notice date"
-                          name="notice_date"
-                        />
-                        <div class="text-danger">
-                        {{$errors->first('notice_date')}}
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="publish_date" class="form-label text-bold">Publish date</label>
-                        <input
-                          type="date"
-                          class="form-control"
-                          id="publish_date"
-                          placeholder="Enter publish date"
-                          name="publish_date"
-                        />
-                        <div class="text-danger">
-                        {{$errors->first('publish_date')}}
-                        </div>
-                      </div>
+                        <label>User (Teacher / Student / Parent)</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Alabama</option>
+                            <option>Alaska</option>
+                            <option>California</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                        </select>
+                </div>
                       <div class="form-group my-3">
                         <div for="title" class="form-label text-bold">Message to</div>
                         <label class="me-3">
@@ -79,8 +65,7 @@
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Add</button>
-                      <a href="{{ url('admin/communicate/notice_board') }}" class="btn btn-outline-primary ms-2">Cancel</a>
+                      <button type="submit" class="btn btn-primary">Send email</button>
                     </div>
                   </form>
                 </div>
@@ -93,7 +78,7 @@
       @endsection
 
       @section("script")
-      <script src="{{ asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
+      <script src="{{ asset('dist/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
      <script type="text/javascript">
          $(function () {

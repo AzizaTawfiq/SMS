@@ -16,6 +16,7 @@ use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\CommunicateController;
 
 
 /*
@@ -150,6 +151,15 @@ Route::group(['middleware' => 'admin'], function () {
      Route::post('admin/attendance/student/save', [AttendanceController::class, 'submitAttendanceStudent']);
      Route::get('admin/attendance/report', [AttendanceController::class, 'attendanceReport']);
 
+    // communicate
+     Route::get('admin/communicate/notice_board', [CommunicateController::class, 'noticeBoard']);
+     Route::get('admin/communicate/notice_board/add', [CommunicateController::class, 'addNoticeBoard']);
+     Route::post('admin/communicate/notice_board/add', [CommunicateController::class, 'insertNoticeBoard']);
+     Route::get('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'editNoticeBoard']);
+     Route::post('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'updateNoticeBoard']);
+     Route::get('admin/communicate/notice_board/delete/{id}', [CommunicateController::class, 'deleteNoticeBoard']);
+
+
 });
 
 
@@ -163,6 +173,7 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('student/my_exam_result', [ExaminationsController::class, 'myExamResult']);
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'myExamTimetable']);
     Route::get('student/my_attendance', [AttendanceController::class, 'myAttendanceStudent']);
+    Route::get('student/my_notice_board', [CommunicateController::class, 'myNoticeBoardStudent']);
     Route::get('student/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('student/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 });

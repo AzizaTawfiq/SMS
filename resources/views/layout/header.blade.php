@@ -313,6 +313,24 @@
 
             </ul>
             </li>
+            <li class="nav-item {{request()->is('admin/communicate/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('admin/communicate/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-chat-dots-fill"></i>
+                <p>
+                Communicate
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('admin/communicate/notice_board')}}" class="nav-link {{request()->is('admin/communicate/notice_board/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pin-angle-fill"></i>
+                    <p>Notice Board</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
 
               <li class="nav-item">
                 <a href="{{ url('admin/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
@@ -433,6 +451,12 @@
                 <a href="{{url('student/my_attendance')}}" class="nav-link {{request()->is('student/my_attendance/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-pencil-square"></i>
                     <p>Attendance</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('student/my_notice_board')}}" class="nav-link {{request()->is('student/my_notice_board/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pin-angle-fill"></i>
+                    <p>Notice Board</p>
                 </a>
                 </li>
               <li class="nav-item">

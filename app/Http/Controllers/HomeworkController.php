@@ -139,6 +139,19 @@ class HomeworkController extends Controller
         }
     }
 
+    public function submittedHomework($homework_id)
+    {
+        $homework = HomeworkModel::getSingle($homework_id);
+        if (!empty($homework)) {
+            $data['homework_id'] = $homework_id;
+            $data['getRecord'] = HomeworkSubmitModel::getRecord($homework_id);
+        $data['header_title' ]= 'Submitted Homework List';
+        return view('admin.homework.submitted_list', $data);
+        } else {
+            abort(404);
+        }
+    }
+
     //teacher menu
 
     public function homeworkTeacher()
@@ -248,6 +261,19 @@ class HomeworkController extends Controller
             $homework->is_deleted=1;
             $homework->save();
             return redirect('teacher/homework')->with('success', 'Homework deleted successfully');
+        } else {
+            abort(404);
+        }
+    }
+
+    public function submittedHomeworkTeacher($homework_id)
+    {
+        $homework = HomeworkModel::getSingle($homework_id);
+        if (!empty($homework)) {
+            $data['homework_id'] = $homework_id;
+            $data['getRecord'] = HomeworkSubmitModel::getRecord($homework_id);
+        $data['header_title' ]= 'Submitted Homework List';
+        return view('teacher.homework.submitted_list', $data);
         } else {
             abort(404);
         }

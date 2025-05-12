@@ -129,6 +129,11 @@
                                 title="Delete Homework"
                                 description="Are you sure you want to delete this homework?"
                               />
+                              <a href="{{url('admin/homework/submitted_homework/' .$value->id)}}" class="text-primary fs-5 ms-3"
+                             data-bs-toggle="tooltip" data-bs-placement="top" title="Submitted homework">
+                             <i class="nav-icon bi bi-pencil-square"></i>
+                            </a>
+
                             </td>
                         </tr>
                         @endforeach

@@ -15,6 +15,20 @@ class HomeworkSubmitModel extends Model
         return self::find($id);
     }
 
+    static public function getRecord($homework_id){
+        $return = HomeworkSubmitModel::select('homework_submit.*','users.name as created_name','users.name as first_name', 'users.last_name')->
+        join('users', 'users.id', '=', 'homework_submit.student_id')->
+        where('homework_submit.homework_id', '=', $homework_id);
+       if (!empty(Request::get('student_name'))) {
+           $return = $return->where('users.name', '=', Request::get('student_name'));
+       }
+       if (!empty(Request::get('created_at'))) {
+           $return = $return->whereDate('homework_submit.created_at', '=', Request::get('created_at'));
+       }
+        $return = $return-> orderBy('homework_submit.id','desc')->paginate(20);
+        return $return;
+   }
+
     static public function getRecordStudent($student_id){
         $return = HomeworkSubmitModel::select('homework_submit.*','school_classes.name as class_name','subjects.name as subject_name')->
         join('homework', 'homework.id', '=', 'homework_submit.homework_id')->
@@ -50,6 +64,9 @@ class HomeworkSubmitModel extends Model
 
     public function getHomework() {
         return $this->belongsTo(HomeworkModel::class, 'homework_id');
+    }
+    public function getStudent() {
+        return $this->belongsTo(User::class, 'student_id');
     }
 
 }

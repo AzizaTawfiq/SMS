@@ -167,6 +167,7 @@ Route::group(['middleware' => 'admin'], function () {
      Route::get('admin/homework/edit/{id}', [HomeworkController::class, 'edit']);
      Route::post('admin/homework/edit/{id}', [HomeworkController::class, 'update']);
      Route::get('admin/homework/delete/{id}', [HomeworkController::class, 'delete']);
+     Route::get('admin/homework/submitted_homework/{id}', [HomeworkController::class, 'submittedHomework']);
 
 
 });
@@ -211,6 +212,8 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('teacher/homework/edit/{id}', [HomeworkController::class, 'editHomeworkTeacher']);
     Route::post('teacher/homework/edit/{id}', [HomeworkController::class, 'updateHomeworkTeacher']);
     Route::get('teacher/homework/delete/{id}', [HomeworkController::class, 'deleteHomeworkTeacher']);
+    Route::get('teacher/homework/submitted_homework/{id}', [HomeworkController::class, 'submittedHomeworkTeacher']);
+
     Route::get('teacher/my_notice_board', [CommunicateController::class, 'myNoticeBoardTeacher']);
     Route::get('teacher/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('teacher/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');

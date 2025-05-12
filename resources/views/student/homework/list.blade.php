@@ -107,16 +107,10 @@
                             <td>{{ $value->created_name }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                             <td>
-                            <a href="{{url('student/my_homework/edit/' .$value->id)}}" class="text-primary fs-5"
+                            <a href="{{url('student/my_homework/submit_homework/' .$value->id)}}" class="text-primary fs-5"
                              data-bs-toggle="tooltip" data-bs-placement="top" title="Submit homework">
                              <i class="bi bi-upload"></i>
                             </a>
-                              <x-confirm-delete
-                                :url="url('student/my_homework/delete/' .$value->id)"
-                                :id="$value->id"
-                                title="Delete Homework"
-                                description="Are you sure you want to delete this homework?"
-                              />
                             </td>
                         </tr>
                         @endforeach

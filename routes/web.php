@@ -182,11 +182,13 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('student/my_attendance', [AttendanceController::class, 'myAttendanceStudent']);
     Route::get('student/my_notice_board', [CommunicateController::class, 'myNoticeBoardStudent']);
     Route::get('student/my_homework', [HomeworkController::class, 'myHomeworkStudent']);
+    Route::get('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'submitHomework']);
+    Route::post('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'insertSubmitHomework']);
     Route::get('student/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('student/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 });
 
-//teacher url 
+//teacher url
 Route::group(['middleware' => 'teacher'], function () {
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('teacher/account', [UserController::class, 'myAccount']);

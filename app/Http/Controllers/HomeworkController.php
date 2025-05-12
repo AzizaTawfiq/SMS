@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\School_Class;
 use App\Models\AssignSubject;
 use App\Models\HomeworkModel;
+use App\Models\HomeworkSubmitModel;
 use App\Models\AssignClassTeacherModel;
 use Illuminate\Support\Str;
 
@@ -256,8 +257,33 @@ class HomeworkController extends Controller
 
     public function myHomeworkStudent()
     {
-        $data['getRecord'] = HomeworkModel::getRecordStudent(Auth::user()->class_id);
+        $data['getRecord'] = HomeworkModel::getRecordStudent(Auth::user()->class_id, Auth::user()->id);
         $data['header_title' ]= 'Homework List';
         return view('student.homework.list', $data);
     }
-}
+
+    public function submitHomework($homework_id)
+    {
+        $data['getRecord'] = HomeworkModel::getSingle($homework_id);
+        $data['header_title' ]= 'Submit homework';
+        return view('student.homework.submit', $data);
+    }
+    public function insertSubmitHomework($homework_id ,Request $request)
+    {
+        $homework = new HomeworkSubmitModel;
+        $homework-> homework_id = $homework_id;
+        $homework-> student_id = Auth::user()->id;
+        $homework-> description = trim($request-> description);
+        if (!empty($request->file('document_file'))) {
+            $ext = $request->file('document_file')->getClientOriginalExtension();
+            $file = $request->file('document_file');
+            $randomStr = date('Ymdhis') . Str::random(20);
+            $filename = strtolower($randomStr) . '.' . $ext;
+            $file->move('upload/homework/', $filename);
+            $homework->document_file = $filename;
+        }
+        $homework->save();
+        return redirect('student/my_homework')->with('success', 'Homework submitted successfully');
+    }
+
+    }

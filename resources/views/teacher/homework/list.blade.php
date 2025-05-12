@@ -6,7 +6,7 @@
             <div class="row">
               <div class="col-sm-6"><h3 class="mb-0">Homeworks({{$getRecord->total()}}) </h3></div>
               <div class="col-sm-6 text-end">
-                <a href="{{ url('admin/homework/add') }}" class="btn btn-primary">Add homework</a>
+                <a href="{{ url('teacher/homework/add') }}" class="btn btn-primary">Add homework</a>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
                       </div>
                       <div class="form-group col-md-4" style="margin-top: 30px;">
                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-                       <a href="{{ url('admin/homework') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
+                       <a href="{{ url('teacher/homework') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
                       </div>
                     </div>
                   </form>
@@ -114,17 +114,17 @@
                             <td>{{ date('d-m-Y H:i A', strtotime($value->submission_date)) }}</td>
                             <td>                        
                                 @if(!empty($value->getDocument()))
-                                    <a href="{{ $value->getDocument() }}" class="text-primary" download="">
-                                        <i class="bi bi-file-earmark-arrow-down-fill"></i> 
-                                    </a>
+                                <a href="{{ $value->getDocument() }}" class="text-primary" download="">
+                                    <i class="bi bi-file-earmark-arrow-down-fill"></i> 
+                                </a>
                                 @endif
                             </td>
                             <td>{{ $value->created_name }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                             <td>
-                              <a href="{{url('admin/homework/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
+                              <a href="{{url('teacher/homework/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
                               <x-confirm-delete
-                                :url="url('admin/homework/delete/' .$value->id)"
+                                :url="url('teacher/homework/delete/' .$value->id)"
                                 :id="$value->id"
                                 title="Delete Homework"
                                 description="Are you sure you want to delete this homework?"

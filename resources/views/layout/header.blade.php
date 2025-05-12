@@ -348,15 +348,9 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="{{url('admin/homework/homework')}}" class="nav-link {{request()->is('admin/homework/homework/*') ? 'active':''}}">
+                <a href="{{url('admin/homework')}}" class="nav-link {{request()->is('admin/homework/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-pencil-square"></i>
                     <p>Homework</p>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a href="{{url('admin/homework/report')}}" class="nav-link {{request()->is('admin/homework/report/*') ? 'active':''}}">
-                <i class="nav-icon bi bi-file-text"></i>
-                    <p>Homework Report</p>
                 </a>
                 </li>
 
@@ -435,6 +429,24 @@
                 <a href="{{url('teacher/attendance/report')}}" class="nav-link {{request()->is('teacher/attendance/report/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-clipboard2-data"></i>
                     <p>Attendance Report</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
+            <li class="nav-item {{request()->is('teacher/homework/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('teacher/homework/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-journal-text"></i>
+                <p>
+                Homework
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('teacher/homework')}}" class="nav-link {{request()->is('teacher/homework/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Homework</p>
                 </a>
                 </li>
 

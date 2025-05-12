@@ -6,7 +6,7 @@
       <div class="app-content-header">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Edit homework</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Add homework</h3></div>
             </div>
         </div>
         </div>
@@ -25,8 +25,8 @@
                                     <option value="">Select Class</option>
                                     @foreach ($getClass as $class)
                             <option
-                            {{($getRecord->class_id == $class->id ? 'selected' : '')}}
-                             value="{{ $class->id }}">{{ $class->name }}
+                           
+                             value="{{ $class->class_id }}">{{ $class->class_name }}
                             </option>
                           @endforeach  
 
@@ -34,14 +34,9 @@
                             </div>
                             <div class="col-12 col-md-6 form-group mb-3">
                         <label for="subject_id" class="form-label fw-bold">Subject</label>
-                        <select  name="subject_id" id="subject_id" class="form-control getSubject" required>
+                        <select name="subject_id" id="subject_id" class="form-control getSubject" required>
                             <option value="">Select subject</option>
-                            @foreach ($getSubject as $subject)
-                            <option
-                            {{($getRecord->subject_id == $subject->subject_id ? 'selected' : '')}}
-                             value="{{ $subject->subject_id }}">{{ $subject->subject_name }}
-                            </option>
-                          @endforeach
+                           
                         </select>
 
                       </div>
@@ -53,7 +48,6 @@
                           id="homework_date"
                           placeholder="Enter homework date"
                           name="homework_date"
-                          value="{{$getRecord->homework_date}}"
                         />
                         <div class="text-danger">
                         {{$errors->first('homework_date')}}
@@ -67,7 +61,6 @@
                           id="submission_date"
                           placeholder="Enter submission date"
                           name="submission_date"
-                          value="{{$getRecord->submission_date}}"
                         />
                         <div class="text-danger">
                         {{$errors->first('submission_date')}}
@@ -81,11 +74,6 @@
                           id="document_file"
                           name="document_file"
                         />
-                        @if(!empty($getRecord->getDocument()))
-                                    <a href="{{ $getRecord->getDocument() }}" class="text-primary" download="">
-                                        <i class="bi bi-file-earmark-arrow-down-fill"></i> 
-                                    </a>
-                                @endif
                         <div class="text-danger">
                         {{$errors->first('document_file')}}
                         </div>
@@ -93,14 +81,14 @@
 
                       <div class="form-group fw-bold mb-3">
                         <label for="description" class="form-label fw-bold">Description</label>
-                        <textarea  name="description" id="compose-textarea" class="form-control" style="height: 300px">
-                        {{$getRecord->description}}
+                        <textarea name="description" id="compose-textarea" class="form-control" style="height: 300px">
+
                     </textarea>
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Save</button>
-                      <a href="{{ url('admin/homework') }}" class="btn btn-outline-primary ms-2">Cancel</a>
+                      <button type="submit" class="btn btn-primary">Add</button>
+                      <a href="{{ url('teacher/homework') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
                   </form>
                 </div>
@@ -119,7 +107,7 @@
                               $('.getClass').on('change', function(){
             var class_id = $(this).val();
             $.ajax({
-                url: "{{ url('admin/ajaxGetSubject') }}",
+                url: "{{ url('teacher/ajaxGetSubject') }}",
                 method: "POST",
                 data: {
                     _token: '{{ csrf_token() }}',

@@ -66,7 +66,7 @@
                         {{$errors->first('submission_date')}}
                         </div>
                       </div>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                         <label for="document_file" class="form-label fw-bold mb-3">Document</label>
                         <input
                           type="file"
@@ -107,7 +107,7 @@
                               $('.getClass').on('change', function(){
             var class_id = $(this).val();
             $.ajax({
-                url: "{{ url('admin/ajax_get_subject') }}",
+                url: "{{ url('admin/ajaxGetSubject') }}",
                 method: "POST",
                 data: {
                     _token: '{{ csrf_token() }}',

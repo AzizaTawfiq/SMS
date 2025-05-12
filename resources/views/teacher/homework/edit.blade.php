@@ -25,8 +25,8 @@
                                     <option value="">Select Class</option>
                                     @foreach ($getClass as $class)
                             <option
-                            {{($getRecord->class_id == $class->id ? 'selected' : '')}}
-                             value="{{ $class->id }}">{{ $class->name }}
+                            {{($getRecord->class_id == $class->class_id ? 'selected' : '')}}
+                             value="{{ $class->class_id }}">{{ $class->class_name }}
                             </option>
                           @endforeach  
 
@@ -100,7 +100,7 @@
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Save</button>
-                      <a href="{{ url('admin/homework') }}" class="btn btn-outline-primary ms-2">Cancel</a>
+                      <a href="{{ url('teacher/homework') }}" class="btn btn-outline-primary ms-2">Cancel</a>
                     </div>
                   </form>
                 </div>
@@ -119,7 +119,7 @@
                               $('.getClass').on('change', function(){
             var class_id = $(this).val();
             $.ajax({
-                url: "{{ url('admin/ajaxGetSubject') }}",
+                url: "{{ url('teacher/ajaxGetSubject') }}",
                 method: "POST",
                 data: {
                     _token: '{{ csrf_token() }}',

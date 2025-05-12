@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\School_Class;
 use App\Models\AssignSubject;
 use App\Models\HomeworkModel;
+use App\Models\AssignClassTeacherModel;
 use Illuminate\Support\Str;
 
 
@@ -27,7 +28,7 @@ class HomeworkController extends Controller
       
         return view('admin.homework.add', $data);
     }
-    public function ajax_get_subject(Request $request)
+    public function ajaxGetSubject(Request $request)
     {
 
         $class_id = $request->class_id;
@@ -132,6 +133,120 @@ class HomeworkController extends Controller
             $homework->is_deleted=1;
             $homework->save();
             return redirect('admin/homework')->with('success', 'Homework deleted successfully');
+        } else {
+            abort(404);
+        }
+    }
+
+    //teacher menu
+
+    public function homeworkTeacher()
+    {
+        $class_ids = array();
+        $getClass =  AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+        foreach($getClass as $class)
+        {
+            $class_ids[] = $class->class_id;
+        }
+        $data['getRecord'] = HomeworkModel::getRecordTeacher($class_ids);
+        $data['header_title' ]= 'Homework List';
+        return view('teacher.homework.list', $data);
+    }
+    public function addHomeworkTeacher()
+    {
+        $data['header_title' ]= 'Add homework';
+        $data['getClass'] =  AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+        return view('teacher.homework.add', $data);
+    }
+
+    public function insertHomeworkTeacher(Request $request)
+    {
+        $request->validate([
+            'class_id' =>'required',
+            'subject_id' =>'required',
+            'homework_date' =>'required',
+            'submission_date' =>'required',
+            'description' =>'required'
+        ]);
+        $homework = new HomeworkModel;
+        $homework-> class_id= trim($request->class_id);
+        $homework->subject_id = trim($request->subject_id);
+        if(!empty($request->homework_date))
+        {
+            $homework->homework_date = trim($request->homework_date);
+        }
+        if(!empty($request->submission_date))
+        {
+            $homework->submission_date = trim($request->submission_date);
+        }
+        $homework->description = trim($request->description);
+        $homework->created_by = Auth::user()->id;
+        if (!empty($request->file('document_file'))) {
+            $ext = $request->file('document_file')->getClientOriginalExtension();
+            $file = $request->file('document_file');
+            $randomStr = date('Ymdhis') . Str::random(20);
+            $filename = strtolower($randomStr) . '.' . $ext;
+            $file->move('upload/homework/', $filename);
+            $homework->document_file = $filename;
+        }
+        $homework->save();
+        return redirect('teacher/homework')->with('success', 'Homework added successfully');
+
+    }
+
+    public function editHomeworkTeacher( $id)
+    {
+        $getRecord = HomeworkModel::getSingle($id);
+        $data['getRecord'] = $getRecord;
+        $data['getSubject'] = AssignSubject::MySubject($getRecord->class_id);
+        $data['getClass'] = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+        $data['header_title' ]= 'Edit homework'; 
+        return view('teacher.homework.edit', $data);
+       
+
+    }
+
+    public function updateHomeworkTeacher($id, Request $request)
+    {
+        $request->validate([
+            'class_id' =>'required',
+            'subject_id' =>'required',
+            'homework_date' =>'required',
+            'submission_date' =>'required',
+            'description' =>'required'
+        ]);
+        $homework= HomeworkModel::getSingle($id);
+        $homework-> class_id= trim($request->class_id);
+        $homework->subject_id = trim($request->subject_id);
+        if(!empty($request->homework_date))
+        {
+            $homework->homework_date = trim($request->homework_date);
+        }
+        if(!empty($request->submission_date))
+        {
+            $homework->submission_date = trim($request->submission_date);
+        }
+        $homework->description = trim($request->description);
+        if (!empty($request->file('document_file'))) {
+            $ext = $request->file('document_file')->getClientOriginalExtension();
+            $file = $request->file('document_file');
+            $randomStr = date('Ymdhis') . Str::random(20);
+            $filename = strtolower($randomStr) . '.' . $ext;
+            $file->move('upload/homework/', $filename);
+            $homework->document_file = $filename;
+        }
+        $homework->save();
+        return redirect('teacher/homework')->with('success', 'Homework updated successfully');
+
+    }
+
+    public function deleteHomeworkTeacher($id)
+    {
+        $homework = HomeworkModel::getSingle($id);
+        if (!empty($homework)) {
+            $homework->is_deleted=1;
+            $homework->save();
+            return redirect('teacher/homework')->with('success', 'Homework deleted successfully');
         } else {
             abort(404);
         }

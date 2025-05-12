@@ -22,7 +22,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-3">
-                        <label for="class_id" class="form-label text-bold">class</label>
+                        <label for="class_id" class="form-label fw-bold">class</label>
                         <select name="class_id" id="class_id" class="form-control getClass" required>
                             <option value="">Select class</option>
                             @foreach($school_classes as $class)
@@ -33,7 +33,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="subject_id" class="form-label text-bold">Subject</label>
+                        <label for="subject_id" class="form-label fw-bold">Subject</label>
                         <select name="subject_id" id="subject_id" class="form-control getSubject" required>
                             <option value="">Select subject</option>
                             @if(!empty($getSubject))

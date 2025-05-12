@@ -31,7 +31,7 @@
 
                                     <div class="card-body">
                                         <div class="form-group mb-3">
-                                            <label for="name" class="form-label text-bold">Class Name</label>
+                                            <label for="name" class="form-label fw-bold">Class Name</label>
                                             <input type="text" class="form-control" id="name"
                                                 placeholder="class name" name="name" value="{{ old('name') }}" />
                                         </div>

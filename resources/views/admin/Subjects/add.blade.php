@@ -31,7 +31,7 @@
 
                                     <div class="card-body">
                                         <div class="form-group mb-3">
-                                            <label for="name" class="form-label text-bold">Subject Title</label>
+                                            <label for="name" class="form-label fw-bold">Subject Title</label>
                                             <input type="text" class="form-control" id="name"
                                                 placeholder="subject title" name="name" value="{{ old('name') }}" />
                                         </div>

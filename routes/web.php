@@ -17,6 +17,7 @@ use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CommunicateController;
+use App\Http\Controllers\HomeworkController;
 
 
 /*
@@ -159,6 +160,15 @@ Route::group(['middleware' => 'admin'], function () {
      Route::post('admin/communicate/notice_board/edit/{id}', [CommunicateController::class, 'updateNoticeBoard']);
      Route::get('admin/communicate/notice_board/delete/{id}', [CommunicateController::class, 'deleteNoticeBoard']);
      Route::get('admin/communicate/send_email', [CommunicateController::class, 'sendEmail']);
+
+     // homework
+     Route::get('admin/homework', [HomeworkController::class, 'homework']);
+     Route::get('admin/homework/add', [HomeworkController::class, 'add']);
+     Route::post('admin/homework/add', [HomeworkController::class, 'insert']);
+     Route::post('admin/ajax_get_subject', [HomeworkController::class, 'ajax_get_subject']);
+     Route::get('admin/homework/edit/{id}', [HomeworkController::class, 'edit']);
+     Route::post('admin/homework/edit/{id}', [HomeworkController::class, 'update']);
+     Route::get('admin/homework/delete/{id}', [HomeworkController::class, 'delete']);
 
 
 });

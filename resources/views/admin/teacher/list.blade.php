@@ -26,7 +26,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-2">
-                        <label for="name" class="form-label text-bold">First name</label>
+                        <label for="name" class="form-label fw-bold">First name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -38,7 +38,7 @@
 
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="last_name" class="form-label text-bold">Last name</label>
+                        <label for="last_name" class="form-label fw-bold">Last name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -80,7 +80,7 @@
                         />
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="marital_status" class="form-label text-bold">Marital status</label>
+                        <label for="marital_status" class="form-label fw-bold">Marital status</label>
                         <input
                           type="text"
                           class="form-control"
@@ -92,7 +92,7 @@
 
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="address" class="form-label text-bold">Address</label>
+                        <label for="address" class="form-label fw-bold">Address</label>
                         <input
                           type="text"
                           class="form-control"

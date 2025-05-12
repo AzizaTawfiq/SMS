@@ -110,7 +110,7 @@
                                                                     <div class="modal-body">
                                                                         <div class="form-group mb-3">
                                                                             <label for="name"
-                                                                                class="form-label text-bold">Subject
+                                                                                class="form-label fw-bold">Subject
                                                                                 Title</label>
                                                                             <input type="text" class="form-control"
                                                                                 id="name" placeholder="subject title"

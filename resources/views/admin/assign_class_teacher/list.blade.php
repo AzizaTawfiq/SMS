@@ -28,7 +28,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-3">
-                        <label for="class_name" class="form-label text-bold">Class name</label>
+                        <label for="class_name" class="form-label fw-bold">Class name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -40,7 +40,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="teacher_name" class="form-label text-bold">Teacher name</label>
+                        <label for="teacher_name" class="form-label fw-bold">Teacher name</label>
                         <input
                           type="text"
                           class="form-control"

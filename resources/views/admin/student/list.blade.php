@@ -25,7 +25,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-2">
-                        <label for="name" class="form-label text-bold">Name</label>
+                        <label for="name" class="form-label fw-bold">Name</label>
                         <input
                           type="text"
                           class="form-control"

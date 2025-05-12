@@ -102,7 +102,7 @@
                                                                     <div class="modal-body">
                                                                         <div class="form-group mb-3">
                                                                             <label for="name"
-                                                                                class="form-label text-bold">Class
+                                                                                class="form-label fw-bold">Class
                                                                                 Name</label>
                                                                             <input type="text" class="form-control"
                                                                                 id="name" placeholder="class name"

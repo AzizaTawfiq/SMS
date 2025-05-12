@@ -20,7 +20,7 @@
 
                     <div class="card-body">
                       <div class="form-group">
-                        <label for="name" class="form-label text-bold">Name</label>
+                        <label for="name" class="form-label fw-bold">Name</label>
                         <input
                           type="text"
                           class="form-control"

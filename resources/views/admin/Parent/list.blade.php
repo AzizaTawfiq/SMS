@@ -25,14 +25,14 @@
               
                     <div class="card-body row">
                       <div class="form-group col-md-2">
-                        <label for="name" class="form-label text-bold"> first Name</label>
+                        <label for="name" class="form-label fw-bold"> first Name</label>
                         <input  type="text"  class="form-control" id="name"
                           placeholder="Search for name" name="first_name" value="{{old('first_name')}}" />
 
                       </div>
 
                       <div class="form-group col-md-2">
-                        <label for="last_name" class="form-label text-bold">Last name</label>
+                        <label for="last_name" class="form-label fw-bold">Last name</label>
                         <input type="text" class="form-control"  id="last_name" placeholder="Search for last name"
                           name="last_name" value="{{old('last_name')}}" />
                       </div>

@@ -23,7 +23,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-3">
-                        <label for="title" class="form-label text-bold">title</label>
+                        <label for="title" class="form-label fw-bold">title</label>
                         <input
                           type="text"
                           class="form-control"

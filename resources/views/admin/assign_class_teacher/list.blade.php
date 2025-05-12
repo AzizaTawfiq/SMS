@@ -52,7 +52,7 @@
 
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="status" class="form-label">Status</label>
+                        <label for="status" class="form-label fw-bold">Status</label>
                         <select class="form-control" name="status">
                           <option value="">Select status</option>
                           <option value="100" {{ Request::get('status') == '100' ? 'selected' : '' }}>Active</option>
@@ -60,7 +60,7 @@
                         </select>
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="date" class="form-label">Date</label>
+                        <label for="date" class="form-label fw-bold">Date</label>
                         <input
                           type="date"
                           class="form-control"

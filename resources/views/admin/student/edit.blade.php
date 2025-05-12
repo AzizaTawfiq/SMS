@@ -246,7 +246,7 @@
                             </div>
                             <hr/>
                       <div class="form-group">
-                        <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                        <label for="email" class="form-label fw-bold">Email<span class="text-danger">*</span></label>
                         <input
                           type="text"
                           class="form-control"
@@ -262,7 +262,7 @@
                         </div>
                       </div>
                      <!--  <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label fw-bold">Password</label>
                         <input type="text" class="form-control" id="password" placeholder="Enter password" name="password"  />
                         <p>If you want to change password then enter new password otherwise leave it blank</p>
                         <div class="text-danger">

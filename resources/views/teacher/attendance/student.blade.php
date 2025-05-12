@@ -34,7 +34,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="getAttendanceDate" class="form-label">Attendance date</label>
+                        <label for="getAttendanceDate" class="form-label fw-bold">Attendance date</label>
                         <input
                           type="date"
                           class="form-control"

@@ -32,7 +32,7 @@
                         </select>
                       </div>
                       <div class="col-md-2 form-group">
-                        <label for="student_name" class="form-label">Student Name</label>
+                        <label for="student_name" class="form-label fw-bold">Student Name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -43,7 +43,7 @@
                         />
                       </div>
                       <div class="col-md-2 form-group">
-                        <label for="attendance_type" class="form-label">Attendance type</label>
+                        <label for="attendance_type" class="form-label fw-bold">Attendance type</label>
                         <select name="attendance_type" class="form-control">
                             <option value="">Select type</option>
                             <option @if(Request::get('attendance_type') == 1) selected @endif value="1">Present</option>
@@ -54,7 +54,7 @@
                         </select>
                       </div>
                       <div class="col-md-2 form-group">
-                        <label for="getAttendanceDate" class="form-label">Attendance date</label>
+                        <label for="getAttendanceDate" class="form-label fw-bold">Attendance date</label>
                         <input
                           type="date"
                           class="form-control"

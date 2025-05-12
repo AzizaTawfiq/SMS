@@ -184,6 +184,7 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('student/my_homework', [HomeworkController::class, 'myHomeworkStudent']);
     Route::get('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'submitHomework']);
     Route::post('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'insertSubmitHomework']);
+    Route::get('student/my_submitted_homework', [HomeworkController::class, 'mySubmittedHomework']);
     Route::get('student/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('student/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 });

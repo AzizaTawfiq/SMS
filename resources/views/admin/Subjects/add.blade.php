@@ -36,7 +36,7 @@
                                                 placeholder="subject title" name="name" value="{{ old('name') }}" />
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label class="form-label">Type</label>
+                                            <label class="form-label fw-bold">Type</label>
                                             <select name="type" class="form-control">
                                                 <option>Select Type</option>
                                                 <option value="0">Theory</option>
@@ -44,7 +44,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label class="form-label">Status</label>
+                                            <label class="form-label fw-bold">Status</label>
                                             <select name="status" class="form-control">
                                                 <option>Select Status</option>
                                                 <option value="0">Active</option>

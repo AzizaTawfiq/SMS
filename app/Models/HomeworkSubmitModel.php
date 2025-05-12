@@ -15,22 +15,41 @@ class HomeworkSubmitModel extends Model
         return self::find($id);
     }
 
-    static public function getRecord(){
-         $return = self::select('homework_submit.*','users.name as created_name')->
-         join('users', 'users.id', '=', 'homework_submit.created_by');
-         if (!empty(Request::get('name'))) {
-            $return = $return->where('homework_submit.name', 'like', '%' . Request::get('name'). '%');
+    static public function getRecordStudent($student_id){
+        $return = HomeworkSubmitModel::select('homework_submit.*','school_classes.name as class_name','subjects.name as subject_name')->
+        join('homework', 'homework.id', '=', 'homework_submit.homework_id')->
+        join('school_classes','school_classes.id', '=', 'homework.class_id')->
+        join('subjects','subjects.id', '=', 'homework.subject_id')->
+        where('homework_submit.student_id', '=', $student_id);
+
+        if (!empty(Request::get('subject_name'))) {
+            $return = $return->where('subjects.name', 'like', '%' . Request::get('subject_name'). '%');
         }
-        if (!empty(Request::get('note'))) {
-            $return = $return->where('homework_submit.note', 'like', '%' . Request::get('note'). '%');
+        if (!empty(Request::get('homework_date'))) {
+            $return = $return->whereDate('homework.homework_date', '=', Request::get('homework_date'));
+        }
+        if (!empty(Request::get('submission_date'))) {
+            $return = $return->whereDate('homework.submission_date', '=', Request::get('submission_date'));
         }
         if (!empty(Request::get('created_at'))) {
-            $return = $return->whereDate('homework_submit.created_at', '=', Request::get('created_at'));
+            $return = $return->whereDate('homework.created_at', '=', Request::get('created_at'));
         }
-         $return = $return-> where('homework_submit.is_deleted', '=', 0)->
-         orderBy('homework_submit.id','desc')->paginate(20);
-         return $return;
+        $return = $return->orderBy('homework_submit.id','desc')->paginate(10);
+
+        return $return;
     }
 
+    public function getDocument()
+    {
+        if (!empty($this->document_file && file_exists('upload/homework/' . $this->document_file))) {
+            return url('upload/homework/' . $this->document_file);
+        } else {
+            return "";
+        }
+    }
+
+    public function getHomework() {
+        return $this->belongsTo(HomeworkModel::class, 'homework_id');
+    }
 
 }

@@ -229,7 +229,7 @@
                             </div>
                             <hr/>
                       <div class="form-group">
-                        <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                        <label for="email" class="form-label fw-bold">Email<span class="text-danger">*</span></label>
                         <input
                           type="text"
                           class="form-control"
@@ -245,7 +245,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="password" class="form-label">Password<span class="text-danger">*</span></label>
+                        <label for="password" class="form-label fw-bold">Password<span class="text-danger">*</span></label>
                         <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"  />
                         <div class="text-danger">
                         {{$errors->first('password')}}

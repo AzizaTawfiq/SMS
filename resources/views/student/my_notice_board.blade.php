@@ -35,7 +35,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="notice_date_from" class="form-label">Notice date from</label>
+                        <label for="notice_date_from" class="form-label fw-bold">Notice date from</label>
                         <input
                           type="date"
                           class="form-control"
@@ -45,7 +45,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="notice_date_to" class="form-label">Notice date to</label>
+                        <label for="notice_date_to" class="form-label fw-bold">Notice date to</label>
                         <input
                           type="date"
                           class="form-control"

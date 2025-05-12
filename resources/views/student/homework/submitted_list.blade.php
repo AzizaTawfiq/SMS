@@ -4,7 +4,7 @@
         <div class="app-content-header">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-12"><h3 class="mb-0">My homework list</h3></div>
+              <div class="col-sm-12"><h3 class="mb-0">My submitted homework list</h3></div>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
                       </div>
                       <div class="form-group col-md-4" style="margin-top: 30px;">
                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-                       <a href="{{ url('student/my_homework') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
+                       <a href="{{ url('student/my_submitted_homework') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
                       </div>
                     </div>
                   </form>
@@ -84,9 +84,10 @@
                           <th>Submission date</th>
                           <th>Document</th>
                           <th>Description</th>
-                          <th>Created by</th>
                           <th>Created date</th>
-                          <th>Actions</th>
+                          <th>Submitted document</th>
+                          <th>Submitted description</th>
+                          <th>Submitted created date</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -94,8 +95,17 @@
                         <tr>
                             <td>{{ $getRecord->firstItem() + $key }}</td>
                             <td>{{ $value->subject_name }}</td>
-                            <td>{{ date('d-m-Y H:i A', strtotime($value->homework_date)) }}</td>
-                            <td>{{ date('d-m-Y H:i A', strtotime($value->submission_date)) }}</td>
+                            <td>{{ date('d-m-Y H:i A', strtotime($value->getHomework->homework_date)) }}</td>
+                            <td>{{ date('d-m-Y H:i A', strtotime($value->getHomework->submission_date)) }}</td>
+                            <td>
+                                @if(!empty($value->getHomework->getDocument()))
+                                <a href="{{ $value->getHomework->getDocument() }}" class="text-primary" download="">
+                                    <i class="bi bi-file-earmark-arrow-down-fill"></i>
+                                </a>
+                                @endif
+                            </td>
+                            <td>{!! $value->getHomework->description !!}</td>
+                            <td>{{ date('d-m-Y H:i A', strtotime($value->getHomework->created_at)) }}</td>
                             <td>
                                 @if(!empty($value->getDocument()))
                                 <a href="{{ $value->getDocument() }}" class="text-primary" download="">
@@ -104,14 +114,7 @@
                                 @endif
                             </td>
                             <td>{!! $value->description !!}</td>
-                            <td>{{ $value->created_name }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
-                            <td>
-                            <a href="{{url('student/my_homework/submit_homework/' .$value->id)}}" class="text-primary fs-5"
-                             data-bs-toggle="tooltip" data-bs-placement="top" title="Submit homework">
-                             <i class="bi bi-upload"></i>
-                            </a>
-                            </td>
                         </tr>
                         @endforeach
                       </tbody>

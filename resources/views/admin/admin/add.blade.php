@@ -35,7 +35,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label fw-bold">Email</label>
                         <input
                           type="text"
                           class="form-control"
@@ -51,7 +51,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label fw-bold">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"  />
                         <div class="text-danger">
                         {{$errors->first('password')}}

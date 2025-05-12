@@ -36,7 +36,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="notice_date_from" class="form-label">Notice date from</label>
+                        <label for="notice_date_from" class="form-label fw-bold">Notice date from</label>
                         <input
                           type="date"
                           class="form-control"
@@ -46,7 +46,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="notice_date_to" class="form-label">Notice date to</label>
+                        <label for="notice_date_to" class="form-label fw-bold">Notice date to</label>
                         <input
                           type="date"
                           class="form-control"
@@ -56,7 +56,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="publish_date_from" class="form-label">Publish date from</label>
+                        <label for="publish_date_from" class="form-label fw-bold">Publish date from</label>
                         <input
                           type="date"
                           class="form-control"
@@ -66,7 +66,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="publish_date_to" class="form-label">Publish date to</label>
+                        <label for="publish_date_to" class="form-label fw-bold">Publish date to</label>
                         <input
                           type="date"
                           class="form-control"
@@ -76,7 +76,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="created_date" class="form-label">Created date</label>
+                        <label for="created_date" class="form-label fw-bold">Created date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -86,7 +86,7 @@
                         />
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="status" class="form-label">Message to</label>
+                        <label for="status" class="form-label fw-bold">Message to</label>
                         <select class="form-control" name="message_to">
                           <option value="">Select</option>
                           <option value="2" {{ Request::get('message_to') == '2' ? 'selected' : '' }}>Teacher</option>

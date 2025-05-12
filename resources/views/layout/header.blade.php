@@ -516,6 +516,12 @@
                     <p>Homework</p>
                 </a>
                 </li>
+                <li class="nav-item">
+                <a href="{{url('student/my_submitted_homework')}}" class="nav-link {{request()->is('student/my_submitted_homework/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Submitted Homework</p>
+                </a>
+                </li>
               <li class="nav-item">
                 <a href="{{url('student/my_calendar')}}" class="nav-link {{request()->is('student/my_calendar/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-calendar-date"></i>

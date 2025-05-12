@@ -44,13 +44,13 @@
                       </div>
 
                       <div class="form-group col-md-2">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label fw-bold">Email</label>
                         <input type="text" class="form-control"  id="email"  placeholder="Search for email"
                           name="email"  value="{{ Request::get('email') }}"  />
                       </div>
-    
+
                       <div class="form-group col-md-3">
-                        <label for="created_at" class="form-label">created date</label>
+                        <label for="created_at" class="form-label fw-bold">created date</label>
                         <input type="date" class="form-control" id="created_at"
                          placeholder="Search for created date" name="created_at" value="{{ Request::get('created_at') }}" />
                       </div>
@@ -63,7 +63,7 @@
                 </div>
               @include('_message')
 
-  @if(!empty($getSearchstudent))            
+  @if(!empty($getSearchstudent))
                 <div class="card mb-4">
                   <div class="card-header">
                     <h3 class="card-title"> student list</h3>
@@ -98,7 +98,7 @@
                             <td><a href="{{url('admin/parent/assign_student_parent/' .$value->id .'/'.$parent_id )}}" class="btn btn-primary">Add student to parent</a></td>
                         </tr>
                         @endforeach
-                       
+
                       </tbody>
                     </table>
                     <div class=" padding:10px; justify-content-center mt-4">
@@ -107,7 +107,7 @@
                   </div>
                   <!-- /.card-body -->
                 </div>
-    @endif            
+    @endif
 
                 <div class="card mb-4">
                   <div class="card-header">
@@ -143,7 +143,7 @@
                             <td><a href="{{url('admin/parent/assign_student_parent_delete/' .$value->id)}}" class="btn btn-denger">deleted</a></td>
                         </tr>
                         @endforeach
-                       
+
                       </tbody>
                     </table>
                     <div class=" padding:10px; justify-content-center mt-4">

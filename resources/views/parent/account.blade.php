@@ -36,7 +36,7 @@
                                 {{$errors->first('last_name')}}
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6 form-group mt-3">
                                 <label for="gender" class="form-label fw-bold">Gender<span class="text-danger">*</span></label>
                                 <select class="form-control" id="gender" name="gender" >
@@ -50,7 +50,7 @@
 
                             </div>
 
-                           
+
                             <div class="col-md-6 form-group mt-3">
                                 <label for="caste" class="form-label fw-bold">occupation</label>
                                 <input type="text" class="form-control" id="occupation"
@@ -64,7 +64,7 @@
                             <div class="col-md-6 form-group mt-3">
                                 <label for="mobile_number" class="form-label fw-bold">Mobile number</label>
                                 <input  type="text"  class="form-control"  id="mobile_number"
-                                placeholder="Enter mobile number" name="mobile_number" 
+                                placeholder="Enter mobile number" name="mobile_number"
                                 value="{{ old('mobile_number' , $getRecord->mobil_number) }}" />
                                 <div class="text-danger">
                                 {{$errors->first('mobile_number')}}
@@ -79,7 +79,7 @@
                                 {{$errors->first('address')}}
                                 </div>
                             </div>
-                           
+
                             <div class="col-md-6 form-group mt-3">
                                 <label for="profile_pic" class="form-label fw-bold">Profile pic</label>
                                 <input type="file" class="form-control" id="profile_pic" name="profile_pic" />
@@ -90,7 +90,7 @@
                             </div>
 
                       <div class="form-group">
-                        <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                        <label for="email" class="form-label fw-bold">Email<span class="text-danger">*</span></label>
                         <input
                           type="text" class="form-control" id="email"
                           placeholder="Enter email" name="email" value="{{ old('email' ,$getRecord->email) }}"  />

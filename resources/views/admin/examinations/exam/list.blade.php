@@ -36,7 +36,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="created_at" class="form-label">Date</label>
+                        <label for="created_at" class="form-label fw-bold">Date</label>
                         <input
                           type="date"
                           class="form-control"

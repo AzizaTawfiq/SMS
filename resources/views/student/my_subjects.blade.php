@@ -33,7 +33,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label fw-bold">Email</label>
                         <input
                           type="text"
                           class="form-control"
@@ -44,7 +44,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="created_at" class="form-label">Date</label>
+                        <label for="created_at" class="form-label fw-bold">Date</label>
                         <input
                           type="date"
                           class="form-control"

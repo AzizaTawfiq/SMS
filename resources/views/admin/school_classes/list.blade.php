@@ -110,7 +110,7 @@
                                                                                 value="{{ $item->name }}" />
                                                                         </div>
                                                                         <div class="form-group mb-3">
-                                                                          <label class="form-label">Status</label>
+                                                                          <label class="form-label fw-bold">Status</label>
                                                                           <select name="status" class="form-control">
                                                                               <option>Select Status</option>
                                                                               <option @if($item->status==0) selected @endif value="0">Active</option>

@@ -47,9 +47,9 @@
                         />
 
                       </div>
-                 
+
                       <div class="form-group col-md-4">
-                        <label for="homework_date" class="form-label">Homework date</label>
+                        <label for="homework_date" class="form-label fw-bold">Homework date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -59,7 +59,7 @@
                         />
                       </div>
                       <div class="form-group col-md-4">
-                        <label for="submission_date" class="form-label">Submission date</label>
+                        <label for="submission_date" class="form-label fw-bold">Submission date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -69,7 +69,7 @@
                         />
                       </div>
                       <div class="form-group col-md-4">
-                        <label for="created_at" class="form-label">created date</label>
+                        <label for="created_at" class="form-label fw-bold">created date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -112,10 +112,10 @@
                             <td>{{ $value->subject_name }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->homework_date)) }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->submission_date)) }}</td>
-                            <td>                        
+                            <td>
                                 @if(!empty($value->getDocument()))
                                     <a href="{{ $value->getDocument() }}" class="text-primary" download="">
-                                        <i class="bi bi-file-earmark-arrow-down-fill"></i> 
+                                        <i class="bi bi-file-earmark-arrow-down-fill"></i>
                                     </a>
                                 @endif
                             </td>

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;  
-use Illuminate\Support\Facades\Auth;  
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\School_Class;
 use App\Models\AssignSubject;
 use App\Models\HomeworkModel;
@@ -25,7 +25,7 @@ class HomeworkController extends Controller
 
         $data['header_title' ]= 'Add homework';
         $data['getClass'] = School_Class::get();
-      
+
         return view('admin.homework.add', $data);
     }
     public function ajaxGetSubject(Request $request)
@@ -37,16 +37,16 @@ class HomeworkController extends Controller
         foreach($getSubject as $value){
              $html .= "<option value='" .$value->subject_id . "'>$value->subject_name</option>";
          }
- 
+
          $json['message']= $html;
          echo json_encode($json);
 
         }
 
-      
+
     public function insert(Request $request)
     {
-     
+
         $request->validate([
             'class_id' =>'required',
             'subject_id' =>'required',
@@ -86,9 +86,9 @@ class HomeworkController extends Controller
         $data['getRecord'] = $getRecord;
         $data['getSubject'] = AssignSubject::MySubject($getRecord->class_id);
         $data['getClass'] = School_Class::get();
-        $data['header_title' ]= 'Edit homework'; 
+        $data['header_title' ]= 'Edit homework';
         return view('admin.homework.edit', $data);
-       
+
 
     }
 
@@ -200,9 +200,9 @@ class HomeworkController extends Controller
         $data['getRecord'] = $getRecord;
         $data['getSubject'] = AssignSubject::MySubject($getRecord->class_id);
         $data['getClass'] = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
-        $data['header_title' ]= 'Edit homework'; 
+        $data['header_title' ]= 'Edit homework';
         return view('teacher.homework.edit', $data);
-       
+
 
     }
 
@@ -250,5 +250,14 @@ class HomeworkController extends Controller
         } else {
             abort(404);
         }
+    }
+
+    //student menu
+
+    public function myHomeworkStudent()
+    {
+        $data['getRecord'] = HomeworkModel::getRecordStudent(Auth::user()->class_id);
+        $data['header_title' ]= 'Homework List';
+        return view('student.homework.list', $data);
     }
 }

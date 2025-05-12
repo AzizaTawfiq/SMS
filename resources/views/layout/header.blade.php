@@ -509,6 +509,13 @@
                     <p>Notice Board</p>
                 </a>
                 </li>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('student/my_homework')}}" class="nav-link {{request()->is('student/my_homework/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Homework</p>
+                </a>
+                </li>
               <li class="nav-item">
                 <a href="{{url('student/my_calendar')}}" class="nav-link {{request()->is('student/my_calendar/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-calendar-date"></i>

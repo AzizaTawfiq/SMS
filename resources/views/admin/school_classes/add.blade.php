@@ -36,6 +36,21 @@
                                                 placeholder="class name" name="name" value="{{ old('name') }}" />
                                         </div>
                                         <div class="form-group mb-3">
+                                        <label for="name" class="form-label fw-bold">Amount ($)</label>
+                                        <input
+                                        type="number"
+                                        class="form-control"
+                                        id="amount"
+                                        placeholder="Enter amount"
+                                        name="amount"
+                                        min="0"
+                                        value="{{ old('amount') }}"
+                                        />
+                                        <div class="text-danger">
+                                        {{$errors->first('amount')}}
+                                        </div>
+                                    </div>
+                                        <div class="form-group mb-3">
                                             <label class="form-label fw-bold">Status</label>
                                             <select name="status" class="form-control">
                                                 <option>Select Status</option>

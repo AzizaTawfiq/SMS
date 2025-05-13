@@ -24,7 +24,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-3">
-                        <label for="name" class="form-label text-bold">Exam name</label>
+                        <label for="name" class="form-label fw-bold">Exam name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -36,7 +36,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="created_at" class="form-label">Date</label>
+                        <label for="created_at" class="form-label fw-bold">Date</label>
                         <input
                           type="date"
                           class="form-control"

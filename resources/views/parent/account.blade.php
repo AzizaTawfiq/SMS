@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="first_name" class="form-label text-bold">First name<span class="text-danger">*</span></label>
+                                <label for="first_name" class="form-label fw-bold">First name<span class="text-danger">*</span></label>
                                 <input type="text"  class="form-control" id="first_name"
                                 placeholder="Enter first name"  name="name" value="{{ old('name', $getRecord->name) }}" />
                                 <div class="text-danger">
@@ -29,16 +29,16 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="last_name" class="form-label text-bold">Last name<span class="text-danger">*</span></label>
+                                <label for="last_name" class="form-label fw-bold">Last name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="last_name"
                                 placeholder="Enter last name"  name="last_name" value="{{ old('last_name' , $getRecord->last_name) }}"  />
                                 <div class="text-danger">
                                 {{$errors->first('last_name')}}
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6 form-group mt-3">
-                                <label for="gender" class="form-label text-bold">Gender<span class="text-danger">*</span></label>
+                                <label for="gender" class="form-label fw-bold">Gender<span class="text-danger">*</span></label>
                                 <select class="form-control" id="gender" name="gender" >
                                 <option value="">Select gender</option>
                                 <option {{(old('gender') == 'Male') ? 'selected' :''}} value="Male">Male</option>
@@ -50,9 +50,9 @@
 
                             </div>
 
-                           
+
                             <div class="col-md-6 form-group mt-3">
-                                <label for="caste" class="form-label text-bold">occupation</label>
+                                <label for="caste" class="form-label fw-bold">occupation</label>
                                 <input type="text" class="form-control" id="occupation"
                                 placeholder="Enter occupation"
                                 name="occupation"  value="{{ old('occupation' , $getRecord->occuoation) }}" />
@@ -62,9 +62,9 @@
                             </div>
 
                             <div class="col-md-6 form-group mt-3">
-                                <label for="mobile_number" class="form-label text-bold">Mobile number</label>
+                                <label for="mobile_number" class="form-label fw-bold">Mobile number</label>
                                 <input  type="text"  class="form-control"  id="mobile_number"
-                                placeholder="Enter mobile number" name="mobile_number" 
+                                placeholder="Enter mobile number" name="mobile_number"
                                 value="{{ old('mobile_number' , $getRecord->mobil_number) }}" />
                                 <div class="text-danger">
                                 {{$errors->first('mobile_number')}}
@@ -72,16 +72,16 @@
                             </div>
 
                             <div class="col-md-6 form-group mt-3">
-                                <label for="caste" class="form-label text-bold">Address <span class="text-danger">*</span></label>
+                                <label for="caste" class="form-label fw-bold">Address <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="address"placeholder="Enter Address"
                                 name="address" value="{{ old('address' , $getRecord->address) }}" />
                                 <div class="text-danger">
                                 {{$errors->first('address')}}
                                 </div>
                             </div>
-                           
+
                             <div class="col-md-6 form-group mt-3">
-                                <label for="profile_pic" class="form-label text-bold">Profile pic</label>
+                                <label for="profile_pic" class="form-label fw-bold">Profile pic</label>
                                 <input type="file" class="form-control" id="profile_pic" name="profile_pic" />
                                 <div class="text-danger">
                                 {{$errors->first('profile_pic')}}
@@ -90,7 +90,7 @@
                             </div>
 
                       <div class="form-group">
-                        <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                        <label for="email" class="form-label fw-bold">Email<span class="text-danger">*</span></label>
                         <input
                           type="text" class="form-control" id="email"
                           placeholder="Enter email" name="email" value="{{ old('email' ,$getRecord->email) }}"  />

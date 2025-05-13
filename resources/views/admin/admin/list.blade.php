@@ -24,7 +24,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-3">
-                        <label for="name" class="form-label text-bold">Name</label>
+                        <label for="name" class="form-label fw-bold">Name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -36,7 +36,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label fw-bold">Email</label>
                         <input
                           type="text"
                           class="form-control"
@@ -47,7 +47,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="created_at" class="form-label">Date</label>
+                        <label for="created_at" class="form-label fw-bold">Date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -87,8 +87,8 @@
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                             <td>
                               <a href="{{url('admin/admin/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
-                              <x-confirm-delete 
-                                :url="url('admin/admin/delete/' .$value->id)" 
+                              <x-confirm-delete
+                                :url="url('admin/admin/delete/' .$value->id)"
                                 :id="$value->id"
                                 title="Delete Admin"
                                 description="Are you sure you want to delete this administrator?"

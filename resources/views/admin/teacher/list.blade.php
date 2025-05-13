@@ -26,7 +26,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-2">
-                        <label for="name" class="form-label text-bold">First name</label>
+                        <label for="name" class="form-label fw-bold">First name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -38,7 +38,7 @@
 
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="last_name" class="form-label text-bold">Last name</label>
+                        <label for="last_name" class="form-label fw-bold">Last name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -50,7 +50,7 @@
 
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label fw-bold">Email</label>
                         <input
                           type="text"
                           class="form-control"
@@ -61,7 +61,7 @@
                         />
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="gender" class="form-label">Gender</label>
+                        <label for="gender" class="form-label fw-bold">Gender</label>
                         <select class="form-control" name="gender">
                           <option value="">Select gender</option>
                           <option value="male" {{ Request::get('gender') == 'male' ? 'selected' : '' }}>Male</option>
@@ -69,7 +69,7 @@
                         </select>
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="mobile_number" class="form-label">Mobile</label>
+                        <label for="mobile_number" class="form-label fw-bold">Mobile</label>
                         <input
                           type="text"
                           class="form-control"
@@ -80,7 +80,7 @@
                         />
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="marital_status" class="form-label text-bold">Marital status</label>
+                        <label for="marital_status" class="form-label fw-bold">Marital status</label>
                         <input
                           type="text"
                           class="form-control"
@@ -92,7 +92,7 @@
 
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="address" class="form-label text-bold">Address</label>
+                        <label for="address" class="form-label fw-bold">Address</label>
                         <input
                           type="text"
                           class="form-control"
@@ -105,7 +105,7 @@
                       </div>
 
                       <div class="form-group col-md-2">
-                        <label for="status" class="form-label">Status</label>
+                        <label for="status" class="form-label fw-bold">Status</label>
                         <select class="form-control" name="status">
                           <option value="">Select status</option>
                           <option value="100" {{ Request::get('status') == '100' ? 'selected' : '' }}>Active</option>
@@ -113,7 +113,7 @@
                         </select>
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="admission_date" class="form-label">Admission date</label>
+                        <label for="admission_date" class="form-label fw-bold">Admission date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -124,7 +124,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="created_at" class="form-label">created date</label>
+                        <label for="created_at" class="form-label fw-bold">created date</label>
                         <input
                           type="date"
                           class="form-control"

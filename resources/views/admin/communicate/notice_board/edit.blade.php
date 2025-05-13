@@ -20,7 +20,7 @@
 
                     <div class="card-body">
                       <div class="form-group">
-                        <label for="title" class="form-label text-bold">Title</label>
+                        <label for="title" class="form-label fw-bold">Title</label>
                         <input
                           type="text"
                           class="form-control"
@@ -34,7 +34,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="notice_date" class="form-label text-bold">Notice date</label>
+                        <label for="notice_date" class="form-label fw-bold">Notice date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -48,7 +48,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="publish_date" class="form-label text-bold">Publish date</label>
+                        <label for="publish_date" class="form-label fw-bold">Publish date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -67,7 +67,7 @@
                       $message_to_parent = $getRecord->getMessageToSingle($getRecord->id,4);
                       @endphp
                       <div class="form-group my-3">
-                        <div for="title" class="form-label text-bold">Message to</div>
+                        <div for="title" class="form-label fw-bold">Message to</div>
                         <label class="me-3">
                             <input {{!empty($message_to_teacher) ? 'checked' : ''}} type="checkbox" class="form-check-input" name="message_to[]" value="2"> Teacher
                             </label>
@@ -80,7 +80,7 @@
                         </label>
                       </div>
                       <div class="form-group">
-                        <label for="message" class="form-label text-bold">Message</label>
+                        <label for="message" class="form-label fw-bold">Message</label>
                         <textarea name="message" id="compose-textarea" class="form-control" style="height: 300px">
                         {{$getRecord->message}}
                     </textarea>
@@ -100,7 +100,7 @@
     </div>
       @endsection
 
-      @section("script")
+      @section("scripts")
       <script src="{{ asset('dist/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
      <script type="text/javascript">

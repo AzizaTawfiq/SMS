@@ -22,29 +22,29 @@
                     <h3 class="card-title">Search Parent</h3>
                   </div>
                   <form action="{{url('admin/parent/search/')}}" method="get">
-              
+
                     <div class="card-body row">
                       <div class="form-group col-md-2">
-                        <label for="name" class="form-label text-bold"> first Name</label>
+                        <label for="name" class="form-label fw-bold"> first Name</label>
                         <input  type="text"  class="form-control" id="name"
                           placeholder="Search for name" name="first_name" value="{{old('first_name')}}" />
 
                       </div>
 
                       <div class="form-group col-md-2">
-                        <label for="last_name" class="form-label text-bold">Last name</label>
+                        <label for="last_name" class="form-label fw-bold">Last name</label>
                         <input type="text" class="form-control"  id="last_name" placeholder="Search for last name"
                           name="last_name" value="{{old('last_name')}}" />
                       </div>
 
                       <div class="form-group col-md-2">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label fw-bold">Email</label>
                         <input type="text" class="form-control"  id="email"  placeholder="Search for email"
                           name="email" value="{{old('email')}}" />
                       </div>
-                     
+
                       <div class="form-group col-md-2">
-                        <label for="gender" class="form-label">Gender</label>
+                        <label for="gender" class="form-label fw-bold">Gender</label>
                         <select class="form-control" name="gender">
                           <option value="">Select gender</option>
                           <option value="male">Male</option>
@@ -53,27 +53,27 @@
                       </div>
 
                       <div class="form-group col-md-2">
-                        <label for="admission_number" class="form-label">occupation</label>
+                        <label for="admission_number" class="form-label fw-bold">occupation</label>
                         <input  type="text"  class="form-control" id="occupation"
                           placeholder="Search for occupation"
                           name="occupation" value="{{old('occupation')}}"/>
                       </div>
-                    
+
                       <div class="form-group col-md-2">
-                        <label for="caste" class="form-label">address</label>
+                        <label for="caste" class="form-label fw-bold">address</label>
                         <input  type="text"  class="form-control" id="address"
                           placeholder="Search for address" name="address" value="{{old('address')}}"/>
                       </div>
-                     
+
                       <div class="form-group col-md-2">
-                        <label for="mobile" class="form-label">Mobile number</label>
+                        <label for="mobile" class="form-label fw-bold">Mobile number</label>
                         <input type="text"  class="form-control" id="mobile"
                           placeholder="Search for mobile"  name="mobile" />
                       </div>
-            
-                     
+
+
                       <div class="form-group col-md-2">
-                        <label for="status" class="form-label">Status</label>
+                        <label for="status" class="form-label fw-bold">Status</label>
                         <select class="form-control" name="status">
                           <option value="">Select status</option>
                           <option value="0">Active</option>
@@ -81,7 +81,7 @@
                         </select>
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="created_at" class="form-label">created date</label>
+                        <label for="created_at" class="form-label fw-bold">created date</label>
                         <input type="date" class="form-control" id="created_at"
                          placeholder="Search for created date" name="created_at"/>
                       </div>
@@ -96,7 +96,7 @@
                 <div class="card mb-4">
                 @if($data->count() > 0)
                   <div class="card-body p-0">
-                 
+
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -118,9 +118,9 @@
                           <tr>
                             <td>#</td>
                             <td>
-                               
+
                                 <img src="{{asset('upload/profile/'.$value->profile_pic)}}" alt="Profile pic" style="width: 50px; height: 50px; border-radius: 50%;">
-                           
+
                             </td>
                             <td>{{ $value->name }}{{ $value->last_name }}</td>
                             <td>{{ $value->email }}</td>
@@ -136,7 +136,7 @@
                               <td>
                               <a href="{{url('admin/parent/delete/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-trash"></i></a>
                             </td>
-             
+
                         </tr>
                         @endforeach
                       </tbody>
@@ -150,7 +150,7 @@
                 </div>
                 <div class=" padding:10px; justify-content-center mt-4">
 
-                      
+
                     </div>
 
                   </div>

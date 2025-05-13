@@ -17,6 +17,7 @@ use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CommunicateController;
+use App\Http\Controllers\HomeworkController;
 
 
 /*
@@ -31,7 +32,7 @@ use App\Http\Controllers\CommunicateController;
 */
 // Auth url
 Route::get('/', [AuthController::class, 'login']);
-Route::post('login', [AuthController::class, 'AuthLogin']);
+Route::post('login', [AuthController::class, 'authLogin']);
 Route::get('logout', [AuthController::class, 'logout']);
 Route::get('forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('forgot-password', [AuthController::class, 'submitForgotPassword']);
@@ -111,8 +112,6 @@ Route::group(['middleware' => 'admin'], function () {
    Route::get('admin/change_password', [UserController::class, 'change_password'])->name('change_password');
    Route::post('admin/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 
-
-
    //change password
    Route::get('admin/change_password', [UserController::class, 'change_password'])->name('change_password');
    Route::post('admin/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
@@ -160,10 +159,18 @@ Route::group(['middleware' => 'admin'], function () {
      Route::get('admin/communicate/notice_board/delete/{id}', [CommunicateController::class, 'deleteNoticeBoard']);
      Route::get('admin/communicate/send_email', [CommunicateController::class, 'sendEmail']);
 
+     // homework
+     Route::get('admin/homework', [HomeworkController::class, 'homework']);
+     Route::get('admin/homework/add', [HomeworkController::class, 'add']);
+     Route::post('admin/homework/add', [HomeworkController::class, 'insert']);
+     Route::post('admin/ajaxGetSubject', [HomeworkController::class, 'ajaxGetSubject']);
+     Route::get('admin/homework/edit/{id}', [HomeworkController::class, 'edit']);
+     Route::post('admin/homework/edit/{id}', [HomeworkController::class, 'update']);
+     Route::get('admin/homework/delete/{id}', [HomeworkController::class, 'delete']);
+     Route::get('admin/homework/submitted_homework/{id}', [HomeworkController::class, 'submittedHomework']);
+
 
 });
-
-
 
 //student url
 Route::group(['middleware' => 'student'], function () {
@@ -175,10 +182,13 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('student/my_exam_timetable', [ExaminationsController::class, 'myExamTimetable']);
     Route::get('student/my_attendance', [AttendanceController::class, 'myAttendanceStudent']);
     Route::get('student/my_notice_board', [CommunicateController::class, 'myNoticeBoardStudent']);
+    Route::get('student/my_homework', [HomeworkController::class, 'myHomeworkStudent']);
+    Route::get('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'submitHomework']);
+    Route::post('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'insertSubmitHomework']);
+    Route::get('student/my_submitted_homework', [HomeworkController::class, 'mySubmittedHomework']);
     Route::get('student/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('student/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 });
-
 
 //teacher url
 Route::group(['middleware' => 'teacher'], function () {
@@ -195,11 +205,19 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('teacher/attendance/student', [AttendanceController::class, 'attendanceStudentTeacher']);
     Route::post('teacher/attendance/student/save', [AttendanceController::class, 'submitAttendanceStudent']);
     Route::get('teacher/attendance/report', [AttendanceController::class, 'attendanceReportTeacher']);
+    Route::get('teacher/homework', [HomeworkController::class, 'homeworkTeacher']);
+    Route::get('teacher/homework/add', [HomeworkController::class, 'addHomeworkTeacher']);
+    Route::post('teacher/homework/add', [HomeworkController::class, 'insertHomeworkTeacher']);
+    Route::post('teacher/ajaxGetSubject', [HomeworkController::class, 'ajaxGetSubject']);
+    Route::get('teacher/homework/edit/{id}', [HomeworkController::class, 'editHomeworkTeacher']);
+    Route::post('teacher/homework/edit/{id}', [HomeworkController::class, 'updateHomeworkTeacher']);
+    Route::get('teacher/homework/delete/{id}', [HomeworkController::class, 'deleteHomeworkTeacher']);
+    Route::get('teacher/homework/submitted_homework/{id}', [HomeworkController::class, 'submittedHomeworkTeacher']);
+
     Route::get('teacher/my_notice_board', [CommunicateController::class, 'myNoticeBoardTeacher']);
     Route::get('teacher/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('teacher/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 });
-
 
 //parent url
 Route::group(['middleware' => 'parent'], function () {

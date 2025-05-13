@@ -338,6 +338,25 @@
             </ul>
             </li>
 
+            <li class="nav-item {{request()->is('admin/homework/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('admin/homework/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-journal-text"></i>
+                <p>
+                Homework
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('admin/homework')}}" class="nav-link {{request()->is('admin/homework/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Homework</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
+
               <li class="nav-item">
                 <a href="{{ url('admin/change_password') }}" class="nav-link {{ request()->is('admin/change_password') ? 'active' : '' }}">
                  <i class="nav-icon bi bi-shield-lock"></i>
@@ -415,6 +434,24 @@
 
             </ul>
             </li>
+            <li class="nav-item {{request()->is('teacher/homework/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('teacher/homework/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-journal-text"></i>
+                <p>
+                Homework
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('teacher/homework')}}" class="nav-link {{request()->is('teacher/homework/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Homework</p>
+                </a>
+                </li>
+
+            </ul>
+            </li>
             <li class="nav-item">
                 <a href="{{url('teacher/my_notice_board')}}" class="nav-link {{request()->is('teacher/my_notice_board/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-pin-angle-fill"></i>
@@ -470,6 +507,19 @@
                 <a href="{{url('student/my_notice_board')}}" class="nav-link {{request()->is('student/my_notice_board/*') ? 'active':''}}">
                 <i class="nav-icon bi bi-pin-angle-fill"></i>
                     <p>Notice Board</p>
+                </a>
+                </li>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('student/my_homework')}}" class="nav-link {{request()->is('student/my_homework/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Homework</p>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{url('student/my_submitted_homework')}}" class="nav-link {{request()->is('student/my_submitted_homework/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-pencil-square"></i>
+                    <p>Submitted Homework</p>
                 </a>
                 </li>
               <li class="nav-item">

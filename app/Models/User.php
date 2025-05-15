@@ -83,6 +83,12 @@ class User extends Authenticatable
     {
         return self::find($id);
     }
+    static public function getSingleClass($id){
+        return self::select('users.*', 'school_classes.amount', 'school_classes.name as class_name')
+        ->join('school_classes', 'school_classes.id', '=', 'users.class_id')
+        ->where('users.id', '=', $id)
+        ->first();
+    }
 
     static public function getEmailSingle($email)
     {
@@ -314,6 +320,24 @@ class User extends Authenticatable
         return StudentAttendanceModel::checkAlreadyAttendance($student_id, $class_id, $attendance_date);
     }
 
+    static public function getStudentCollectFees()
+    {
 
+        $return = self::select('users.*', 'school_classes.name as class_name','school_classes.amount')
+        ->join('school_classes','school_classes.id', '=', 'users.class_id')
+        ->where('users.role', '=', 3)
+        ->where('users.is_deleted', '=', 0);
+        if (!empty(Request::get('class_id'))) {
+            $return = $return->where('users.class_id', 'like', '%' . Request::get('class_id'). '%');
+        }
+        if (!empty(Request::get('student_name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('student_name'). '%');
+        }
+
+        $return = $return->orderBy('users.name', 'asc')
+            ->paginate(10);
+
+        return $return;
+    }
 
 }

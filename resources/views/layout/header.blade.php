@@ -253,6 +253,25 @@
                 </li>
             </ul>
             </li>
+            <li class="nav-item {{request()->is('admin/fees_collection/*') ? 'menu-open' : ''}}">
+            <a href="#" class="nav-link {{request()->is('admin/fees_collection/*') ? 'active' : ''}}">
+            <i class="nav-icon bi bi-cash-stack"></i>
+                <p>
+                Fees Collection
+                <i class="nav-arrow bi bi-chevron-right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                <a href="{{url('admin/fees_collection/collect_fees')}}" class="nav-link {{request()->is('admin/fees_collection/collect_fees/*') ? 'active':''}}">
+                <i class="nav-icon bi bi-wallet2"></i>
+                    <p>Collect Fees</p>
+                </a>
+                </li>
+
+
+            </ul>
+            </li>
             <li class="nav-item {{request()->is('admin/examinations/*') ? 'menu-open' : ''}}">
             <a href="#" class="nav-link {{request()->is('admin/examinations/*') ? 'active' : ''}}">
             <i class="nav-icon bi bi-file-earmark-text"></i>

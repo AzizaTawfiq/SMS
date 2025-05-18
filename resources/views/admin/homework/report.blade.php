@@ -15,7 +15,7 @@
               <div class="col-md-12">
               <div class="card card-primary card-outline mb-2">
               <div class="card-header">
-                    <h3 class="card-title">Search Homework Report</h3>
+                    <h3 class="card-title">Search</h3>
                   </div>
                   <form action="" method="get">
 
@@ -90,11 +90,8 @@
                 </div>
               @include('_message')
                 <div class="card mb-4">
-                    <div class="card-header">
-                       <h3 class="card-title"> Homework Report last</h3>
-                     </div>
                   <div class="card-body p-0">
-               
+                  @if($getRecord->count() != 0)
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -107,7 +104,6 @@
                           <th>Document</th>
                           <th>Description</th>
                           <th>Created date</th>
-
                           <th>Submitted document</th>
                           <th>Submitted description</th>
                           <th>Submitted created date</th>
@@ -118,8 +114,8 @@
                         <tr>
                             <td>{{ $getRecord->firstItem() + $key }}</td>
                             <td>{{ $value->first_name }} {{ $value->last_name }}</td>
-                            <td>{{ $value->subject_name }}</td>
                             <td>{{ $value->class_name }}</td>
+                            <td>{{ $value->subject_name }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->getHomework->homework_date)) }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->getHomework->submission_date)) }}</td>
                             <td>
@@ -148,7 +144,7 @@
                      {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                     </div>
 
-                            @if($getRecord->count() == 0)
+                            @else
                                 <x-empty-state message="No homework found in the system." />
                             @endif
                   </div>

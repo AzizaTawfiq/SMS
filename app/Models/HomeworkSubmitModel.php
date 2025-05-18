@@ -33,11 +33,10 @@ class HomeworkSubmitModel extends Model
    {
          $return = HomeworkSubmitModel::select('homework_submit.*','school_classes.name as class_name',
          'subjects.name as subject_name', 'users.name as first_name','users.last_name')->
-        join('users.name', 'users.id', '=', 'homework_submit.student_id')->
+        join('users', 'users.id', '=', 'homework_submit.student_id')->
         join('homework', 'homework.id', '=', 'homework_submit.homework_id')->
         join('school_classes','school_classes.id', '=', 'homework.class_id')->
-        join('subjects','subjects.id', '=', 'homework.subject_id')->
-        where('homework_submit.homework_id', '=', Request::get('homework_id'));
+        join('subjects','subjects.id', '=', 'homework.subject_id');
         if (!empty(Request::get('first_name')))
         {
             $return = $return->where('users.name', '=', Request::get('first_name'));
@@ -46,15 +45,15 @@ class HomeworkSubmitModel extends Model
         {
             $return = $return->where('users.last_name', '=', Request::get('last_name'));
         }
-        if (!empty(Request::get('classs_name')))
+        if (!empty(Request::get('class_name')))
         {
-            $return = $return->where('school_classes.name', '=', Request::get('classs_name'));
+            $return = $return->where('school_classes.name', '=', Request::get('class_name'));
         }
-         if (!empty(Request::get('subject_name'))) 
+         if (!empty(Request::get('subject_name')))
          {
             $return = $return->where('subjects.name', 'like', '%' . Request::get('subject_name'). '%');
         }
-        if (!empty(Request::get('homework_date'))) 
+        if (!empty(Request::get('homework_date')))
         {
             $return = $return->whereDate('homework.homework_date', '=', Request::get('homework_date'));
         }
@@ -66,8 +65,10 @@ class HomeworkSubmitModel extends Model
          {
             $return = $return->whereDate('homework.created_at', '=', Request::get('created_at'));
         }
+
          $return = $return-> orderBy('homework_submit.id','desc')->paginate(20);
          return $return;
+
    }
 
     static public function getRecordStudent($student_id){

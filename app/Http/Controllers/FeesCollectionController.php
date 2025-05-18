@@ -36,10 +36,10 @@ class FeesCollectionController extends Controller
             'amount' => 'required',
             'payment_type' => 'required',
         ]);
+        $getStudentClass= User::getSingleClass($student_id);
         $paid_amount= FeesStudentModel::getPaidAmount($student_id,$getStudentClass->class_id);
         $remaining_amount = $getStudentClass->amount - $paid_amount;
         if($remaining_amount >= $request->amount){
-            $getStudentClass= User::getSingleClass($student_id);
             $payment = new FeesStudentModel;
             $payment->student_id = $student_id;
             $payment->class_id = $getStudentClass->class_id;

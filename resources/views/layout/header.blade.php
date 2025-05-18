@@ -354,6 +354,13 @@
                 </a>
                 </li>
 
+                 <li class="nav-item">
+                <a href="{{url('admin/homework/homework_report')}}" class="nav-link {{request()->is('admin/homework/homework_report') ? 'active':''}}">
+                <i class="nav-icon bi bi-book	"></i>
+                    <p>Homework Report</p>
+                </a>
+                </li>
+
             </ul>
             </li>
 

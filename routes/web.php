@@ -173,6 +173,8 @@ Route::group(['middleware' => 'admin'], function () {
      Route::post('admin/homework/edit/{id}', [HomeworkController::class, 'update']);
      Route::get('admin/homework/delete/{id}', [HomeworkController::class, 'delete']);
      Route::get('admin/homework/submitted_homework/{id}', [HomeworkController::class, 'submittedHomework']);
+     Route::get('admin/homework/homework_report', [HomeworkController::class, 'homework_report']);
+
 
      //fees collection
      Route::get('admin/fees_collection/collect_fees', [FeesCollectionController::class, 'collectFees']);

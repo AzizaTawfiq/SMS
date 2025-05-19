@@ -8,7 +8,7 @@
                 <a href="{{ url()->previous() }}" class="btn btn-link ps-0">
                   <i class="bi bi-arrow-left me-2"></i>
                 </a>
-                <h3 class="mb-0 d-inline-block">Collect fees <span class="text-primary">({{$getStudentClass->name}} {{$getStudentClass->last_name}})</span></h3>
+                <h3 class="mb-0 d-inline-block">Fees collection</h3>
               </div>
               <div class="col-sm-6 text-end">
                 <a type="button" class="btn btn-primary" id="addFees">Add fees</a>
@@ -101,8 +101,8 @@
                     <label class="form-label fw-bold">Payment type <span class="text-danger">*</span></label>
                     <select class="form-select" name="payment_type">
                       <option value="">Select</option>
-                      <option value="cash">Cash</option>
-                      <option value="cheque">Cheque</option>
+                      <option value="paypal">Paypal</option>
+                      <option value="stripe">Stripe</option>
                     </select>
 
                   </div>

@@ -119,7 +119,7 @@
                                                                             id="amount"
                                                                             placeholder="Enter amount"
                                                                             name="amount"
-                                                                            min="0"
+                                                                            min="1"
                                                                             value="{{old('amount') ? old('amount') : $item->amount}}"
 
                                                                             />

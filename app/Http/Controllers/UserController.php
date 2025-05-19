@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SettingsModel;
 use Illuminate\Support\Facades\Hash;
 use Str;
 use Auth;
@@ -11,6 +12,19 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function settings()
+    {
+        $data['header_title'] = 'Settings';
+        $data['getRecord'] = SettingsModel::getSingle();
+        return view('admin.settings',$data);
+    }
+    public function updateSettings(Request $request)
+    {
+        $settings = SettingsModel::getSingle();
+        $settings->paypal_email = $request->paypal_email;
+        $settings->save();
+        return redirect()->back()->with('success', 'Settings updated successfully!');
+    }
     public function myAccount()
     {
         $data['getRecord'] = Auth::user();
@@ -39,7 +53,7 @@ class UserController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->save();
-        return redirect('admin/account')->with('success', 'Account updated successfully');    
+        return redirect('admin/account')->with('success', 'Account updated successfully');
      }
 
      public function updateMyParentAccount(Request $request)

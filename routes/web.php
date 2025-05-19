@@ -18,6 +18,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\HomeworkController;
+use App\Http\Controllers\FeesCollectionController;
 
 
 /*
@@ -175,6 +176,14 @@ Route::group(['middleware' => 'admin'], function () {
      Route::get('admin/homework/homework_report', [HomeworkController::class, 'homework_report']);
 
 
+     //fees collection
+     Route::get('admin/fees_collection/collect_fees', [FeesCollectionController::class, 'collectFees']);
+     Route::get('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesCollectionController::class, 'addFees']);
+     Route::post('admin/fees_collection/collect_fees/add_fees/{student_id}', [FeesCollectionController::class, 'insertFees']);
+
+     //settings
+     Route::get('admin/settings', [UserController::class, 'settings']);
+     Route::post('admin/settings', [UserController::class, 'updateSettings']);
 
 });
 
@@ -192,6 +201,8 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'submitHomework']);
     Route::post('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'insertSubmitHomework']);
     Route::get('student/my_submitted_homework', [HomeworkController::class, 'mySubmittedHomework']);
+    Route::get('student/fees_collection', [FeesCollectionController::class, 'collectFeesStudent']);
+    Route::post('student/fees_collection', [FeesCollectionController::class, 'collectFeesStudentPayment']);
     Route::get('student/change_password', [UserController::class, 'change_password'])->name('change_password');
     Route::post('student/change_password', [UserController::class, 'update_change_password'])->name('update_change_password');
 });

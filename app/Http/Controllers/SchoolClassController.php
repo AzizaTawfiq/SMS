@@ -24,6 +24,7 @@ class SchoolClassController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|unique:school_classes|max:255',
+            'amount' => 'required',
             'status' => 'required|in:0,1',
         ], [
             'status.required' => 'Please select a status.',
@@ -32,10 +33,11 @@ class SchoolClassController extends Controller
 
         $school_class = new School_Class();
         $school_class->name = $request->name;
+        $school_class->amount = $request->amount;
         $school_class->status = $request->status;
         $school_class->user_id = Auth::user()->id;
         $school_class->save();
-        return redirect()->route('school_classes.list')->with('success', 'class inserted successfuly');
+        return redirect()->route('school_classes.list')->with('success', 'class inserted successfully');
     }
 
     public function edit(Request $request)
@@ -48,7 +50,7 @@ class SchoolClassController extends Controller
     {
         $school_class = School_Class::findOrFail($id);
         $school_class->update($request->all());
-        return redirect()->route('school_classes.list')->with('success', 'class updated successfuly');
+        return redirect()->route('school_classes.list')->with('success', 'class updated successfully');
 
     }
 

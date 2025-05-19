@@ -58,6 +58,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Name</th>
+                                            <th>Amount ($)</th>
                                             <th>Status</th>
                                             <th>Created By</th>
                                             <th>Created At</th>
@@ -69,6 +70,7 @@
                                             <tr>
                                             <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->name }}</td>
+                                                <td>{{ number_format($item->amount,2) }}</td>
                                                 <td>
                                                     @if ($item->status == 0)
                                                         <span class="badge bg-primary">Active</span>
@@ -108,6 +110,22 @@
                                                                                 id="name" placeholder="class name"
                                                                                 name="name"
                                                                                 value="{{ $item->name }}" />
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="amount" class="form-label fw-bold">Amount ($)</label>
+                                                                            <input
+                                                                            type="number"
+                                                                            class="form-control"
+                                                                            id="amount"
+                                                                            placeholder="Enter amount"
+                                                                            name="amount"
+                                                                            min="1"
+                                                                            value="{{old('amount') ? old('amount') : $item->amount}}"
+
+                                                                            />
+                                                                            <div class="text-danger">
+                                                                            {{$errors->first('amount')}}
+                                                                            </div>
                                                                         </div>
                                                                         <div class="form-group mb-3">
                                                                           <label class="form-label fw-bold">Status</label>

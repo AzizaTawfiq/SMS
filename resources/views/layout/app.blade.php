@@ -63,6 +63,7 @@
     />
     <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @yield('style')
 </head>
   <!--end::Head-->
   <!--begin::Body-->

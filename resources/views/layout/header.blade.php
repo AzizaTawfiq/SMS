@@ -10,11 +10,11 @@
             <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li> -->
           </ul>
           <ul class="navbar-nav ms-auto">
-           <!--  <li class="nav-item">
+             <!-- <li class="nav-item">
               <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                 <i class="bi bi-search"></i>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item dropdown">
               <a class="nav-link" data-bs-toggle="dropdown" href="#">
                 <i class="bi bi-chat-text"></i>
@@ -94,10 +94,10 @@
                   </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                <a href="{{url('chat')}}" class="dropdown-item dropdown-footer">See All Messages</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
+             <li class="nav-item dropdown">
               <a class="nav-link" data-bs-toggle="dropdown" href="#">
                 <i class="bi bi-bell-fill"></i>
                 <span class="navbar-badge badge text-bg-warning">15</span>
@@ -122,7 +122,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer"> See All Notifications </a>
               </div>
-            </li> -->
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="#" data-lte-toggle="fullscreen">
                 <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>

@@ -84,6 +84,15 @@ class User extends Authenticatable
         return self::find($id);
     }
 
+    static public function getTotalUser($role)
+    {
+        return self::select('users.id')
+                ->where('role', '=', $role)
+                ->where('is_deleted', '=', 0)
+                ->count();
+
+    }
+
     static public function getEmailSingle($email)
     {
         return User::where('email', $email)->first();

@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\ExamModel;
 use App\Models\School_Class;
 use App\Models\Subject;
+use App\Models\AssignClassTeacherModel;
+use App\Models\NoticeBoardModel;
 
 
 class DashboardController extends Controller
@@ -30,6 +32,10 @@ class DashboardController extends Controller
             }
             elseif(Auth::user()->role == 2)
             {
+                 $data['TotalStudents'] = User::getTeacherStudentsCount(Auth::user()->id);
+                 $data['TotalClass']=AssignClassTeacherModel::getMyClassSubjectGroupCount(Auth::user()->id);
+                 $data['TotalSubject']=AssignClassTeacherModel::getMyClassSubjectCount(Auth::user()->id);
+                 $data['totalNoticeBoard'] = NoticeBoardModel::getRecordUserCount(Auth::getUser()->role);
                 return view('teacher.dashboard', $data);
             }
             elseif(Auth::user()->role == 3)

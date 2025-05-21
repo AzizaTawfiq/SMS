@@ -39,4 +39,11 @@ class ExamModel extends Model
          orderBy('exam.name','asc')->get();
          return $return;
     }
+
+        static public function getTotalExam(){
+         $return = self::select('exam.id')->
+         where('exam.is_deleted', '=', 0)->
+         count();
+         return $return;
+    }
 }

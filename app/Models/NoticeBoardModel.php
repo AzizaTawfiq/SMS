@@ -58,7 +58,9 @@ class NoticeBoardModel extends Model
     ->where('message_to', $message_to)
     ->first();
 }
- static public function getRecordUser($message_to){
+
+ static public function getRecordUser($message_to)
+ {
     $return = NoticeBoardModel::select('notice_board.*','users.name as created_name')->
     join('users', 'users.id', '=', 'notice_board.created_by');
     $return = $return->join('notice_board_message','notice_board_message.notice_board_id', '=',
@@ -77,6 +79,18 @@ class NoticeBoardModel extends Model
     $return= $return->orderBy('notice_board.id', 'desc')->
     paginate(10);
 return $return;
+}
+
+static public function getRecordUserCount($message_to)
+{
+    $return = NoticeBoardModel::select('notice_board.*','users.name as created_name')->
+    join('users', 'users.id', '=', 'notice_board.created_by');
+    $return = $return->join('notice_board_message','notice_board_message.notice_board_id', '=',
+    'notice_board.id');
+    $return = $return->where('notice_board_message.message_to', '=', $message_to);
+    $return = $return->where('notice_board.publish_date', '<=', date('Y-m-d'));
+    return $return->count();
+
 }
 
 }

@@ -17,7 +17,8 @@
                 <div class="card mb-4">
                   <div class="card-body p-0">
                     @if($getRecord->count() > 0)
-                    <table class="table table-striped">
+                  <div class="table-responsive">
+                    <table class="table table-striped text-center align-middle " style=" table-layout: auto;">
                       <thead>
                         <tr>
                           <th>#</th>
@@ -79,6 +80,7 @@
                     @else
                         <x-empty-state message="No students found for this teacher." />
                     @endif
+                 </div>
                   </div>
                 </div>
               </div>

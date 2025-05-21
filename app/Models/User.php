@@ -90,6 +90,15 @@ class User extends Authenticatable
         ->first();
     }
 
+    static public function getTotalUser($role)
+    {
+        return self::select('users.id')
+                ->where('role', '=', $role)
+                ->where('is_deleted', '=', 0)
+                ->count();
+
+    }
+
     static public function getEmailSingle($email)
     {
         return User::where('email', $email)->first();
@@ -185,6 +194,17 @@ class User extends Authenticatable
             ->paginate(10);
 
         return $return;
+    }
+    static public function getTeacherStudentsCount($teacher_id)
+    {
+        $return = self::select('users.id')
+        ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'users.class_id')
+        ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+        ->where('assign_class_teacher.is_deleted', '=', 0)
+        ->where('assign_class_teacher.status', '=', 0)
+        ->where('users.role', '=', '3')
+        ->where('users.is_deleted', '=', 0);
+        return $return->count();
     }
     static public function getTeacher()
     {

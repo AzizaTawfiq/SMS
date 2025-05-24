@@ -68,5 +68,10 @@ class HomeworkSubmitModel extends Model
     public function getStudent() {
         return $this->belongsTo(User::class, 'student_id');
     }
+    
+    static public function getRecordStudentCount($student_id)
+    {
+        return HomeworkSubmitModel::where('student_id', '=', $student_id)->count();
+    }
 
 }

@@ -10,6 +10,10 @@ use App\Models\School_Class;
 use App\Models\Subject;
 use App\Models\AssignClassTeacherModel;
 use App\Models\NoticeBoardModel;
+use App\Models\AssignSubject;
+use App\Models\HomeworkModel;
+use App\Models\HomeworkSubmitModel;
+use App\Models\StudentAttendanceModel;
 
 
 class DashboardController extends Controller
@@ -40,6 +44,17 @@ class DashboardController extends Controller
             }
             elseif(Auth::user()->role == 3)
             {
+                $data['TotalSubject'] = AssignSubject::getMyStudentSubjectCount(Auth::user()->class_id);
+                $data['totalNoticeBoard'] = NoticeBoardModel::getRecordUserCount(Auth::getUser()->role);
+                $data['TotalHomework'] = HomeworkModel::getRecordStudentCount(Auth::user()->class_id, Auth::user()->id);
+                $data['TotalSubmittedHomework'] = HomeworkSubmitModel::getRecordStudentCount(Auth::user()->id);
+                $data['StudentAttendance'] =  StudentAttendanceModel::getRecordStudentAttendanceCount(Auth::user()->id);
+                $data['StudentAttendanceAbsent'] =  StudentAttendanceModel::getRecordStudentAbsentAttendanceCount(Auth::user()->id);
+
+
+
+
+
                 return view('student.dashboard', $data);
             }
             elseif(Auth::user()->role == 4){

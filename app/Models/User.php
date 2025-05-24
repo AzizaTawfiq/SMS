@@ -203,6 +203,7 @@ class User extends Authenticatable
     static public function getTeacher()
     {
 
+        
         $return = self::select('users.*')->where('users.role', '=', '2')
             ->where('users.is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {

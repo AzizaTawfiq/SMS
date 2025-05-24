@@ -21,4 +21,14 @@ class AssignSubject extends Model
            ->orderBy('subject_school_class.id','desc')
            ->get();
     }
+    static public function getMyStudentSubjectCount($class_id){
+        return self::select('subject_school_class.id')
+           ->join('subjects','subjects.id','=','subject_school_class.subject_id')
+           ->join('users','users.id','=','subject_school_class.user_id')
+           ->where('subject_school_class.schoolclass_id','=',$class_id)
+           ->where('subject_school_class.deleted_at','=',null)
+           ->where('subject_school_class.status','=',0)
+           ->orderBy('subject_school_class.id','desc')
+           ->count();
+    }
 }

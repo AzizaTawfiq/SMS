@@ -73,12 +73,10 @@ class HomeworkModel extends Model
          join('subjects','subjects.id', '=', 'homework.subject_id')->
          where('homework.class_id', '=' ,$class_id)->
          where('homework.is_deleted', '=' , 0)->
-         whereNotIn('homework.id',
-         function($query) use ($student_id){
-            $query->select('homework_submit.homework_id' , )-> from('homework_submit')->
-            where('homework_submit.student_id', '=' ,$student_id);
-        }
-    );
+         whereNotIn('homework.id', function($query) use ($student_id) {
+                            $query->select('homework_submit.homework_id' , )-> from('homework_submit')->
+                            where('homework_submit.student_id', '=' ,$student_id);
+                       } );
 
         if (!empty(Request::get('subject_name'))) {
             $return = $return->where('subjects.name', 'like', '%' . Request::get('subject_name'). '%');
@@ -103,6 +101,23 @@ class HomeworkModel extends Model
         } else {
             return "";
         }
+    }
+
+   static public function getRecordStudentCount($class_id, $student_id){
+     $return = self::select('homework.id')->
+         join('users', 'users.id', '=', 'homework.created_by')->
+         join('school_classes','school_classes.id', '=', 'homework.class_id')->
+         join('subjects','subjects.id', '=', 'homework.subject_id')->
+         where('homework.class_id', '=' ,$class_id)->
+         where('homework.is_deleted', '=' , 0)->
+         whereNotIn('homework.id', function($query) use ($student_id) {
+                            $query->select('homework_submit.homework_id' , )-> from('homework_submit')->
+                            where('homework_submit.student_id', '=' ,$student_id);
+                       } );
+        $return = $return ->count();
+         return $return;
+
+
     }
 
 }

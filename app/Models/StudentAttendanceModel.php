@@ -71,4 +71,18 @@ class StudentAttendanceModel extends Model
         ->groupBy('student_attendance.class_id')->get();
    }
 
+   static public function getRecordStudentAttendanceCount($student_id)
+   {
+       return StudentAttendanceModel::where('student_id', '=', $student_id)
+       ->where('attendance_type', '!=', 3)
+       ->count();
+   }
+
+    static public function getRecordStudentAbsentAttendanceCount($student_id)
+    {
+         return StudentAttendanceModel::where('student_id', '=', $student_id)
+         ->where('attendance_type', '=', 3)
+         ->count();
+    }
+
 }

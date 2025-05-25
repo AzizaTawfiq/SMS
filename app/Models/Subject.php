@@ -30,4 +30,9 @@ class Subject extends Model
     {
         return self::find($id);
     }
+
+    static public function getTotalSubject()
+    {
+        return self::count();
+    }
 }

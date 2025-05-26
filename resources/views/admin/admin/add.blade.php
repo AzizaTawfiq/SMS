@@ -15,7 +15,7 @@
             <div class="row g-4">
               <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
-                  <form action="{{ url('admin/admin/add')}}" method="post">
+                  <form action="{{ url('admin/admin/add')}}" method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
 
                     <div class="card-body">
@@ -57,6 +57,13 @@
                         {{$errors->first('password')}}
                         </div>
                       </div>
+                      <div class="form-group ">
+                          <label for="profile_pic" class="form-label fw-bold">Profile pic</label>
+                            <input type="file" class="form-control" id="profile_pic"  name="profile_pic"/>
+                                <div class="text-danger">
+                                {{$errors->first('profile_pic')}}
+                                </div>
+                       </div>
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Add</button>

@@ -72,6 +72,7 @@
                       <thead>
                         <tr>
                           <th>#</th>
+                          <th>Pic</th>
                           <th>Name</th>
                           <th>Email</th>
                           <th>Created date</th>
@@ -82,6 +83,11 @@
                         @foreach($getRecord as $key => $value)
                         <tr>
                             <td>{{ $getRecord->firstItem() + $key }}</td>
+                             <td>
+                                @if(!empty($value->getProfile()))
+                                <img src="{{ $value->getProfile() }}" alt="Profile pic" style="width: 50px; height: 50px; border-radius: 50%;">
+                                @endif
+                            </td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>

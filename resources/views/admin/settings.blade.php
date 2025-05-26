@@ -22,14 +22,8 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label for="email" class="form-label fw-bold">Paypal business Email</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="email"
-                          placeholder="Enter email"
-                          name="paypal_email"
-                          value="{{$getRecord->paypal_email}}"
-                        />
+                        <input  type="text"  class="form-control"  id="email"  placeholder="Enter email"
+                          name="paypal_email"  value="{{$getRecord->paypal_email}}" />
                         <div class="text-danger">
                         {{$errors->first('paypal_email')}}
                         </div>

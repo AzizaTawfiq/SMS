@@ -246,7 +246,7 @@ class User extends Authenticatable
         if (!empty($this->profile_pic && file_exists('upload/profile/' . $this->profile_pic))) {
             return url('upload/profile/' . $this->profile_pic);
         } else {
-            return "";
+            return url('upload/profile/user.jpg');
         }
     }
 

@@ -159,8 +159,8 @@
 
       <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
       <div class="info text-center mt-4">
-            <i class="bi bi-mortarboard-fill fs-1 text-white" style="opacity: .8"></i>
-            <!-- <a href="#" class="ms-2">{{Auth::user()-> name}}</a> -->
+          <i class="bi bi-mortarboard-fill fs-1 text-white" style="opacity: .8"></i>
+             <a href="#" class="ms-2">{{Auth::user()-> name}}</a>
           </div>
         <div class="sidebar-wrapper">
           <nav class="mt-2">

@@ -15,7 +15,7 @@
             <div class="row g-4">
               <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
-                  <form action="" method="post">
+                  <form action="" method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
 
                     <div class="card-body">
@@ -49,6 +49,16 @@
                         {{$errors->first('email')}}
                         </div>
                       </div>
+
+                      <div class="form-group ">
+                           <label for="profile_pic" class="form-label fw-bold">Profile pic</label>
+                             <input
+                                type="file"
+                                class="form-control"  id="profile_pic"  name="profile_pic" />
+                                <div class="text-danger">
+                                {{$errors->first('profile_pic')}}
+                                </div>
+                       </div>
                       <!-- <div class="form-group">
                         <label for="password" class="form-label fw-bold">Password</label>
                         <input type="text" class="form-control" id="password" placeholder="Enter password" name="password"  />

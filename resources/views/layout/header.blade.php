@@ -131,22 +131,15 @@
             </li>
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <img
-                  src="{{ asset('dist/assets/img/user2-160x160.jpg') }}"
-                  class="user-image rounded-circle shadow"
-                  alt="User Image"
-                />
+                <img  src="{{ Auth::user()->getProfile() }}" class="user-image rounded-circle shadow"
+                  alt="{{ Auth::user()->name }}'s Profile Picture" />
                 <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <li class="user-header bg-primary text-white">
-                  <img
-                    src="{{ asset('dist/assets/img/user2-160x160.jpg') }}"
-                    class="rounded-circle shadow"
-                    alt="User Image"
-                  />
+                  <img src="{{ Auth::user()->getProfile() }}" class="rounded-circle shadow"alt="User Image" />
                   <p>
-                    {{ Auth::user()->name }}
+                     {{ Auth::user()->name }}
                     <small>{{ Auth::user()->email }}</small>
                   </p>
                 </li>
@@ -166,8 +159,8 @@
 
       <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
       <div class="info text-center mt-4">
-            <i class="bi bi-mortarboard-fill fs-1 text-white" style="opacity: .8"></i>
-            <!-- <a href="#" class="ms-2">{{Auth::user()-> name}}</a> -->
+          <i class="bi bi-mortarboard-fill fs-1 text-white" style="opacity: .8"></i>
+             <a href="#" class="ms-2">{{Auth::user()-> name}}</a>
           </div>
         <div class="sidebar-wrapper">
           <nav class="mt-2">

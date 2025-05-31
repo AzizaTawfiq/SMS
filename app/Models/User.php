@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -38,6 +39,7 @@ class User extends Authenticatable
         'admission_date',
         'date_of_birth',
         'date_of_birth',
+        'parent_id',
     ];
 
     /**
@@ -66,10 +68,10 @@ class User extends Authenticatable
         $return = self::select('users.*')->where('role', '=', '1')
             ->where('is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {
-            $return = $return->where('name', 'like', '%' . Request::get('name'). '%');
+            $return = $return->where('name', 'like', '%' . Request::get('name') . '%');
         }
         if (!empty(Request::get('email'))) {
-            $return = $return->where('email', 'like', '%' . Request::get('email'). '%');
+            $return = $return->where('email', 'like', '%' . Request::get('email') . '%');
         }
         if (!empty(Request::get('created_at'))) {
             $return = $return->whereDate('created_at', '=', Request::get('created_at'));
@@ -101,16 +103,16 @@ class User extends Authenticatable
         $return = self::select('users.*')->where('users.role', '=', '3')
             ->where('users.is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {
-            $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
         }
         if (!empty(Request::get('email'))) {
-            $return = $return->where('users.email', 'like', '%' . Request::get('email'). '%');
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
         }
         if (!empty(Request::get('admission_number'))) {
-            $return = $return->where('users.admission_number', 'like', '%' . Request::get('admission_number'). '%');
+            $return = $return->where('users.admission_number', 'like', '%' . Request::get('admission_number') . '%');
         }
         if (!empty(Request::get('roll_number'))) {
-            $return = $return->where('users.roll_number', 'like', '%' . Request::get('roll_number'). '%');
+            $return = $return->where('users.roll_number', 'like', '%' . Request::get('roll_number') . '%');
         }
         if (!empty(Request::get('class_id'))) {
             $return = $return->where('users.class_id', '=', Request::get('class_id'));
@@ -119,16 +121,16 @@ class User extends Authenticatable
             $return = $return->where('users.gender', '=', Request::get('gender'));
         }
         if (!empty(Request::get('caste'))) {
-            $return = $return->where('users.caste', 'like', '%' . Request::get('caste'). '%');
+            $return = $return->where('users.caste', 'like', '%' . Request::get('caste') . '%');
         }
         if (!empty(Request::get('religion'))) {
-            $return = $return->where('users.religion', 'like', '%' . Request::get('religion'). '%');
+            $return = $return->where('users.religion', 'like', '%' . Request::get('religion') . '%');
         }
         if (!empty(Request::get('mobile'))) {
-            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile'). '%');
+            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile') . '%');
         }
         if (!empty(Request::get('blood_group'))) {
-            $return = $return->where('users.blood_group', 'like', '%' . Request::get('blood_group'). '%');
+            $return = $return->where('users.blood_group', 'like', '%' . Request::get('blood_group') . '%');
         }
         if (!empty(Request::get('admission_date'))) {
             $return = $return->whereDate('users.admission_date', '=', Request::get('admission_date'));
@@ -137,10 +139,10 @@ class User extends Authenticatable
             $return = $return->whereDate('users.date_of_birth', '=', Request::get('date_of_birth'));
         }
         if (!empty(Request::get('height'))) {
-            $return = $return->where('users.height', 'like', '%' . Request::get('height'). '%');
+            $return = $return->where('users.height', 'like', '%' . Request::get('height') . '%');
         }
         if (!empty(Request::get('weight'))) {
-            $return = $return->where('users.weight', 'like', '%' . Request::get('weight'). '%');
+            $return = $return->where('users.weight', 'like', '%' . Request::get('weight') . '%');
         }
         if (!empty(Request::get('status'))) {
             $status = (Request::get('status')) == 100 ? 0 : 1;
@@ -158,23 +160,17 @@ class User extends Authenticatable
     }
     static public function getStudentClass($class_id)
     {
-        return self::select('users.id','users.name','users.last_name')
-        ->where('users.role', '=', '3')
-        ->where('users.is_deleted', '=', 0)
-        ->where('users.class_id', '=', $class_id)
-        ->orderBy('users.id', 'desc')
+        return self::select('users.id', 'users.name', 'users.last_name')
+            ->where('users.role', '=', '3')
+            ->where('users.is_deleted', '=', 0)
+            ->where('users.class_id', '=', $class_id)
+            ->orderBy('users.id', 'desc')
             ->get();
     }
     static public function getTeacherStudents($teacher_id)
     {
-        $return = self::select('users.*',"school_classes.name as class_name")->
-        join('school_classes', 'school_classes.id', '=', 'users.class_id')->
-        join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'school_classes.id')->
-        where('assign_class_teacher.teacher_id', '=', $teacher_id)->
-        where('assign_class_teacher.is_deleted', '=', 0)->
-        where('assign_class_teacher.status', '=', 0)->
-        where('users.role', '=', '3')
-        ->where('users.is_deleted', '=', 0);
+        $return = self::select('users.*', "school_classes.name as class_name")->join('school_classes', 'school_classes.id', '=', 'users.class_id')->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'school_classes.id')->where('assign_class_teacher.teacher_id', '=', $teacher_id)->where('assign_class_teacher.is_deleted', '=', 0)->where('assign_class_teacher.status', '=', 0)->where('users.role', '=', '3')
+            ->where('users.is_deleted', '=', 0);
         $return = $return->orderBy('users.id', 'desc')->groupBy('users.id')
             ->paginate(10);
 
@@ -186,25 +182,25 @@ class User extends Authenticatable
         $return = self::select('users.*')->where('users.role', '=', '2')
             ->where('users.is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {
-            $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
         }
         if (!empty(Request::get('last_name'))) {
-            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name'). '%');
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
         }
         if (!empty(Request::get('email'))) {
-            $return = $return->where('users.email', 'like', '%' . Request::get('email'). '%');
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
         }
         if (!empty(Request::get('gender'))) {
             $return = $return->where('users.gender', '=', Request::get('gender'));
         }
         if (!empty(Request::get('mobile'))) {
-            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile'). '%');
+            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile') . '%');
         }
         if (!empty(Request::get('marital_status'))) {
-            $return = $return->where('users.marital_status', 'like', '%' . Request::get('marital_status'). '%');
+            $return = $return->where('users.marital_status', 'like', '%' . Request::get('marital_status') . '%');
         }
         if (!empty(Request::get('address'))) {
-            $return = $return->where('users.address', 'like', '%' . Request::get('address'). '%');
+            $return = $return->where('users.address', 'like', '%' . Request::get('address') . '%');
         }
         if (!empty(Request::get('admission_date'))) {
             $return = $return->whereDate('users.admission_date', '=', Request::get('admission_date'));
@@ -247,24 +243,27 @@ class User extends Authenticatable
 
     static public function getSearchstudent()
     {
-        if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('email'))) {
 
-            $return = self::select('users.*', 'class-num as class_name')
-                ->leftJoin('class', 'class.id', '=', 'users.class_id', 'left')
-                ->where('users.user_type', '=', 3)
+        if (!empty(Request::get('student_id')) || !empty(Request::get('first_name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
+            $return = self::select('users.*', 'school_classes.name as class_name')
+                ->join('school_classes', 'school_classes.id', '=', 'users.class_id', 'left')
+                ->where('users.role', '=', 3)
+                ->where('users.parent_id', '=', null)
                 ->where('users.is_deleted', '=', 0);
 
+
+
             if (!empty(Request::get('id'))) {
-                $return = $return->where('users.id', 'like', Request::get('id'));
+                $return = $return->where('users.id', '=', Request::get('sudent_id'));
             }
 
             if (!empty(Request::get('name'))) {
-                $return = $return->where('users.name', 'like', '%' . Request::get('name'). '%');
+                $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
             }
 
 
             if (!empty(Request::get('email'))) {
-                $return = $return->where('users.email', 'like', '%' . Request::get('email'). '%');
+                $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
             }
 
             $return = $return->orderBy('users.id', 'desc')
@@ -279,12 +278,12 @@ class User extends Authenticatable
     {
         $return = self::select(
             'users.*',
-            'class.class-num as class_name',
+            'school_classes.name as class_name',
             'parent.name as parent_name'
         )
             ->join('users as parent', 'parent.id', '=', 'users.parent_id')
-            ->leftJoin('class', 'class.id', '=', 'users.class_id')
-            ->where('users.user_type', '=', 3)
+            ->join('school_classes', 'school_classes.id', '=', 'users.class_id', 'left')
+            ->where('users.role', '=', 3)
             ->where('users.parent_id', '=', $parent_id)
             ->where('users.is_deleted', '=', 0)
             ->orderBy('users.id', 'desc')
@@ -296,11 +295,11 @@ class User extends Authenticatable
     static public function getTeacherClass()
     {
         $return = self::select('users.*')->where('role', '=', '2')
-        ->where('is_deleted', '=', 0);
-    $return = $return->orderBy('id', 'desc')
-        ->get();
+            ->where('is_deleted', '=', 0);
+        $return = $return->orderBy('id', 'desc')
+            ->get();
 
-    return $return;
+        return $return;
     }
 
     // get user name by user id in blade
@@ -310,10 +309,33 @@ class User extends Authenticatable
         return $user ? $user->name : 'Unknown User';
     }
 
-    public static function getAttendance($student_id, $class_id, $attendance_date){
+    public static function getAttendance($student_id, $class_id, $attendance_date)
+    {
         return StudentAttendanceModel::checkAlreadyAttendance($student_id, $class_id, $attendance_date);
     }
 
 
+    public static function getStudentParent($student_id, $parent_id)
+    {
+        return DB::table('assign_student_to_parents')
+            ->join('users', 'assign_student_to_parents.student_id', '=', 'users.student_id')
+            ->where('assign_student_to_parents.student_id', $student_id)
+            ->where('assign_student_to_parents.parent_id', $parent_id)
+            ->where('users.is_deleted', '=', 0)
+            ->select('users.*')
+            ->orderBy('users.id', 'desc')
+            ->get();
+    }
 
+    public static function check_assignStudentParent($student_id)
+    {
+        $return = self::select(
+            'users.*',
+        )
+         ->where('id', '=', $student_id)
+         ->where('parent_id', '=', null)
+         ->first();
+
+        return $return;
+    }
 }

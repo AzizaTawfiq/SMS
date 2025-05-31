@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignStudentToParent;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
@@ -15,58 +16,59 @@ class ParentController extends Controller
 {
     public function list()
     {
-        $data = User::where('role',4)
-        ->where('is_deleted',0)
-        ->get();
+        $data = User::where('role', 4)
+            ->where('is_deleted', 0)
+            ->get();
         return view('admin.parent.list', compact('data'));
     }
 
-    public function search(Request $request){
-   
-      $query = User::query();
+    public function search(Request $request)
+    {
 
-    if ($request->filled('first_name')) {
-        $query->where('name', 'like', '%' . $request->first_name . '%');
-    }
+        $query = User::query();
 
-    if ($request->filled('last_name')) {
-        $query->where('name', 'like', '%' . $request->last_name . '%');
-    }
+        if ($request->filled('first_name')) {
+            $query->where('name', 'like', '%' . $request->first_name . '%');
+        }
 
-    if ($request->filled('email')) {
-        $query->where('email',$request->email);
-    }
+        if ($request->filled('last_name')) {
+            $query->where('name', 'like', '%' . $request->last_name . '%');
+        }
 
-    if ($request->filled('gender')) {
-        $query->where('gender',$request->gender);
-    }
+        if ($request->filled('email')) {
+            $query->where('email', $request->email);
+        }
 
-    if ($request->filled('occupation')) {
-        $query->where('occupation',$request->occupation);
-    }
+        if ($request->filled('gender')) {
+            $query->where('gender', $request->gender);
+        }
 
-    if ($request->filled('address')) {
-        $query->where('address',$request->address);
-    }
+        if ($request->filled('occupation')) {
+            $query->where('occupation', $request->occupation);
+        }
 
-    if ($request->filled('mobile')) {
-        $query->where('mobile_number',$request->mobile);
-    }
+        if ($request->filled('address')) {
+            $query->where('address', $request->address);
+        }
 
-    if ($request->filled('status')) {
-        $query->where('status',$request->status);
-    }
+        if ($request->filled('mobile')) {
+            $query->where('mobile_number', $request->mobile);
+        }
 
-     if ($request->filled('created_at')) {
-        $query->whereDate('created_at',$request->created_at);
-    }
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('created_at')) {
+            $query->whereDate('created_at', $request->created_at);
+        }
 
 
 
 
-        $data = $query->where('role',4)->get();
- 
-       return view('admin.parent.list', compact('data'));
+        $data = $query->where('role', 4)->get();
+
+        return view('admin.parent.list', compact('data'));
     }
 
     public function add()
@@ -130,7 +132,7 @@ class ParentController extends Controller
     public function update($id, Request $request)
     {
         $user = User::findOrFail($id);
-        
+
         $request->validate([
             'email' => [
                 'required',
@@ -144,20 +146,20 @@ class ParentController extends Controller
             'mobile_number' => 'max:15|min:8',
 
         ]);
-        $user->name = $request->first_name.' '.$request->last_name;
+        $user->name = $request->first_name . ' ' . $request->last_name;
         $user->email = $request->email;
         $user->address = $request->address;
         $user->occupation = $request->occupation;
         $user->mobile_number = $request->mobile_number;
         $user->gender = $request->gender;
         $user->status = $request->status;
-      
+
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
 
-      
+
         if ($request->hasFile('image')) {
             $imagePath = public_path('upload/profile/' . $user->profile_pic);
 
@@ -171,33 +173,68 @@ class ParentController extends Controller
             $destinationPath = public_path('upload/profile');
             $image->move($destinationPath, $imageName);
             $user->profile_pic = $imageName;
-
         }
-    
+
         $user->save();
 
         return redirect('admin/parent/list')->with('success', 'Parent updated successfully');
-
-       
     }
 
     public function delete($id)
     {
 
-            $user = User::findOrfail($id);
-            $user->is_deleted = 1;
-            $user->save();
-            return redirect()->back()->with('success', 'Parent deleted successfully');
-      
+        $user = User::findOrfail($id);
+        $user->is_deleted = 1;
+        $user->save();
+        return redirect()->back()->with('success', 'Parent deleted successfully');
     }
 
-    public function MyStudent($id)
+    public function myStudent($id)
     {
-
         $data['parent_id'] = $id;
         $data['getSearchstudent'] = User::getSearchstudent();
-        $data['getRecored'] = User::getMystudent($id);
-        $data['header_title'] = 'parent student List';
-        return view('admin.parent./my_student', $data);
+        $data['getRecord'] = User::getMyStudent($id);
+        $data['header_title'] = "Parent Student List";
+        return view('admin.parent.my_student', $data);
+        
+    }
+
+
+    public function myStudent_assign(Request $request, $id)
+    {
+        $data['parent_id'] = $id;
+        $data['getSearchstudent'] = User::getSearchstudent();
+        $data['getRecord'] = User::getMyStudent($id);
+        $data['header_title'] = "Parent Student List";
+        $data['assigned_student'] = User::where('id', $request->student_id)->where('parent_id', '!=', null)->first();
+
+       
+            return view('admin.parent.my_student', $data);
+        
+
+    
+    }
+
+    public function assignStudentParent(Request $request, $student_id, $parent_id)
+    {
+
+      
+        $data['assigned_student'] = null;
+        $user = User::getSingle($student_id);
+        $user->parent_id = $parent_id;
+        $user->save();
+
+        return redirect()->back()->with('success' , 'Assigned successfully.');
+    }
+
+
+    public function assignStudentParentDelete($student_id,)
+    {
+
+        $check_assign = 0;
+        $user = User::getSingle($student_id);
+        $user->parent_id = null;
+        $user->save();
+        return redirect()->back()->with('success','Assigned deleted successfully.');
     }
 }

@@ -57,6 +57,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/student/edit/{id}', [StudentController::class, 'edit']);
     Route::post('admin/student/edit/{id}', [StudentController::class, 'update']);
     Route::get('admin/student/delete/{id}', [StudentController::class, 'delete']);
+    Route::post('admin/student/export_excel', [StudentController::class, 'exportStudentExcel']);
 
     Route::get('admin/teacher/list', [TeacherController::class, 'list']);
     Route::get('admin/teacher/add', [TeacherController::class, 'add']);
@@ -154,6 +155,7 @@ Route::group(['middleware' => 'admin'], function () {
      Route::get('admin/attendance/student', [AttendanceController::class, 'attendanceStudent']);
      Route::post('admin/attendance/student/save', [AttendanceController::class, 'submitAttendanceStudent']);
      Route::get('admin/attendance/report', [AttendanceController::class, 'attendanceReport']);
+     Route::post('admin/attendance/report_export_excel', [AttendanceController::class, 'attendanceReportExportExcel']);
 
     // communicate
      Route::get('admin/communicate/notice_board', [CommunicateController::class, 'noticeBoard']);

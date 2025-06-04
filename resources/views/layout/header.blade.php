@@ -158,9 +158,9 @@
 
 
       <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-      <div class="info text-center mt-4">
-          <i class="bi bi-mortarboard-fill fs-1 text-white" style="opacity: .8"></i>
-             <a href="#" class="ms-2">{{Auth::user()-> name}}</a>
+      <div class="info text-center ">
+          <img src="{{ asset($globalSettings->Logo) }}" alt="Logo" style="width: 90px; height: 70px;" class="me-3">
+          <h2 class="mb-0" style="color: white; border-bottom: 1px solid white;">{{ $globalSettings->site_name ?? 'University Name' }}</h2>
           </div>
         <div class="sidebar-wrapper">
           <nav class="mt-2">

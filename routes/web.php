@@ -65,6 +65,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/teacher/edit/{id}', [TeacherController::class, 'edit']);
     Route::post('admin/teacher/edit/{id}', [TeacherController::class, 'update']);
     Route::get('admin/teacher/delete/{id}', [TeacherController::class, 'delete']);
+    Route::post('admin/teacher/export_excel', [TeacherController::class, 'exportTeacherExcel']);
+
 
      // parent
     Route::get('admin/parent/list', [ParentController::class, 'list']);

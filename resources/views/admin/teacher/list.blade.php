@@ -1,6 +1,36 @@
 @extends('layout.app')
 @section("content")
 <main class="app-main">
+  <style>
+    
+.table thead th {
+    background-color:rgb(230, 231, 233); 
+    color:rgb(5, 58, 110);
+    font-weight: bold;
+    border-bottom: 2px solidrgb(161, 166, 170);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.table td, .table th {
+    border: 1px solid #dee2e6;
+    padding: 12px;
+    vertical-align: middle;
+}
+
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+}
+
+
+.table tbody tr:hover {
+    background-color: #e9f7fe;
+    transition: background-color 0.3s ease;
+}
+
+
+  </style>
         <div class="app-content-header">
 
           <div class="container-fluid">
@@ -143,9 +173,27 @@
                 </div>
               @include('_message')
                 <div class="card mb-4">
+                   <div class="card-header">
+                    <h3 class="card-title" style="font-weight: bold;"> Teacher List</h3>
+                    <form style="float: right;" action="{{ url('admin/teacher/export_excel') }}" method="post">
+                       {{csrf_field()}}
+                       <input type="hidden" name="name" value="{{ Request::get('name') }}">
+                       <input type="hidden" name="last_name" value="{{ Request::get('last_name') }}">
+                       <input type="hidden" name="email" value="{{ Request::get('email') }}">
+                       <input type="hidden" name="gender" value="{{ Request::get('gender') }}">
+                       <input type="hidden" name="mobile_number" value="{{ Request::get('mobile_number') }}">
+                       <input type="hidden" name="marital_status" value="{{ Request::get('marital_status') }}">
+                       <input type="hidden" name="address" value="{{ Request::get('address') }}">
+                       <input type="hidden" name="status" value="{{ Request::get('status') }}">
+                       <input type="hidden" name="admission_date" value="{{ Request::get('admission_date') }}">
+                       <input type="hidden" name="created_at" value="{{ Request::get('created_at') }}">
+                      <button type="submit" class="btn btn-primary"><i class="bi bi-file-earmark-spreadsheet"></i> Export to Excel</button>
+                    </form>
+                  </div>
                   <div class="card-body p-0">
                   @if($getRecord->count() > 0)
-                    <table class="table table-striped">
+                   <div class="table-responsive"  style="overflow-x: auto;" >
+                    <table class="table table-striped text-center align-middle" style="min-width: 1200px;">
                       <thead>
                         <tr>
                           <th >#</th>
@@ -177,7 +225,7 @@
                                 @endif
                             </td>
 
-                            <td>{{ $value->name }}{{ $value->last_name }}</td>
+                            <td>{{ $value->name }} {{ $value->last_name }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->gender }}</td>
                             <td>
@@ -203,20 +251,30 @@
                                 {{ date('d-m-Y', strtotime($value->created_at)) }}
                                 @endif
                                 </td>
-                            <td>
-                              <a href="{{url('admin/teacher/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
+                         <td>
+                            <div class="d-inline-flex gap-1">
+                              <a href="{{ url('admin/teacher/edit/' . $value->id) }}" 
+                                class="btn btn-outline-primary btn-sm" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                              </a>
                               <x-confirm-delete
-                                :url="url('admin/teacher/delete/' .$value->id)"
-                                :id="$value->id"
-                                title="Delete Teacher"
-                                description="Are you sure you want to delete this teacher?"
-                              />
-                            </td>
+                                  :url="url('admin/teacher/delete/' . $value->id)"
+                                  :id="$value->id"
+                                  title="Delete Teacher"
+                                  description="Are you sure you want to delete this teacher?" >
+                                <button class="btn btn-outline-danger btn-sm" title="Delete">
+                                  <i class="bi bi-trash"></i>
+                                </button>
+                              </x-confirm-delete>
+                            </div>
+                          </td>
+
 
                         </tr>
                         @endforeach
                       </tbody>
                     </table>
+                   </div>
                     <div class="d-flex justify-content-center mt-4">
 
                         {!! $getRecord-> appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}

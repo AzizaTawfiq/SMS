@@ -211,10 +211,8 @@ class User extends Authenticatable
         ->where('users.is_deleted', '=', 0);
         return $return->count();
     }
-    static public function getTeacher()
+    static public function getTeacher($remove_pagination=0)
     {
-
-        
         $return = self::select('users.*')->where('users.role', '=', '2')
             ->where('users.is_deleted', '=', 0);
         if (!empty(Request::get('name'))) {
@@ -250,8 +248,16 @@ class User extends Authenticatable
         }
 
 
-        $return = $return->orderBy('users.id', 'desc')
-            ->paginate(10);
+        $return = $return->orderBy('users.id', 'desc');
+
+        if(!empty($remove_pagination))
+        {
+            $return = $return->get();
+        }
+        else
+        {
+            $return = $return->paginate(4);
+        }
 
         return $return;
     }

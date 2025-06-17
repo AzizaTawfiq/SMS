@@ -211,7 +211,9 @@
                                 title="Delete Teacher"
                                 description="Are you sure you want to delete this teacher?"
                               />
-                            </td>
+                              @if(Auth::id() != $value->id)
+                              <a href="{{url('chat?receiver_id='.base64_encode($value->id))}}" class="text-primary ms-4"><i class="bi bi-chat-dots"></i></a>
+                              @endif                            </td>
 
                         </tr>
                         @endforeach

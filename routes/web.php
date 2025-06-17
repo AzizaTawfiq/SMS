@@ -19,6 +19,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\FeesCollectionController;
+use App\Http\Controllers\ChatController;
 
 
 /*
@@ -37,6 +38,14 @@ Route::post('login', [AuthController::class, 'authLogin']);
 Route::get('logout', [AuthController::class, 'logout']);
 Route::get('forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('forgot-password', [AuthController::class, 'submitForgotPassword']);
+
+// common url
+Route::group(['middleware' => 'common'], function () {
+    Route::get('chat', [ChatController::class, 'chat']);
+    Route::post('submit_message', [ChatController::class, 'submit_message']);
+    Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']);
+
+});
 
 // admin url
 Route::group(['middleware' => 'admin'], function () {

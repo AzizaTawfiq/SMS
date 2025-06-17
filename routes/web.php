@@ -42,6 +42,8 @@ Route::post('forgot-password', [AuthController::class, 'submitForgotPassword']);
 // common url
 Route::group(['middleware' => 'common'], function () {
     Route::get('chat', [ChatController::class, 'chat']);
+    Route::post('submit_message', [ChatController::class, 'submit_message']);
+    Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']);
 
 });
 

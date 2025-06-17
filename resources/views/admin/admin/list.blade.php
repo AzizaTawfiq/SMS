@@ -4,7 +4,7 @@
         <div class="app-content-header">
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Admins ({{$getRecord->total()}}) </h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Admins</h3></div>
               <div class="col-sm-6 text-end">
                 <a href="{{ url('admin/admin/add') }}" class="btn btn-primary">Add Admin</a>
               </div>
@@ -58,7 +58,7 @@
                         />
                       </div>
                       <div class="form-group col-md-3" style="margin-top: 30px;">
-                       <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                       <button  class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
                        <a href="{{ url('admin/admin/list') }}" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i></a>
                       </div>
                     </div>
@@ -88,11 +88,14 @@
                             <td>
                               <a href="{{url('admin/admin/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
                               <x-confirm-delete
-                                :url="url('admin/admin/delete/' .$value->id)"
-                                :id="$value->id"
-                                title="Delete Admin"
-                                description="Are you sure you want to delete this administrator?"
+                              :url="url('admin/admin/delete/' .$value->id)"
+                              :id="$value->id"
+                              title="Delete Admin"
+                              description="Are you sure you want to delete this administrator?"
                               />
+                              @if(Auth::id() != $value->id)
+                              <a href="{{url('chat?receiver_id='.base64_encode($value->id))}}" class="text-primary ms-4"><i class="bi bi-chat-dots"></i></a>
+                              @endif
                             </td>
                         </tr>
                         @endforeach
@@ -112,4 +115,4 @@
         </div>
       </main>
 
-      @endsection
+@endsection

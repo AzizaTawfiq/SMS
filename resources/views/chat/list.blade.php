@@ -20,7 +20,8 @@
     left: 0;
     top: 0;
     padding: 20px;
-    z-index: 7
+    z-index: 7;
+    background-color: #fff
 }
 
 .chat-app .chat {
@@ -97,7 +98,7 @@
 .chat .chat-history {
     padding: 20px;
     border-bottom: 2px solid #fff;
-    min-height: 1000px;
+    min-height: 500px;
     overflow: auto
 }
 
@@ -293,106 +294,14 @@
                                 <input type="text" class="form-control" placeholder="Search...">
                             </div>
                             <ul class="list-unstyled chat-list mt-2 mb-0">
-                                <li class="clearfix">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
-                                    <div class="about">
-                                        <div class="name">Vincent Porter</div>
-                                        <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>
-                                    </div>
-                                </li>
-                                <li class="clearfix active">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                    <div class="about">
-                                        <div class="name">Aiden Chavez</div>
-                                        <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                    </div>
-                                </li>
-                                <li class="clearfix">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
-                                    <div class="about">
-                                        <div class="name">Mike Thomas</div>
-                                        <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                    </div>
-                                </li>
-                                <li class="clearfix">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                    <div class="about">
-                                        <div class="name">Christian Kelly</div>
-                                        <div class="status"> <i class="fa fa-circle offline"></i> left 10 hours ago </div>
-                                    </div>
-                                </li>
-                                <li class="clearfix">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="avatar">
-                                    <div class="about">
-                                        <div class="name">Monica Ward</div>
-                                        <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                    </div>
-                                </li>
-                                <li class="clearfix">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
-                                    <div class="about">
-                                        <div class="name">Dean Henry</div>
-                                        <div class="status"> <i class="fa fa-circle offline"></i> offline since Oct 28 </div>
-                                    </div>
-                                </li>
+                              @include('chat._user')
                             </ul>
                         </div>
-                        <div class="chat">
-                            <div class="chat-header clearfix">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                        </a>
-                                        <div class="chat-about">
-                                            <h6 class="m-b-0">Aiden Chavez</h6>
-                                            <small>Last seen: 2 hours ago</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 hidden-sm text-right">
-                                        <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                                        <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                                        <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                                        <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chat-history">
-                                <ul class="m-b-0">
-                                    <li class="clearfix">
-                                        <div class="message-data text-right">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                            <span class="message-data-time">10:10 AM, Today</span>
-                                        </div>
-                                        <div class="message other-message float-right">
-                                            <div>Hi Aiden, how are you? How is the project coming along?</div>
-                                        </div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <div class="message-data">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                            <span class="message-data-time">10:12 AM, Today</span>
-
-                                        </div>
-                                        <div class="message my-message">Are we meeting today?</div>
-                                    </li>
-                                    <li class="clearfix">
-                                        <div class="message-data">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                            <span class="message-data-time">10:15 AM, Today</span>
-                                        </div>
-                                        <div class="message my-message">Project has been already finished and I have results to show you.</div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="chat-message clearfix">
-                                <div class="input-group mb-0">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-send"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Type message...">
-                                </div>
-                            </div>
+                        <div class="chat" id="getChatMessageAll">
+                            @if(!empty($getReceiver))
+                            @include('chat._message')
+                            @else
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -400,4 +309,63 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section("scripts")
+<script type="text/javascript">
+$(document).ready(function(){
+    $('body').delegate('.getChatWindows', 'click', function(e){
+        e.preventDefault();
+        var receiver_id =$(this).attr('id');
+        $('.getChatWindows').removeClass('active');
+        $(this).addClass('active');
+        $.ajax({
+            type: 'POST',
+            url: "{{url('get_chat_windows')}}",
+            data: {
+                'receiver_id': receiver_id,
+                '_token': '{{csrf_token()}}'
+
+            },
+            dataType: 'json',
+            success: function(response){
+                $('.clearMessage'+receiver_id).hide();
+                $('#getChatMessageAll').html(data.success);
+                scrollDown();
+
+            },
+            error: function(xhr, status, error){
+
+            }
+        });
+    });
+
+    $('body').delegate('#submit_message', 'submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "{{url('submit_message')}}",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(response){
+                    $('#appendMessage').append(response.success);
+                    $('#clearMessage').val('');
+                    scrollDown();
+            },
+            error: function(xhr, status, error){
+
+            }
+        });
+    });
+
+});
+function scrollDown(){
+   $('.chat-history').animate({
+        scrollTop: $('.chat-history').prop('scrollHeight')+300000
+    }, 500);
+}
+scrollDown();
+</script>
 @endsection

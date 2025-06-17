@@ -4,83 +4,65 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ChatModel;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 class ChatController extends Controller
 {
-    public function chat()
+    public function chat(Request $request)
     {
-        $data['getRecord'] = User::getAdmin();
         $data['header_title' ]= 'My chat';
+        $sender_id = Auth::user()->id;
+        if(!empty($request->receiver_id)){
+         $receiver_id = base64_decode($request->receiver_id);
+         if($receiver_id == $sender_id){
+            return redirect()->back()->with('error','Something went wrong, please try again');
+            exit();
+         }
+         ChatModel::updateCount( $sender_id, $receiver_id);
+         $data['getReceiver']= User::getSingle($receiver_id);
+         $data['getChat']= ChatModel::getChat($receiver_id, $sender_id);
+        }
+        $data['getChatUser']= ChatModel::getChatUser( $sender_id);
         return view('chat.list', $data);
     }
 
+    public function submit_message(Request $request){
+        $sender_id = Auth::user()-> id;
+        $receiver_id = $request-> receiver_id;
+        $message = $request-> message;
+        $chat = new ChatModel();
+        $chat-> sender_id = $sender_id;
+        $chat-> receiver_id = $receiver_id;
+        $chat-> message = $message;
+        $chat-> created_date = time();
+        $chat-> save();
+        $getChat= ChatModel::where('id',"=", $chat->id)->get();
+        return response()->json([
+            'status' => true,
+            'success' => view('chat._single', [
+                'getChat' => $getChat,
 
-
-
-    public function add()
-    {
-
-        $data['header_title' ]= 'Add admin';
-        return view('admin.admin.add', $data);
-    }
-    public function insert(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6'
-        ]);
-        $user = new User;
-        $user->name = trim($request->name);
-        $user->email = trim($request->email);
-        $user->password = Hash::make($request->password);
-        $user->role = 1;
-        $user->save();
-        return redirect('admin/admin/list')->with('success', 'Admin added successfully');
+            ])->render(),
+        ],200);
 
     }
 
-    public function edit( $id)
-    {
-        $data['getRecord'] = User::getSingle($id);
-        if (!empty($data['getRecord'])) {
-            $data['header_title' ]= 'Edit admin';
-            return view('admin.admin.edit', $data);
-        } else {
-            abort(404);
-        }
-
+    public function get_chat_windows(Request $request){
+        $receiver_id = $request-> receiver_id;
+        $sender_id = Auth::user()-> id;
+        ChatModel::updateCount( $sender_id, $receiver_id);
+        $getReceiver= User::getSingle($receiver_id);
+        $getChat= ChatModel::getChat($receiver_id, $sender_id);
+        return response()->json([
+           'status' => true,
+           'success' => view('chat._message', [
+            'getReceiver' => $getReceiver,
+            'getChat' => $getChat,
+          ])->render(),
+        ],200);
     }
 
-    public function update($id, Request $request)
-    {
-         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            /* 'password' => 'required|min:6' */
-        ]);
-        $user=  User::getSingle($id);
-        $user->name = trim($request->name);
-        $user->email = trim($request->email);
-      /*   if(!empty($request->password)){
-            $user->password = Hash::make($request->password);
-        } */
-        $user->save();
-        return redirect('admin/admin/list')->with('success', 'Admin updated successfully');
-
-    }
-
-    public function delete($id)
-    {
-        $user = User::getSingle($id);
-        if (!empty($user)) {
-            $user->is_deleted=1;
-            $user->save();
-            return redirect('admin/admin/list')->with('success', 'Admin deleted successfully');
-        } else {
-            abort(404);
-        }
-    }
 }

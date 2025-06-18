@@ -132,9 +132,10 @@
                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                             <td>
                               <a href="{{url('admin/parent/edit/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
-                            </td>
-                              <td>
                               <a href="{{url('admin/parent/delete/' .$value->id)}}" class="text-primary fs-5"><i class="bi bi-trash"></i></a>
+                              @if(Auth::id() != $value->id)
+                              <a href="{{url('chat?receiver_id='.base64_encode($value->id))}}" class="text-primary ms-4"><i class="bi bi-chat-dots"></i></a>
+                              @endif
                             </td>
 
                         </tr>

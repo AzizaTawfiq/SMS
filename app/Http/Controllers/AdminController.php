@@ -18,7 +18,6 @@ class AdminController extends Controller
     }
     public function add()
     {
-
         $data['header_title' ]= 'Add admin';
         return view('admin.admin.add', $data);
     }

@@ -204,7 +204,32 @@
                   </form>
                 </div>
               @include('_message')
+
                 <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-title" style="font-weight: bold;"> Student List</h3>
+                    <form style="float: right;" action="{{ url('admin/student/export_excel') }}" method="post">
+                       {{csrf_field()}}
+                      <input type="hidden" name="name" value="{{Request::get('name')}} ">
+                      <input type="hidden" name="email" value="{{Request::get('email')}} ">
+                      <input type="hidden" name="admission_number" value="{{Request::get('admission_number')}} ">
+                      <input type="hidden" name="roll_number" value="{{Request::get('roll_number')}} ">
+                      <input type="hidden" name="gender" class_id="{{Request::get('gender')}} ">
+                      <input type="hidden" name="date_of_birth" value="{{Request::get('date_of_birth')}} ">
+                      <input type="hidden" name="caste" value="{{Request::get('caste')}} ">
+                      <input type="hidden" name="religion" value="{{Request::get('religion')}} ">
+                      <input type="hidden" name="mobile" value="{{Request::get('mobile')}} ">
+                      <input type="hidden" name="admission_date" value="{{Request::get('admission_date')}} ">
+                      <input type="hidden" name="blood_group" value="{{Request::get('blood_group')}} ">
+                      <input type="hidden" name="height" value="{{Request::get('height')}} ">
+                      <input type="hidden" name="weight" value="{{Request::get('weight')}} ">
+                      <input type="hidden" name="status" value="{{Request::get('status')}} ">
+                      <input type="hidden" name="created_at" value="{{Request::get('created_at')}} ">
+
+                      <button class="btn btn-primary btn-sm" type="submit">
+                        <i class="bi bi-file-earmark-arrow-down"></i> Export to Excel</button>
+                    </form>
+                  </div>
                   <div class="card-body p-0">
                     @if($getRecord->count() > 0)
                    <div class="table-responsive">
@@ -241,8 +266,8 @@
                                 <img src="{{ $value->getProfile() }}" alt="Profile pic" style="width: 50px; height: 50px; border-radius: 50%;">
                                 @endif
                             </td>
-                            <td>{{ $value->name }}<!-- {{ $value->last_name }} --></td>
-                            <td>{{ $value->parent_name }}{{ $value->parent_last_name }}</td>
+                            <td>{{ $value->name }} {{ $value->last_name }}</td>
+                            <td>{{ $value->parent_name }} {{ $value->parent_last_name }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->admission_number }}</td>
                             <td>{{ $value->roll_number }}</td>

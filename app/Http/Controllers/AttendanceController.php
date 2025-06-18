@@ -11,6 +11,9 @@ use App\Models\AssignClassTeacherModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Str;
+use App\Exports\ExportattendanceReport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class AttendanceController extends Controller
@@ -48,6 +51,7 @@ class AttendanceController extends Controller
     {
         $data['getClass'] = School_Class::get();
         $data['getRecord'] = StudentAttendanceModel::getRecord();
+        $data['header_title'] = 'Attendance Report';
 
         return view('admin.attendance.report', $data);
     }
@@ -81,4 +85,10 @@ class AttendanceController extends Controller
         return view('student.my_attendance', $data);
     }
 
+    public function attendanceReportExportExcel(Request $request)
+    {
+       return Excel::download(new ExportattendanceReport, 'attendance_report_'.date('d-m-Y').'.xlsx');
+    }
+    
 }
+ 

@@ -72,6 +72,18 @@
                   </form>
                 </div>
                 <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-title" style="font-weight: bold;">Attendance report</h3>
+                    <form style="float: right;" action="{{ url('admin/attendance/report_export_excel') }}" method="post">
+                      {{csrf_field()}}
+                      <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
+                      <input type="hidden" name="student_name" value="{{ Request::get('student_name') }}">
+                      <input type="hidden" name="attendance_type" value="{{ Request::get('attendance_type') }}">
+                      <input type="hidden" name="attendance_date" value="{{ Request::get('attendance_date') }}">  
+                      <button class="btn btn-primary btn-sm" type="submit">
+                        <i class="bi bi-file-earmark-arrow-down"></i> Export to Excel</button>
+                    </form>
+                  </div>
                   <div class="card-body p-0">
                   @if($getRecord->count() > 0)
                     <table class="table table-striped">

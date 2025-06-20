@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('admission_number')->nullable();
             $table->string('roll_number')->nullable();
             $table->string('class_id')->nullable();
+            $table->string('parent_id')->nullable();
             $table->string('gender')->nullable();
             $table->string('mobile_number')->nullable();
             $table->string('occupation')->nullable();

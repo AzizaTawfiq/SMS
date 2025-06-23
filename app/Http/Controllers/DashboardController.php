@@ -22,8 +22,8 @@ class DashboardController extends Controller
                 $student_ids = User::getMyStudentIds(Auth::user()->id);
                 $data['getRecord'] = User::getParent(Auth::user()->id);
                 $data['myStudents'] = User::getMyStudentCount(Auth::user()->id);
-                $data['totalPaidAmount'] = FeesStudentModel::totalPaidAmountStudentParent($student_ids);
-                $data['getTotalFees'] = FeesStudentModel::getTotalFees();
+                // $data['totalPaidAmount'] = FeesStudentModel::totalPaidAmountStudentParent($student_ids);
+                // $data['getTotalFees'] = FeesStudentModel::getTotalFees();
                 return view('parent.dashboard', $data);
             }
         }

@@ -22,7 +22,7 @@ class StudentAttendanceModel extends Model
          return $return;
     }
 
-    static public function getRecord(){
+    static public function getRecord($remove_pagination = 0) {
         $return = StudentAttendanceModel::select('student_attendance.*','student.name as student_name',
         'student.last_name as student_last_name','school_classes.name as class_name'
         ,'created_by.name as created_name')
@@ -44,7 +44,13 @@ class StudentAttendanceModel extends Model
        if (!empty(Request::get('attendance_date'))) {
            $return = $return->whereDate('student_attendance.attendance_date', '=', Request::get('attendance_date'));
        }
-        $return = $return-> orderBy('student_attendance.id','desc')->paginate(20);
+        $return = $return->orderBy('student_attendance.id', 'desc');
+        if (!empty($remove_pagination)) 
+        {
+            $return = $return->get();
+        } else {
+            $return = $return->paginate(4);
+        }
         return $return;
    }
 
@@ -70,5 +76,19 @@ class StudentAttendanceModel extends Model
         ->where('student_attendance.student_id','=',$student_id)
         ->groupBy('student_attendance.class_id')->get();
    }
+
+   static public function getRecordStudentAttendanceCount($student_id)
+   {
+       return StudentAttendanceModel::where('student_id', '=', $student_id)
+       ->where('attendance_type', '!=', 3)
+       ->count();
+   }
+
+    static public function getRecordStudentAbsentAttendanceCount($student_id)
+    {
+         return StudentAttendanceModel::where('student_id', '=', $student_id)
+         ->where('attendance_type', '=', 3)
+         ->count();
+    }
 
 }

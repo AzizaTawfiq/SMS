@@ -142,12 +142,12 @@
                                                         <td nowrap>
                                                             <a href="{{ url('admin/parent/edit/' . $value->id) }}"
                                                                 class="text-primary fs-5"><i class="bi bi-pencil"></i></a>
-                                                        
-                                                        
+
+
                                                             <a href="{{ url('admin/parent/delete/' . $value->id) }}"
                                                                 class="text-primary fs-5"><i class="bi bi-trash"></i></a>
-                                                        
-                                                        
+
+
                                                             <a href="{{ url('admin/parent/my_student/' . $value->id) }}"
                                                                 class="text-primary fs-5"><i class="las la-users-cog"></i></a>
                                                         </td>

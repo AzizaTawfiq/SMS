@@ -21,7 +21,7 @@
 
                     <div class="card-body row">
                       <div class="form-group col-md-3">
-                        <label for="class_id" class="form-label text-bold">Class</label>
+                        <label for="class_id" class="form-label fw-bold">Class</label>
                         <select class="form-control" name="class_id" id="getClass">
                           <option value="">Select class</option>
                           @foreach ($getClass as $class)
@@ -34,7 +34,7 @@
 
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="getAttendanceDate" class="form-label">Attendance date</label>
+                        <label for="getAttendanceDate" class="form-label fw-bold">Attendance date</label>
                         <input
                           type="date"
                           class="form-control"

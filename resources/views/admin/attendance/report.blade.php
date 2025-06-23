@@ -20,7 +20,7 @@
                 <form action="" method="get">
                     <div class="row card-body">
                       <div class="col-md-3 form-group">
-                        <label for="class_id" class="form-label text-bold">Class</label>
+                        <label for="class_id" class="form-label fw-bold">Class</label>
                         <select class="form-control" name="class_id" id="class_id">
                           <option value="">Select class</option>
                           @foreach ($getClass as $class)
@@ -32,7 +32,7 @@
                         </select>
                       </div>
                       <div class="col-md-2 form-group">
-                        <label for="student_name" class="form-label">Student Name</label>
+                        <label for="student_name" class="form-label fw-bold">Student Name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -43,7 +43,7 @@
                         />
                       </div>
                       <div class="col-md-2 form-group">
-                        <label for="attendance_type" class="form-label">Attendance type</label>
+                        <label for="attendance_type" class="form-label fw-bold">Attendance type</label>
                         <select name="attendance_type" class="form-control">
                             <option value="">Select type</option>
                             <option @if(Request::get('attendance_type') == 1) selected @endif value="1">Present</option>
@@ -54,7 +54,7 @@
                         </select>
                       </div>
                       <div class="col-md-2 form-group">
-                        <label for="getAttendanceDate" class="form-label">Attendance date</label>
+                        <label for="getAttendanceDate" class="form-label fw-bold">Attendance date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -72,6 +72,18 @@
                   </form>
                 </div>
                 <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-title" style="font-weight: bold;">Attendance report</h3>
+                    <form style="float: right;" action="{{ url('admin/attendance/report_export_excel') }}" method="post">
+                      {{csrf_field()}}
+                      <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
+                      <input type="hidden" name="student_name" value="{{ Request::get('student_name') }}">
+                      <input type="hidden" name="attendance_type" value="{{ Request::get('attendance_type') }}">
+                      <input type="hidden" name="attendance_date" value="{{ Request::get('attendance_date') }}">  
+                      <button class="btn btn-primary btn-sm" type="submit">
+                        <i class="bi bi-file-earmark-arrow-down"></i> Export to Excel</button>
+                    </form>
+                  </div>
                   <div class="card-body p-0">
                   @if($getRecord->count() > 0)
                     <table class="table table-striped">

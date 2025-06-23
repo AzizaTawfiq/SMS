@@ -6,10 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Str;
+use App\Exports\ExporteacherReport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class TeacherController extends Controller
 {
+    public function exportTeacherExcel(Request $request)
+    {
+       return Excel::download(new ExporteacherReport, 'teacher_report_'.date('d-m-Y').'.xlsx');
+
+    }
     public function list()
     {
         $data['getRecord'] = User::getTeacher();

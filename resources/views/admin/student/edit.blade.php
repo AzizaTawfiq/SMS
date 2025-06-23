@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="first_name" class="form-label text-bold">First name<span class="text-danger">*</span></label>
+                                <label for="first_name" class="form-label fw-bold">First name<span class="text-danger">*</span></label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="admission_number" class="form-label text-bold">Admission number<span class="text-danger">*</span></label>
+                                <label for="admission_number" class="form-label fw-bold">Admission number<span class="text-danger">*</span></label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="roll_number" class="form-label text-bold">Roll number</label>
+                                <label for="roll_number" class="form-label fw-bold">Roll number</label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="class_id" class="form-label text-bold">Class<span class="text-danger">*</span></label>
+                                <label for="class_id" class="form-label fw-bold">Class<span class="text-danger">*</span></label>
                                 <select
                                 class="form-control"
                                 id="class_id"
@@ -83,7 +83,7 @@
 
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="gender" class="form-label text-bold">Gender<span class="text-danger">*</span></label>
+                                <label for="gender" class="form-label fw-bold">Gender<span class="text-danger">*</span></label>
                                 <select
                                 class="form-control"
                                 id="gender"
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="col-md-6 form-group mt-3">
-                                <label for="date_of_birth" class="form-label text-bold">Date of birth<span class="text-danger">*</span></label>
+                                <label for="date_of_birth" class="form-label fw-bold">Date of birth<span class="text-danger">*</span></label>
                                 <input
                                 type="date"
                                 class="form-control"
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="caste" class="form-label text-bold">Caste</label>
+                                <label for="caste" class="form-label fw-bold">Caste</label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="religion" class="form-label text-bold">Religion</label>
+                                <label for="religion" class="form-label fw-bold">Religion</label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -145,7 +145,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="mobile_number" class="form-label text-bold">Mobile number</label>
+                                <label for="mobile_number" class="form-label fw-bold">Mobile number</label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -160,7 +160,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="admission_date" class="form-label text-bold">Admission date<span class="text-danger">*</span></label>
+                                <label for="admission_date" class="form-label fw-bold">Admission date<span class="text-danger">*</span></label>
                                 <input
                                 type="date"
                                 class="form-control"
@@ -174,7 +174,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="profile_pic" class="form-label text-bold">Profile pic</label>
+                                <label for="profile_pic" class="form-label fw-bold">Profile pic</label>
                                 <input
                                 type="file"
                                 class="form-control"
@@ -187,7 +187,7 @@
 
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="blood_group" class="form-label text-bold">Blood group</label>
+                                <label for="blood_group" class="form-label fw-bold">Blood group</label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -201,7 +201,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                <label for="height" class="form-label text-bold">Height<span class="text-danger">*</span></label>
+                                <label for="height" class="form-label fw-bold">Height<span class="text-danger">*</span></label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -215,7 +215,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3 mb-3">
-                                <label for="weight" class="form-label text-bold">Weight<span class="text-danger">*</span></label>
+                                <label for="weight" class="form-label fw-bold">Weight<span class="text-danger">*</span></label>
                                 <input
                                 type="text"
                                 class="form-control"
@@ -229,7 +229,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 form-group mt-3 mb-3">
-                                <label for="status" class="form-label text-bold">Status<span class="text-danger">*</span></label>
+                                <label for="status" class="form-label fw-bold">Status<span class="text-danger">*</span></label>
                                 <select
                                 class="form-control"
                                 id="status"
@@ -246,7 +246,7 @@
                             </div>
                             <hr/>
                       <div class="form-group">
-                        <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
+                        <label for="email" class="form-label fw-bold">Email<span class="text-danger">*</span></label>
                         <input
                           type="text"
                           class="form-control"
@@ -262,7 +262,7 @@
                         </div>
                       </div>
                      <!--  <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label fw-bold">Password</label>
                         <input type="text" class="form-control" id="password" placeholder="Enter password" name="password"  />
                         <p>If you want to change password then enter new password otherwise leave it blank</p>
                         <div class="text-danger">

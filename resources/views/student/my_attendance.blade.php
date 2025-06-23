@@ -20,7 +20,7 @@
                 <form action="" method="get">
                     <div class="row card-body">
                       <div class="col-md-3 form-group">
-                        <label for="class_id" class="form-label text-bold">Class</label>
+                        <label for="class_id" class="form-label fw-bold">Class</label>
                         <select class="form-control" name="class_id" id="class_id">
                           <option value="">Select class</option>
                           @foreach ($getClass as $class)
@@ -32,7 +32,7 @@
                         </select>
                       </div>
                       <div class="col-md-2 form-group">
-                        <label for="attendance_type" class="form-label">Attendance type</label>
+                        <label for="attendance_type" class="form-label fw-bold">Attendance type</label>
                         <select name="attendance_type" class="form-control">
                             <option value="">Select type</option>
                             <option @if(Request::get('attendance_type') == 1) selected @endif value="1">Present</option>
@@ -43,7 +43,7 @@
                         </select>
                       </div>
                       <div class="col-md-2 form-group">
-                        <label for="getAttendanceDate" class="form-label">Attendance date</label>
+                        <label for="getAttendanceDate" class="form-label fw-bold">Attendance date</label>
                         <input
                           type="date"
                           class="form-control"

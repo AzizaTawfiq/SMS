@@ -29,19 +29,19 @@
                             <div class="card-body">
 
                                 <div class="form-group mb-3">
-                                    <label for="old_password" class="form-label text-bold">Old Password</label>
+                                    <label for="old_password" class="form-label fw-bold">Old Password</label>
                                     <input type="password" class="form-control" id="old_password"
                                         placeholder="Enter old password" name="old_password" required />
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="new_password" class="form-label text-bold">New Password</label>
+                                    <label for="new_password" class="form-label fw-bold">New Password</label>
                                     <input type="password" class="form-control" id="new_password"
                                         placeholder="Enter new password" name="new_password" required />
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="new_password_confirmation" class="form-label text-bold">Confirm New Password</label>
+                                    <label for="new_password_confirmation" class="form-label fw-bold">Confirm New Password</label>
                                     <input type="password" class="form-control" id="new_password_confirmation"
                                         placeholder="Confirm new password" name="new_password_confirmation" required />
                                 </div>

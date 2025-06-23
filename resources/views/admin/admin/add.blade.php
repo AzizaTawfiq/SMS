@@ -15,12 +15,12 @@
             <div class="row g-4">
               <div class="col-md-12">
                 <div class="card card-primary card-outline mb-4">
-                  <form action="{{ url('admin/admin/add')}}" method="post">
+                  <form action="{{ url('admin/admin/add')}}" method="post" enctype="multipart/form-data">
                   {{ csrf_field() }}
 
                     <div class="card-body">
                       <div class="form-group">
-                        <label for="name" class="form-label text-bold">Name</label>
+                        <label for="name" class="form-label fw-bold">Name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -35,7 +35,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email" class="form-label fw-bold">Email</label>
                         <input
                           type="text"
                           class="form-control"
@@ -51,12 +51,19 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label fw-bold">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"  />
                         <div class="text-danger">
                         {{$errors->first('password')}}
                         </div>
                       </div>
+                      <div class="form-group ">
+                          <label for="profile_pic" class="form-label fw-bold">Profile pic</label>
+                            <input type="file" class="form-control" id="profile_pic"  name="profile_pic"/>
+                                <div class="text-danger">
+                                {{$errors->first('profile_pic')}}
+                                </div>
+                       </div>
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Add</button>

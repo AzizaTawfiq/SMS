@@ -110,7 +110,7 @@
                                                                     <div class="modal-body">
                                                                         <div class="form-group mb-3">
                                                                             <label for="name"
-                                                                                class="form-label text-bold">Subject
+                                                                                class="form-label fw-bold">Subject
                                                                                 Title</label>
                                                                             <input type="text" class="form-control"
                                                                                 id="name" placeholder="subject title"
@@ -118,7 +118,7 @@
                                                                                 value="{{ $item->name }}" />
                                                                         </div>
                                                                         <div class="form-group mb-3">
-                                                                            <label class="form-label">Types</label>
+                                                                            <label class="form-label fw-bold">Types</label>
                                                                             <select name="type" class="form-control">
                                                                                 <option>Select Type</option>
                                                                                 <option @if($item->type==0) selected @endif value="0">Theory</option>
@@ -126,7 +126,7 @@
                                                                             </select>
                                                                         </div>
                                                                         <div class="form-group mb-3">
-                                                                          <label class="form-label">Status</label>
+                                                                          <label class="form-label fw-bold">Status</label>
                                                                           <select name="status" class="form-control">
                                                                               <option>Select Status</option>
                                                                               <option @if($item->status==0) selected @endif value="0">Active</option>

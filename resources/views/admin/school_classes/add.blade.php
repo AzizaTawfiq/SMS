@@ -31,12 +31,27 @@
 
                                     <div class="card-body">
                                         <div class="form-group mb-3">
-                                            <label for="name" class="form-label text-bold">Class Name</label>
+                                            <label for="name" class="form-label fw-bold">Class Name</label>
                                             <input type="text" class="form-control" id="name"
                                                 placeholder="class name" name="name" value="{{ old('name') }}" />
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label class="form-label">Status</label>
+                                        <label for="name" class="form-label fw-bold">Amount ($)</label>
+                                        <input
+                                        type="number"
+                                        class="form-control"
+                                        id="amount"
+                                        placeholder="Enter amount"
+                                        name="amount"
+                                        min="1"
+                                        value="{{ old('amount') }}"
+                                        />
+                                        <div class="text-danger">
+                                        {{$errors->first('amount')}}
+                                        </div>
+                                    </div>
+                                        <div class="form-group mb-3">
+                                            <label class="form-label fw-bold">Status</label>
                                             <select name="status" class="form-control">
                                                 <option>Select Status</option>
                                                 <option value="0">Active</option>

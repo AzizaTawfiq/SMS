@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SettingsModel;
 use Illuminate\Support\Facades\Hash;
 use Str;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,42 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function settings()
+    {
+        $data['header_title'] = 'Settings';
+        $data['getRecord'] = SettingsModel::getSingle();
+        return view('admin.settings',$data);
+    }
+    public function updateSettings(Request $request)
+    {
+        $settings = SettingsModel::getSingle();
+        $settings->site_name = $request->site_name;
+        $settings->paypal_email = $request->paypal_email;
+
+        if ($request->hasFile('Logo'))
+       {
+            if (!empty($settings->Logo) && file_exists(public_path($settings->Logo))) {
+                unlink(public_path($settings->Logo));
+            }
+            $file = $request->file('Logo');
+            $filename = Str::slug($request->name) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/settings/'), $filename);
+            $settings->Logo = 'uploads/settings/' . $filename;
+        }
+
+       if ($request->hasFile('Favicon_icon'))
+        {
+            if (!empty($settings->Favicon_icon) && file_exists(public_path($settings->Favicon_icon))) {
+                unlink(public_path($settings->Favicon_icon));
+            }
+            $file = $request->file('Favicon_icon');
+            $filename = Str::slug($request->name) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/settings/'), $filename);
+            $settings->Favicon_icon = 'uploads/settings/' . $filename;
+     }
+        $settings->save();
+        return redirect()->back()->with('success', 'Settings updated successfully!');
+    }
     public function myAccount()
     {
         $data['getRecord'] = User::getSingle(Auth::user()->id);
@@ -39,7 +76,7 @@ class UserController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->save();
-        return redirect('admin/account')->with('success', 'Account updated successfully');    
+        return redirect('admin/account')->with('success', 'Account updated successfully');
      }
 
      public function updateMyParentAccount(Request $request)

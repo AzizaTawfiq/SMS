@@ -25,4 +25,9 @@ class School_Class extends Model
         return self::find($id);
     }
 
+    static public function getTotalClass()
+    {
+        return self::count();
+    }
+
 }

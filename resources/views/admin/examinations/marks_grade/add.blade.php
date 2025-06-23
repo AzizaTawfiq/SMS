@@ -20,7 +20,7 @@
 
                     <div class="card-body">
                       <div class="form-group">
-                        <label for="name" class="form-label text-bold">Name</label>
+                        <label for="name" class="form-label fw-bold">Name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -36,7 +36,7 @@
                       </div>
                       <div class="row mt-3">
                       <div class="form-group col-6">
-                        <label for="percent_from" class="form-label text-bold">Percent from</label>
+                        <label for="percent_from" class="form-label fw-bold">Percent from</label>
                         <input
                           type="number"
                           class="form-control"
@@ -51,7 +51,7 @@
                         </div>
                       </div>
                       <div class="form-group col-6">
-                        <label for="percent_to" class="form-label text-bold">Percent to</label>
+                        <label for="percent_to" class="form-label fw-bold">Percent to</label>
                         <input
                           type="number"
                           class="form-control"

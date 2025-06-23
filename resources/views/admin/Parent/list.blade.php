@@ -131,7 +131,7 @@
                                                                 style="width: 50px; height: 50px; border-radius: 50%;">
 
                                                         </td>
-                                                        <td>{{ $value->name }}{{ $value->last_name }}</td>
+                                                        <td>{{ $value->name." " }}{{ $value->last_name }}</td>
                                                         <td>{{ $value->email }}</td>
                                                         <td>{{ $value->gender }}</td>
                                                         <td>{{ $value->mobile_number }}</td>

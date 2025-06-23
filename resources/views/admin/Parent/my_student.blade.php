@@ -107,7 +107,7 @@
                                                                 style="width: 50px; height: 50px; border-radius: 50%;">
                                                         @endif
                                                     </td>
-                                                    <td>{{ $value->name }}</td>
+                                                    <td>{{ $value->name .' '.$value->last_name }}</td>
                                                     <td>{{ $value->email }}</td>
                                                     <td>{{ $value->status == 0 ? 'Active' : 'Inactive' }}</td>
                                                     <td>{{ $value->created_at }}</td>
@@ -168,7 +168,7 @@
                                                 </td>
                                                 <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                 <td>{{ $value->email }}</td>
-                                                <td>{{ $value->parent_name }}</td>
+                                                <td>{{ $value->parent_fname .' '. $value->parent_lname }}</td>
                                                 <td>{{ $value->status == 0 ? 'Active' : 'Inactive' }}</td>
                                                 <td>{{ $value->created_at }}</td>
                                                 <td><a href="{{ url('admin/parent/my_student/' . $value->id . '/' . $parent_id . '/assign_delete') }}"

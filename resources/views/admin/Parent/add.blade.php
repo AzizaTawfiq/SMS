@@ -23,7 +23,7 @@
                             <div class="col-md-6 form-group">
                                 <label for="first_name" class="form-label text-bold">First name<span class="text-danger">*</span></label>
                                 <input type="text"  class="form-control" id="first_name"
-                                placeholder="Enter first name"  name="name" value="{{ old('name') }}" />
+                                placeholder="Enter first name"  name="first_name" value="{{ old('name') }}" />
                                 <div class="text-danger">
                                 {{$errors->first('name')}}
                                 </div>

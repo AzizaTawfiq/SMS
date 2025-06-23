@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AssignStudentToParent;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +32,7 @@ class ParentController extends Controller
         }
 
         if ($request->filled('last_name')) {
-            $query->where('name', 'like', '%' . $request->last_name . '%');
+            $query->where('last_name', 'like', '%' . $request->last_name . '%');
         }
 
         if ($request->filled('email')) {
@@ -88,7 +88,8 @@ class ParentController extends Controller
         ]);
 
         $Parent = new User;
-        $Parent->name = trim($request->name) . " " . trim($request->last_name);
+        $Parent->name = trim($request->first_name);
+        $Parent->last_name = trim($request->last_name);
         $Parent->gender = trim($request->gender);
         $Parent->occupation = trim($request->occupation);
         $Parent->address = trim($request->address);
@@ -117,9 +118,7 @@ class ParentController extends Controller
 
         $data = DB::table('users')->where('id', $id)
             ->select(
-                '*',
-                DB::raw("SUBSTRING_INDEX(name, ' ', 1) as first_name"),
-                DB::raw("SUBSTRING_INDEX(name, ' ', -1) as last_name")
+                '*'
             )
             ->first();
 
@@ -146,7 +145,8 @@ class ParentController extends Controller
             'mobile_number' => 'max:15|min:8',
 
         ]);
-        $user->name = $request->first_name . ' ' . $request->last_name;
+        $user->name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->address = $request->address;
         $user->occupation = $request->occupation;
@@ -196,7 +196,6 @@ class ParentController extends Controller
         $data['getRecord'] = User::getMyStudent($id);
         $data['header_title'] = "Parent Student List";
         return view('admin.parent.my_student', $data);
-        
     }
 
 
@@ -208,23 +207,20 @@ class ParentController extends Controller
         $data['header_title'] = "Parent Student List";
         $data['assigned_student'] = User::where('id', $request->student_id)->where('parent_id', '!=', null)->first();
 
-       
-            return view('admin.parent.my_student', $data);
-        
 
-    
+        return view('admin.parent.my_student', $data);
     }
 
     public function assignStudentParent(Request $request, $student_id, $parent_id)
     {
 
-      
+
         $data['assigned_student'] = null;
         $user = User::getSingle($student_id);
         $user->parent_id = $parent_id;
         $user->save();
 
-        return redirect()->back()->with('success' , 'Assigned successfully.');
+        return redirect()->back()->with('success', 'Assigned successfully.');
     }
 
 
@@ -235,6 +231,14 @@ class ParentController extends Controller
         $user = User::getSingle($student_id);
         $user->parent_id = null;
         $user->save();
-        return redirect()->back()->with('success','Assigned deleted successfully.');
+        return redirect()->back()->with('success', 'Assigned deleted successfully.');
+    }
+
+    public function myStudentParent()
+    {
+        $id = Auth::user()->id;
+        $data['getRecord'] = User::getMyStudent($id);
+        $data['header_title'] = "My Student";
+        return view('parent.my_student', $data);
     }
 }

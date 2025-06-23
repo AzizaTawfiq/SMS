@@ -21,6 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'last_name',
         'email',
         'password',
         'role',
@@ -96,6 +97,14 @@ class User extends Authenticatable
         return $this->hasMany(School_Class::class);
     }
 
+   static public function getTotalUser($role)
+    {
+        return self::select('users.id')
+                ->where('role', '=', $role)
+                ->where('is_deleted', '=', 0)
+                ->count();
+
+    }
 
     static public function getStudent()
     {
@@ -279,7 +288,8 @@ class User extends Authenticatable
         $return = self::select(
             'users.*',
             'school_classes.name as class_name',
-            'parent.name as parent_name'
+            'parent.name as parent_fname',
+            'parent.last_name as parent_lname'
         )
             ->join('users as parent', 'parent.id', '=', 'users.parent_id')
             ->join('school_classes', 'school_classes.id', '=', 'users.class_id', 'left')
@@ -290,6 +300,38 @@ class User extends Authenticatable
             ->get();
 
         return $return;
+    }
+
+    static public function getMyStudentCount($parent_id)
+    {
+        $return = self::select('users.id')
+            ->join('users as parent', 'parent.id', '=', 'users.parent_id')
+            ->join('school_classes', 'school_classes.id', '=', 'users.class_id', 'left')
+            ->where('users.role', '=', 3)
+            ->where('users.parent_id', '=', $parent_id)
+            ->where('users.is_deleted', '=', 0)
+            ->count();
+
+        return $return;
+    }
+
+     static public function getMyStudentIds($parent_id)
+    {
+        $return = self::select('users.id')
+            ->join('users as parent', 'parent.id', '=', 'users.parent_id')
+            ->join('school_classes', 'school_classes.id', '=', 'users.class_id', 'left')
+            ->where('users.role', '=', 3)
+            ->where('users.parent_id', '=', $parent_id)
+            ->where('users.is_deleted', '=', 0)
+            ->orderBy('users.id', 'desc')
+            ->get();
+
+        $student_ids = array();
+        foreach($return as $value){
+          $student_ids[] = $value->id;
+        }
+
+        return $student_ids;
     }
 
     static public function getTeacherClass()
